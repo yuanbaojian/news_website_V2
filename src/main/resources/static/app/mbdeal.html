@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>结算中心</title>
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+            <div th:each="deal2:${alldeal}" th:if="${session.t_user_id.t_user_id==deal2.t_user_id}+''">
+            <div class="col-sm-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">可用余额</h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center"><span th:text="${deal2[mb_deal_money]}"></span></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">最近支出</h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center"><span th:text="${deal2[mb_deal_zsum]}"></span></p>
+                </div>
+            </div>
+            </div>
+            <div class="col-sm-4">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">最近收益</h3>
+                </div>
+                <div class="panel-body">
+                    <p style="text-align: center"><span th:text="${deal2[mb_deal_ssum]}"></span></p>
+                </div>
+            </div>
+            </div>
+            </div>
+            <div>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>收入/支出</th>
+                        <th>交易明细</th>
+                        <th>状态</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr class="active" th:each="deal:${alldeal}" th:if="${session.t_user_id.t_user_id==deal.t_user_id}+''">
+                        <td th:text="${deal[mb_deal_sz]}"></td>
+                        <td th:text="${deal[mb_deal_record]}"></td>
+                        <td th:text="${deal[mb_deal_zt]}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+   <div th:replace="/temp/t_index::tail_index">
+   </div>
+</body>
+</html>

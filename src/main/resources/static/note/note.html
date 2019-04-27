@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>心得笔记</title>
+    <!---->
+    <link rel="stylesheet" type="text/css" href="/public/webuploader.dist/image-upload/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/webuploader.dist/webuploader.css">
+    <link href="/public/css/nav2.css" rel="stylesheet">
+    <link href="/public/css/bootstrap.css" rel="stylesheet">
+    <link href="/public/css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="/note/css/demo.css" rel="stylesheet">
+    <link href="/note/css/zTreeStyle.css" rel="stylesheet">
+    <script src="/public/js/jquery-3.3.1.js"></script>
+    <script src="/public/js/bootstrap.js"></script>
+    <script src="/note/js/jquery.ztree.core.js"></script>
+    <script src="/note/js/jquery.ztree.excheck.js"></script>
+    <script src="/note/js/jquery.ztree.exedit.js"></script>
+    <style type="text/css">
+        .toolbar {
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        .text {
+            border: 1px solid #ccc;
+            height: 400px;
+        }
+    </style>
+    <SCRIPT type="text/javascript">
+        <!--
+        var setting = {
+            view: {
+                addHoverDom: addHoverDom,
+                removeHoverDom: removeHoverDom,
+                selectedMulti: false
+            },
+            edit: {
+                enable: true,
+                editNameSelectAll: true,
+                showRemoveBtn: true,
+                showRenameBtn: showRenameBtn
+            },
+            data: {
+                simpleData: {
+                    enable: true,
+                }
+            },
+            callback: {
+                beforeDrag: beforeDrag,
+                beforeEditName: beforeEditName,
+                beforeRemove: beforeRemove,
+                beforeRename: beforeRename,
+                onRemove: onRemove,
+                onRename: onRename,
+                beforeClick: beforeClick
+            }
+        };
+
+        var zNodes;
+        function getTree() {
+            // 传用户id ，实际上线后
+            $.post('/notemenu', {}, function (data) {
+                zNodes=data;
+                $.fn.zTree.init($("#treeDemo"), setting, zNodes);
+            }, 'json')
+
+        }
+
+        var log, className = "dark";
+        function beforeDrag(treeId, treeNodes) {
+            return false;
+        }
+        function beforeEditName(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            showLog("[ "+getTime()+" beforeEditName ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.selectNode(treeNode);
+            setTimeout(function() {
+                if (confirm("进入节点 -- " + treeNode.name + " 的编辑状态吗？")) {
+                    setTimeout(function() {
+                        zTree.editName(treeNode);
+                    }, 0);
+                }
+            }, 0);
+            return false;
+        }
+        function beforeRemove(treeId, treeNode) {
+            className = (className === "dark" ? "":"dark");
+            showLog("[ "+getTime()+" beforeRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.selectNode(treeNode);
+            return confirm("确认删除 节点 -- " + treeNode.name + " 吗？");
+        }
+        function onRemove(e, treeId, treeNode) {
+            // 做删除 ，先备份数据库   惨痛教训
+            showLog("[ "+getTime()+" onRemove ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name);
+            var pid=treeNode.id;
+            $.post('/delnote',{"id":pid},function () {
+
+            })
+        }
+        function beforeRename(treeId, treeNode, newName, isCancel) {
+            className = (className === "dark" ? "":"dark");
+            showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" beforeRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+            if (newName.length == 0) {
+                setTimeout(function() {
+                    var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                    zTree.cancelEditName();
+                    alert("节点名称不能为空.");
+                }, 0);
+                return false;
+            }
+            return true;
+        }
+        function onRename(e, treeId, treeNode, isCancel) {
+            //修改后的节点名
+            showLog((isCancel ? "<span style='color:red'>":"") + "[ "+getTime()+" onRename ]&nbsp;&nbsp;&nbsp;&nbsp; " + treeNode.name + (isCancel ? "</span>":""));
+            var name=treeNode.name;
+            var id=treeNode.id;
+            $.post('/editname',{"name":name,"id":id},function () {
+            })
+        }
+        // function showRemoveBtn(treeId, treeNode) {
+        //     return !treeNode.isFirstNode;
+        //     //    源码为不等于
+        // }
+        function showRenameBtn(treeId, treeNode) {
+            return treeNode.isLastNode;
+        //    源码为不等于
+        }
+        function showLog(str) {
+            if (!log) log = $("#log");
+            log.append("<li class='"+className+"'>"+str+"</li>");
+            if(log.children("li").length > 8) {
+                log.get(0).removeChild(log.children("li")[0]);
+            }
+        }
+        //
+        var log, className = "dark";
+        function beforeClick(treeId, treeNode, clickFlag) {
+            className = (className === "dark" ? "":"dark");
+            // showLog("[ "+getTime()+" beforeClick ]&nbsp;&nbsp;" + treeNode.name );
+            var note_id=treeNode.id;
+            url='/note/'+note_id;
+            window.location.href=url;
+            return (treeNode.click != false);
+        }
+
+        function getTime() {
+            var now= new Date(),
+                h=now.getHours(),
+                m=now.getMinutes(),
+                s=now.getSeconds(),
+                ms=now.getMilliseconds();
+            return (h+":"+m+":"+s+ " " +ms);
+        }
+
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+            if (treeNode.id==1) {
+                zTree.editName(treeNode.id==1);
+            }
+            var sObj = $("#" + treeNode.tId + "_span");
+            if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                + "' title='add node' onfocus='this.blur();'></span>";
+            sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
+            if (btn) btn.bind("click", function(){
+                var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+                var t_user=$('#t_user_id').val();
+                var pid=treeNode.id;
+                console.log(pid);
+                $.post('/addnote',{"name":"new_note","t_user_id":t_user,"pId":pid,"t_note_content":"请编辑您的笔记哦！"},function () {
+
+                });
+                zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new_note"});
+                return false;
+            });
+        };
+        function removeHoverDom(treeId, treeNode) {
+            $("#addBtn_"+treeNode.tId).unbind().remove();
+        };
+        function selectAll() {
+            var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+            zTree.setting.edit.editNameSelectAll =  $("#selectAll").attr("checked");
+        }
+        $(document).ready(function(){
+            getTree();
+            $("#selectAll").bind("click", selectAll);
+        });
+        //-->
+    </SCRIPT>
+    <style type="text/css">
+        .ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+    </style>
+
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<br>
+<br>
+<br>
+<!---->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-3">
+           <ul id="treeDemo" class="ztree"></ul>
+        </div>
+        <div class="col-md-9">
+            <br>
+                <form class="form-horizontal"  method="post" role="form" >
+                    <input type="hidden" id="t_user_id" name="t_user_id" th:value="${session.user[t_user_id]}">
+                    <ol id="textdate" class="breadcrumb" style="width: 820px"></ol>
+                    <div th:if="${note} ne null">
+                    <div th:if="${note.id} eq 1+''" th:utext="${note.t_note_content}"></div>
+                    <div th:if="${note.id} ne 1+''" >
+                        <input hidden id="note_id" name="id"  th:value="${note.id}">
+                    <div  id="editor2"  style="width: 820px">
+                        <p th:utext="${note.t_note_content}"></p>
+                    </div>
+                        <button id="btn_submit" formaction="/updatenote" type="submit" class="btn btn-success">保存</button>
+                    </div>
+                    </div>
+                    <textarea hidden id="text1" name="t_note_content"></textarea>
+                    <textarea hidden id="text2" name="t_note_content2"></textarea>
+                </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/edit/wangEditor.js"></script>
+<script>
+    $(document).ready(function () {
+        $.post('/queryallnotename',{},function (data) {
+            for (i=0;i<data.length;i++){
+                $('#t_note_name').append("<option value='"+data[i].id+"'>"+data[i].name+"</option>");
+            }
+        },'json');});
+</script>
+<script>
+    var myDate = new Date();
+    var year=myDate.getFullYear();
+    var month=myDate.getMonth()+1;
+    var day=myDate.getDate();
+    var h=myDate.getHours();       //获取当前小时数(0-23)
+    var m=myDate.getMinutes();
+    $('#textdate').append("<li>" + year+"</li>","<li>" + month+"/"+day+"</li>","<li>"+h+":"+m+"</li>");
+</script>
+<script>
+    // function updatenote() {
+    //     var t_note_content=$('#text1').val()
+    //     var id=$('#note_id').val()
+    //     $.post('/updatenote',{"t_note_content":t_note_content,"id":id},function () {
+    //
+    //     },'json')
+    // }
+</script>
+<script>
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    var editor2 = new E('#editor2')
+    var $text1 = $('#text1')
+    var $text2 = $('#text2')
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text1.val(html)
+    }
+    editor2.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        $text2.val(html)
+    }
+    editor.customConfig.uploadImgShowBase64 = true
+    editor2.customConfig.uploadImgShowBase64 = true
+    editor.create()
+    editor2.create()
+    // editor.txt.html('<p>请编辑您想发表的新闻</p>')
+   $text1.val(editor.txt.html())
+   $text2.val(editor2.txt.html())
+</script>
+</body>
+</html>

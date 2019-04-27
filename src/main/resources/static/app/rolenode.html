@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+            <br>
+            <br>
+
+            <div class="form-group">
+                <label for="t_role_id" class="col-sm-2 control-label">
+                    请选择角色
+                </label>
+            <div class="col-sm-4">
+                <select  class="form-control" name="t_role_id" id="t_role_id" >
+                    <option selected>
+                        请选择修改菜单的角色
+                    </option>
+                    <option  th:each="role:${allroles}"
+                             th:value="${role[t_role_id]}"
+                             th:text="${role[t_role_name]}"
+                     >
+                    </option>
+                </select>
+            </div>
+                <div class="col-sm-2">
+                    <button type="button" onclick="saverolenode()" class="btn btn-success">保存菜单</button>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <div class="form-group">
+                <div class="col-sm-8">
+            <table class="table table-striped" id="rn_tb">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>菜单名称</th>
+                    <th>菜单等级</th>
+                    <th>菜单父级</th>
+                </tr>
+                </thead>
+                <tbody>
+                <first_tr th:each="node:${allnodes}" th:if="${node[t_node_level]=='1'}">
+                    <tr>
+                      <td th:text="${node.t_node_id}"></td>
+                      <td >
+                          <input name="nodecheckbox" type="checkbox" th:value="${node.t_node_id}"   class="checkbox-inline" th:id="${node.t_node_id}">
+                          <span th:text="${node.t_node_name}"></span>
+                      </td>
+                      <td></td>
+                      <td th:text="${node.t_node_level}"></td>
+                      <td th:text="${node.t_node_parent_id}"></td>
+                    </tr>
+                    <second_tr th:each="node2:${allnodes}" th:if="${node[t_node_id]+''==node2[t_node_parent_id]+''}">
+                        <tr>
+                            <td th:text="${node2.t_node_id}"></td>
+                            <td></td>
+                            <td>
+                                <input name="nodecheckbox"  th:value="${node2.t_node_id}" onchange="bindparent()"  type="checkbox" class="checkbox-inline" th:id="${node2.t_node_id}">
+                                <span th:text="${node2.t_node_name}" ></span>
+                            </td>
+                            <td th:text="${node2.t_node_level}"></td>
+                            <td th:text="${node2.t_node_parent_id}"></td>
+                        </tr>
+                    </second_tr>
+                </first_tr>
+                </tbody>
+            </table>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/temp/t_index::tail_index">
+</div>
+<script>
+    //给页面动态添加事件
+// $(document).ready(function () {
+//     //给select 添加动态事件
+//     $('#t_role_id').change(function () {
+//         var role_id=$('#t_role_id').val();
+//         // $.ajax({
+//         //     type:'post',
+//         //     url:'/getnodesbyroleid',
+//         //     dataType:'json',
+//         //     data:{t_role_id:role_id},
+//         //     success:function (result) {
+//         //     //     var tt;
+//         //     //         $("#rn_tb tbody").html("");
+//         //     //     for (var i=0;i<result.length;i++){
+//         //     //         tt="";
+//         //     //         if (result[i].t_node_level=='1'){
+//         //     //          tt="<tr>"+
+//         //     //         "<td>"+result[i].t_node_id+"</td>"+
+//         //     //         "<td>"+result[i].t_node_name+"</td>"+
+//         //     //         "<td></td>"+
+//         //     //         "<td>"+result[i].t_node_level+"</td>"+
+//         //     //         "<td>"+result[i].t_node_parent_id+"</td>"+
+//         //     //         "</tr>";
+//         //     //         //挂载二级菜单
+//         //     //             for (var j=0;j<result.length;j++){
+//         //     //                 if (result[j].t_node_parent_id==result[i].t_node_id){
+//         //     //                     tt+="<tr>"+
+//         //     //                             "<td>"+result[j].t_node_id+"</td>"+
+//         //     //                             "<td></td>"+
+//         //     //                             "<td>"+result[j].t_node_name+"</td>"+
+//         //     //                             "<td>"+result[j].t_node_level+"</td>"+
+//         //     //                             "<td>"+result[j].t_node_parent_id+"</td>"+
+//         //     //                             "</tr>";
+//         //     //                 }
+//         //     //             }
+//         //     //         }
+//         //     //         $('#rn_tb').append(tt);
+//         //     //     }
+//         //         //上面代码为测试，与页面逻辑不符，仅供参考
+//         //         $("input[name='nodecheckbox']").attr('checked',false);
+//         //         // $allcheckbox=$("input[name='nodecheckbox']");
+//         //         // console.log("checkedattr"+$allcheckbox);
+//         //         // $allcheckbox.removeAttr("checked");
+//         //         for (i=0;i<result.length;i++){
+//         //             id=result[i].t_node_id;
+//         //             $('#'+id+'').prop("checked",true);
+//         //         }
+//         //
+//         //      }
+//         //     });
+//         $.post('/getnodesbyroleid',{t_role_id:role_id},function (data) {
+//             $allcheckbox=$('[name="nodecheckbox"]');
+//             $allcheckbox.removeAttr("checked");
+//             // $("input[name='nodecheckbox']").attr('checked',false);
+//             for(i=0;i<data.length;i++){
+//                 id=  data[i].t_node_id;
+//                 $('#'+id+'').prop("checked",true);
+//             }
+//
+//         },'json');
+//     });
+//
+// });
+    function bindparent() {
+        //给选定子id自动勾选父亲
+
+    }
+    
+function saverolenode() {
+    $ech=$('input:checkbox[name=nodecheckbox]:checked');
+    var cd='';
+    $($ech).each(function (index,elem) {
+        console.log($(elem).val());
+        //选中菜单的id，index为索引，elem为传入选中值的信息
+        cd+=$(elem).val()+',';
+        console.log(cd);
+    })
+    console.log(cd);
+        var rid=$('#t_role_id').val();
+        $.ajax({
+            type:'post',
+            url:'/saverolenode',
+            dataType:'json',
+            data:{"t_role_id":rid,"node_id":cd},
+            success:function (data) {
+                if (data.success=='success') {
+                    alert("成功");
+                }
+            }
+        })
+
+};
+
+$(document).ready(function () {
+    $('#t_role_id').change(function () {
+        var role_id=$('#t_role_id').val();
+
+
+        $.post('/getnodesbyroleid',{t_role_id:role_id},function (data) {
+            // var allcheckbox=$('[name="nodecheckbox"]');
+            // allcheckbox.removeAttr("checked");
+            // console.log(""+role_id);
+             $s=$("input[name='nodecheckbox'][type='checkbox']");
+            for (var i=0;i<$s.length;i++){
+                $s[i].checked=false;
+            }
+            console.log($s);
+            // console.log("allcheckbox"+allcheckbox);
+            for(i=0;i<data.length;i++){
+                id=  data[i].t_node_id;
+                $('#'+id+'').prop("checked",true);
+            }
+
+        },'json');
+    })
+})
+</script>
+</body>
+</html>

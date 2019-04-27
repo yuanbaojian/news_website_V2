@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/document::head_index">
+    <title>新闻</title>
+</head>
+<body class="user-select single">
+<div th:replace="/temp/document::mrxwdonghua"></div>
+<div th:replace="/temp/document::right_nav"></div>
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <article class="excerpt excerpt-1" th:each="art:${article}" >
+                <a class="focus" th:href="@{'/article/'+${art[t_article_id]}}" th:title="${art.t_article_title_1}" target="_blank" ><img  th:src="@{'/image/'+${art[t_article_img1]}}" class="thumb"   alt="明日新闻"  style="display: inline;"></a>
+                <header><a class="cat" href="#" title="标签" >标签<i></i></a>
+                    <h2><a href="#" th:title="${art.t_article_title_1}" target="_blank" th:text="${art.t_article_title_1}"></a>
+                    </h2>
+                </header>
+                <p class="meta">
+                    <time class="time"><i class="glyphicon glyphicon-time"></i> [[${#dates.format(art[t_article_create_date],'yyyy-MM-dd')}]]</time>
+                    <span class="views"><i class="glyphicon glyphicon-eye-open"></i> 216</span> <a class="comment" href="##comment" title="评论" target="_blank" ><i class="glyphicon glyphicon-comment"></i> 4</a>
+                </p>
+                <a th:href="@{'/article/'+${art[t_article_id]}}"><p class="note"  th:text="${art[t_article_title_2]}"></p></a>
+            </article>
+        </div>
+    </div>
+    <aside class="sidebar">
+        <div class="fixed">
+            <div th:include="/temp/document::seek_document"></div>
+        </div>
+        <div class="widget widget_hot">
+            <h3>最火爆文</h3>
+            <!--hotArticles-->
+            <ul th:each="hot:${hotArticles}">
+                <li><a th:title="${hot[t_article_title_1]}" th:href="@{'/article/'+${hot[t_article_id]}}" ><span class="thumbnail">
+				<img class="thumb"  th:src="@{'/image/'+${hot[t_article_img1]}}"   style="display: block;">
+			</span><span class="text" th:text="${hot[t_article_title_1]}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+				[[${#dates.format(hot[t_article_create_date],'yyyy-MM-dd')}]]
+			</span>
+                    <!--<span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>-->
+                </a>
+                </li>
+            </ul>
+            <!--hotArticles-->
+
+        </div>
+        <div th:include="/temp/document::advertising_document"></div>
+    </aside>
+</section>
+<div th:include="/temp/document::tail_document"></div>
+<div th:replace="/temp/document::tail_index"></div>
+</body>
+</html>

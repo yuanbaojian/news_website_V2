@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>修改用户</title>
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+        <div class="col-md-6">
+            <form id="defaultForm" class="form-horizontal" role="form" action="/edituser">
+                <div class="form-group">
+                    <label for="firstid" class="col-sm-2 control-label">ID </label>
+                    <div class="col-sm-10">
+                        <input readonly th:value="${updateuser[t_user_id]}" type="text"  name="t_user_id" class="form-control" id="firstid"
+                               >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                <label for="firstname" class="col-sm-2 control-label">账号 </label>
+                <div class="col-sm-10">
+                    <input th:value="${updateuser[user_account]}" type="text"  name="user_account" class="form-control" id="firstname"
+                           placeholder="请输入账号">
+                </div>
+            </div>
+                <div class="form-group">
+                    <label for="lastname"  class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-10">
+                        <input th:value="${updateuser[user_password]}" type="text" name="user_password" class="form-control" id="lastname"
+                               placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-10">
+                        <input name="t_user_password2" type="text" class="form-control" id="lastname2"
+                               placeholder="请确认密码">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="btn_submit" type="submit" class="btn btn-default">保存</button>
+                        <button id="btn_reset" type="reset" class="btn btn-danger">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        </div>
+    </div>
+</div>
+<div th:replace="/temp/t_index::tail_index">
+</div>
+<script>
+    $(document).ready(function() {
+        // Generate a simple captcha
+        function randomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        };
+        $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+        $('#defaultForm').bootstrapValidator({
+//        live: 'disabled',
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                user_account: {
+                    validators: {
+                        notEmpty: {
+                            message: '账号不允许为空'
+                        }
+                    }
+                },
+                lastName: {
+                    group: '.col-lg-4',
+                    validators: {
+                        notEmpty: {
+                            message: 'The last name is required and cannot be empty'
+                        }
+                    }
+                },
+                username: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: 'The username is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'The username must be more than 6 and less than 30 characters long'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: 'The username can only consist of alphabetical, number, dot and underscore'
+                        },
+                        remote: {
+                            type: 'POST',
+                            url: 'remote.php',
+                            message: 'The username is not available'
+                        },
+                        different: {
+                            field: 'password,confirmPassword',
+                            message: 'The username and password cannot be the same as each other'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                },
+                user_password: {
+                    validators: {
+                        notEmpty: {
+                            message: '密码是必需的，不能是空的'
+                        },
+                        identical: {
+                            field: 't_user_password2',
+                            message: '密码要和确认密码相同'
+                        },
+
+                    }
+                },
+                t_user_password2: {
+                    validators: {
+                        notEmpty: {
+                            message: '确认密码不能为空'
+                        },
+                        identical: {
+                            field: 'user_password',
+                            message: '密码不一致'
+                        },
+                    }
+                },
+                birthday: {
+                    validators: {
+                        date: {
+                            format: 'YYYY/MM/DD',
+                            message: 'The birthday is not valid'
+                        }
+                    }
+                },
+                gender: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The gender is required'
+                        }
+                    }
+                },
+                'languages[]': {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please specify at least one language you can speak'
+                        }
+                    }
+                },
+                'programs[]': {
+                    validators: {
+                        choice: {
+                            min: 2,
+                            max: 4,
+                            message: 'Please choose 2 - 4 programming languages you are good at'
+                        }
+                    }
+                },
+                captcha: {
+                    validators: {
+                        callback: {
+                            message: 'Wrong answer',
+                            callback: function(value, validator) {
+                                var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                                return value == sum;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Validate the form manually
+        $('#btn_submit').click(function() {
+            $('#defaultForm').bootstrapValidator('validate');
+            if ($("#defaultForm").data('bootstrapValidator').isValid()) {
+                //获取验证结果，如果成功，执行下面代码
+                document.getElementById("defaultForm").submit();
+
+            }
+        });
+
+        $('#btn_reset').click(function() {
+            $('#defaultForm').data('bootstrapValidator').resetForm(true);
+        });
+    });
+</script>
+</body>
+</html>

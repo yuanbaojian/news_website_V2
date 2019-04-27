@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/document::head_index">
+    <title>新闻</title>
+</head>
+<body class="user-select single">
+<div th:replace="/temp/document::mrxwdonghua"></div>
+<div th:replace="/temp/document::right_nav"></div>
+<section class="container">
+    <div class="content-wrap">
+        <div class="content">
+            <header class="article-header">
+                <h1 class="article-title"><span  th:text="${article.t_article_title_1}"></span></h1>
+                <h4><span th:text="${'作者：'+article.t_article_author}"></span></h4>
+                <div class="article-meta"> <span class="item article-meta-time">
+	  <time class="time" data-toggle="tooltip" data-placement="bottom" data-original-title="创作时间" ><i
+              class="glyphicon glyphicon-time"></i> [[${#dates.format(article[t_article_create_date],'yyyy-MM-dd')}]]</time>
+	  </span> <span class="item article-meta-source" data-toggle="tooltip" data-placement="bottom" data-original-title="新闻来源">
+                    <i class="glyphicon glyphicon-globe"></i> [[${article.t_article_source}]]</span>
+                    <span class="item article-meta-category" data-toggle="tooltip" data-placement="bottom" title=""
+                          data-original-title="栏目"><i class="glyphicon glyphicon-list"></i> <a href="#">[[${article.t_article_classification}]]</a></span>
+                    <span class="item article-meta-views" data-toggle="tooltip" data-placement="bottom" title=""
+                          th:data-original-title="${clickCount[currentPage]}"><i class="glyphicon glyphicon-eye-open"></i>[[${clickCount[currentPage]}]]</span> <span
+                            class="item article-meta-comment" data-toggle="tooltip" data-placement="bottom" title=""
+                            data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i>[[${commentsize}]]</span></div>
+            </header>
+            <article class="article-content">
+                <div th:utext="${article.t_article_document}"></div>
+            </article>
+            <div class="title" id="comment">
+                <h3>评论(ps:登陆后才可以哦！)</h3>
+            </div>
+            <div id="respond">
+
+                    <div class="comment">
+                        <form method="post">
+                        <!--<input type="hidden" id="role" value="游客">-->
+                        <div class="comment-box">
+                            <textarea placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
+                                      cols="100%" rows="3" tabindex="3"></textarea>
+                            <div class="comment-ctrl">
+                                <div class="comment-prompt" style="display: none;"><i
+                                        class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">评论正在提交中...请稍后</span>
+                                </div>
+                                <div class="comment-success" style="display: none;"><i class="fa fa-check"></i> <span
+                                        class="comment-prompt-text">评论提交成功...</span></div>
+
+                                <button th:if="${session.t_user} ne null" name="comment-submit" id="comment-submit" onclick="addcomment()"  tabindex="4" >评论</button>
+                            </div>
+                        </div>
+                        </form> </div>
+
+
+
+            </div>
+            <div id="postcomments">
+                <!--用户id-->
+                <input th:if="${session.t_user} ne null" hidden  id="uid" th:value="${session.user[t_user_id]}">
+                <ol id="comment_list" class="commentlist" th:each="pl,state:${comment}">
+                    <li   class="comment-content"><span class="comment-f" th:text="${(state.size-state.count+1)+'楼'}"></span>
+                        <div class="comment-main">
+                            <p><a class="address" href="#" rel="nofollow" target="_blank">
+                            <img style="width:30px; height:30px; border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;"
+                                 th:src="'/image/'+${pl[t_user_url]}" ><span th:text="${pl[user_account]}"></span></a>
+                            <span class="time" th:text="${pl[create_time]}"></span>
+                            <a class="address" th:if="${session.t_user} ne null" th:onclick="'javascript:com2('+${pl.id}+')'"  th:text="'回复ta'" rel="nofollow" target="_blank"  ></a><br>
+                                <span th:text="${pl.content}"></span>
+                            <div th:id="${pl.id}"></div>
+                            <input id="pid" type="hidden" th:value="${pl[id]}">
+                            <!--<div id="com2"></div>-->
+                        </p></div>
+                        <ol class="commentlist" th:each="pl2:${comment2}" th:if="${pl2[pid]} eq ${pl.id}" >
+                            <li th:if="${pl2.reply_user_id} eq '0'"      class="comment-content" style="padding-left: 20px"><span class="comment-f" ></span>
+                                <div class="comment-main">
+                                    <p><a class="address" href="#" rel="nofollow" target="_blank">
+                                        <img style="width:30px; height:30px; border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;"
+                                             th:src="'/image/'+${pl2[t_user_url]}" ><span th:text="${pl2.user_account+'回复'+pl.user_account}"></span></a>
+                                        <span class="time" th:text="${pl2[create_time]}"></span>
+                                        <a class="address" th:if="${session.t_user} ne null" th:onclick="'javascript:com3('+${pl2.id}+','+${pl.id}+')'" th:text="'回复ta'" rel="nofollow" target="_blank"  ></a><br>
+                                        <span th:text="${pl2.content}"></span>
+                                        <input id="pid2" type="hidden" th:value="${pl2[id]}">
+                                    <div th:id="${pl2.id}"></div>
+                                    </p></div>
+                                <ol class="commentlist" th:each="pl3:${comment2}" th:if="${pl3[reply_user_id]} eq ${pl2.id}">
+                                    <li    class="comment-content" style="padding-left: 40px"><span class="comment-f" ></span>
+                                        <div class="comment-main">
+                                            <p><a class="address" href="#" rel="nofollow" target="_blank">
+                                                <img style="width:30px; height:30px; border-radius:50%;-webkit-border-radius:50%;-moz-border-radius:50%;"
+                                                     th:src="'/image/'+${pl3[t_user_url]}" ><span ></span>@楼上</a>
+                                                <span class="time" th:text="${pl3[create_time]}"></span>
+                                                <a class="address" th:if="${session.t_user} ne null" th:onclick="'javascript:com4('+${pl3.id}+','+${pl2.id}+','+${pl.id}+')'"  th:text="'回复ta'" rel="nofollow" target="_blank"  ></a><br>
+                                                <span th:text="${pl3.content}"></span>
+                                                <input id="pid3" type="hidden" th:value="${pl3[id]}">
+                                            <div th:id="${pl3.id}"></div>
+                                            </p></div>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <aside class="sidebar">
+        <div class="fixed">
+            <div th:include="/temp/document::seek_document"></div>
+        </div>
+        <div class="widget widget_hot">
+            <h3>最火爆文</h3>
+            <!--hotArticles-->
+            <ul th:each="hot:${hotArticles}">
+                <li><a th:title="${hot[t_article_title_1]}" th:href="@{'/article/'+${hot[t_article_id]}}" ><span class="thumbnail">
+				<img class="thumb"  th:src="@{'/image/'+${hot[t_article_img1]}}"   style="display: block;">
+			</span><span class="text" th:text="${hot[t_article_title_1]}"></span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+				[[${#dates.format(hot[t_article_create_date],'yyyy-MM-dd')}]]
+			</span>
+                    <!--<span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span>-->
+                </a>
+                </li>
+            </ul>
+            <!--hotArticles-->
+
+        </div>
+        <div th:include="/temp/document::advertising_document"></div>
+    </aside>
+</section>
+<div th:include="/temp/document::tail_document"></div>
+<div th:replace="/temp/document::tail_index"></div>
+<script th:inline="javascript">
+    var com2plpid="";
+    function com2(pid) {
+        com2plpid=pid;
+        $('#'+pid).empty();
+        $('#'+pid).append("<form method=\"post\"><textarea placeholder=\"您的评论或留言（必填）\" name=\"content\" id=\"comment-textarea2\"\n" +
+            "                                      cols=\"100%\" rows=\"3\" tabindex=\"3\"></textarea>" +
+            "<button th:if=\"${session.t_user} ne null\" name=\"comment-submit\" id=\"comment-submit\" onclick=\"addcomment2()\"  tabindex=\"4\" >评论</button></form>");
+    }
+    var com3plpid="";
+    var commentcom3rid="";
+    function com3(pid2,plpid) {
+        com3plpid=plpid;
+        commentcom3rid=pid2;
+        $('#'+pid2).empty();
+        $('#'+pid2).append("<form method=\"post\"><textarea placeholder=\"您的评论或留言（必填）\" name=\"content\" id=\"comment-textarea3\"\n" +
+            "                                      cols=\"100%\" rows=\"3\" tabindex=\"3\"></textarea>" +
+            "<button th:if=\"${session.t_user} ne null\" name=\"comment-submit\" id=\"comment-submit\" onclick=\"addcomment3()\"  tabindex=\"4\" >评论</button></form>");
+    }
+    var com4plpid="";
+    var commentcom4rid="";
+    function com4(pid3,pid2,pl2pid) {
+        com4plpid=pl2pid;
+        commentcom4rid=pid2;
+        $('#'+pid3).empty();
+        $('#'+pid3).append("<form method=\"post\"><textarea placeholder=\"您的评论或留言（必填）\" name=\"content\" id=\"comment-textarea4\"\n" +
+            "                                      cols=\"100%\" rows=\"3\" tabindex=\"3\"></textarea>" +
+            "<button th:if=\"${session.t_user} ne null\" name=\"comment-submit\" id=\"comment-submit\" onclick=\"addcomment4()\"  tabindex=\"4\" >评论</button></form>");
+    }
+
+    var t_user_id= $('#uid').val()
+    console.log('u_id',t_user_id)
+    var t_article_id= /*[[${aid}]]*/ 'aid';
+    // var pl2pid=$('#commentpid2').val();
+    function addcomment() {
+        var content= $('#comment-textarea').val();
+        $.post('/insertcomment',{"content":content,
+                                    "t_user_id":t_user_id,
+                                    "t_article_id":t_article_id,
+                                    "pid":0},function () {
+        },'json');
+    }
+    function addcomment2() {
+        var content= $('#comment-textarea2').val();
+        $.post('/insertcomment',{"content":content,
+                                    "t_user_id":t_user_id,
+                                    "t_article_id":t_article_id,
+                                    "pid":com2plpid},function () {
+        },'json');
+    }
+
+    function addcomment3() {
+        var content= $('#comment-textarea3').val();
+        $.post('/insertcomment2',{"content":content,
+                                    "t_user_id":t_user_id,
+                                    "t_article_id":t_article_id,
+                                    "pid":com3plpid,
+                                    "reply_user_id":commentcom3rid},function () {
+        },'json');
+    }
+    function addcomment4() {
+        var content= $('#comment-textarea4').val();
+        $.post('/insertcomment2',{"content":content,
+                                    "t_user_id":t_user_id,
+                                    "t_article_id":t_article_id,
+                                    "pid":com4plpid,
+                                    "reply_user_id":commentcom4rid},function () {
+        },'json');
+    }
+
+</script>
+</body>
+</html>

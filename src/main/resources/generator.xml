@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <!--数据库配置-->
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+        </commentGenerator>
+
+
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/news_website?useUnicode=true&amp;characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=UTC"
+                        userId="root"
+                        password="312ybj">
+        </jdbcConnection>
+
+
+        <!--java类型转换-->
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--model生成包名和位置-->
+        <javaModelGenerator targetPackage="com.ybj.news_website.model" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--mybatis的映射  .xml-->
+        <sqlMapGenerator targetPackage="com.ybj.news_website.mapper"  targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--mybatis mapper接口生成的dao包路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.ybj.news_website.Mapper" targetProject="src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+
+
+        <!--配置生成表的模型-->
+
+        <table tableName="article" domainObjectName="Article" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="balance" domainObjectName="Balance" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="comment" domainObjectName="Comment" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="fan" domainObjectName="Fan" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="news_classification" domainObjectName="News_classification" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="reply" domainObjectName="Reply" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="role" domainObjectName="Role" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="top_up" domainObjectName="Top_up" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="user" domainObjectName="User" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+        <table tableName="user_transaction" domainObjectName="User_transaction" >
+            <property name="useActualColumnNames" value="true"/>
+        </table>
+
+
+
+
+    </context>
+</generatorConfiguration>

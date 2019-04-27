@@ -1,0 +1,4284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ybj.news_website.Mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_account" jdbcType="VARCHAR" property="user_account" />
+    <result column="user_password" jdbcType="VARCHAR" property="user_password" />
+    <result column="user_icon" jdbcType="VARCHAR" property="user_icon" />
+    <result column="user_email" jdbcType="VARCHAR" property="user_email" />
+    <result column="activate" jdbcType="INTEGER" property="activate" />
+    <result column="role_id" jdbcType="INTEGER" property="role_id" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_account, user_password, user_icon, user_email, activate, role_id
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (user_id, user_account, user_password, 
+      user_icon, user_email, activate, 
+      role_id)
+    values (#{user_id,jdbcType=INTEGER}, #{user_account,jdbcType=VARCHAR}, #{user_password,jdbcType=VARCHAR}, 
+      #{user_icon,jdbcType=VARCHAR}, #{user_email,jdbcType=VARCHAR}, #{activate,jdbcType=INTEGER}, 
+      #{role_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="user_account != null">
+        user_account,
+      </if>
+      <if test="user_password != null">
+        user_password,
+      </if>
+      <if test="user_icon != null">
+        user_icon,
+      </if>
+      <if test="user_email != null">
+        user_email,
+      </if>
+      <if test="activate != null">
+        activate,
+      </if>
+      <if test="role_id != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_account != null">
+        #{user_account,jdbcType=VARCHAR},
+      </if>
+      <if test="user_password != null">
+        #{user_password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_icon != null">
+        #{user_icon,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null">
+        #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="activate != null">
+        #{activate,jdbcType=INTEGER},
+      </if>
+      <if test="role_id != null">
+        #{role_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.user_id != null">
+        user_id = #{record.user_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.user_account != null">
+        user_account = #{record.user_account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_password != null">
+        user_password = #{record.user_password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_icon != null">
+        user_icon = #{record.user_icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_email != null">
+        user_email = #{record.user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activate != null">
+        activate = #{record.activate,jdbcType=INTEGER},
+      </if>
+      <if test="record.role_id != null">
+        role_id = #{record.role_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set user_id = #{record.user_id,jdbcType=INTEGER},
+      user_account = #{record.user_account,jdbcType=VARCHAR},
+      user_password = #{record.user_password,jdbcType=VARCHAR},
+      user_icon = #{record.user_icon,jdbcType=VARCHAR},
+      user_email = #{record.user_email,jdbcType=VARCHAR},
+      activate = #{record.activate,jdbcType=INTEGER},
+      role_id = #{record.role_id,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="expireTime" jdbcType="TIMESTAMP" property="expireTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, password, createTime, expireTime
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, username, password, 
+      createTime, expireTime)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="expireTime != null">
+        expireTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null">
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireTime != null">
+        expireTime = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      expireTime = #{record.expireTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null">
+        expireTime = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      expireTime = #{expireTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    name, pass
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (name, pass)
+    values (#{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pass != null">
+        pass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set name = #{record.name,jdbcType=VARCHAR},
+      pass = #{record.pass,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, age
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, name, age
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, email, password
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, name, email, 
+      password)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="User" jdbcType="CHAR" property="user" />
+    <result column="Host" jdbcType="CHAR" property="host" />
+    <result column="Select_priv" jdbcType="CHAR" property="select_priv" />
+    <result column="Insert_priv" jdbcType="CHAR" property="insert_priv" />
+    <result column="Update_priv" jdbcType="CHAR" property="update_priv" />
+    <result column="Delete_priv" jdbcType="CHAR" property="delete_priv" />
+    <result column="Create_priv" jdbcType="CHAR" property="create_priv" />
+    <result column="Drop_priv" jdbcType="CHAR" property="drop_priv" />
+    <result column="Reload_priv" jdbcType="CHAR" property="reload_priv" />
+    <result column="Shutdown_priv" jdbcType="CHAR" property="shutdown_priv" />
+    <result column="Process_priv" jdbcType="CHAR" property="process_priv" />
+    <result column="File_priv" jdbcType="CHAR" property="file_priv" />
+    <result column="Grant_priv" jdbcType="CHAR" property="grant_priv" />
+    <result column="References_priv" jdbcType="CHAR" property="references_priv" />
+    <result column="Index_priv" jdbcType="CHAR" property="index_priv" />
+    <result column="Alter_priv" jdbcType="CHAR" property="alter_priv" />
+    <result column="Show_db_priv" jdbcType="CHAR" property="show_db_priv" />
+    <result column="Super_priv" jdbcType="CHAR" property="super_priv" />
+    <result column="Create_tmp_table_priv" jdbcType="CHAR" property="create_tmp_table_priv" />
+    <result column="Lock_tables_priv" jdbcType="CHAR" property="lock_tables_priv" />
+    <result column="Execute_priv" jdbcType="CHAR" property="execute_priv" />
+    <result column="Repl_slave_priv" jdbcType="CHAR" property="repl_slave_priv" />
+    <result column="Repl_client_priv" jdbcType="CHAR" property="repl_client_priv" />
+    <result column="Create_view_priv" jdbcType="CHAR" property="create_view_priv" />
+    <result column="Show_view_priv" jdbcType="CHAR" property="show_view_priv" />
+    <result column="Create_routine_priv" jdbcType="CHAR" property="create_routine_priv" />
+    <result column="Alter_routine_priv" jdbcType="CHAR" property="alter_routine_priv" />
+    <result column="Create_user_priv" jdbcType="CHAR" property="create_user_priv" />
+    <result column="Event_priv" jdbcType="CHAR" property="event_priv" />
+    <result column="Trigger_priv" jdbcType="CHAR" property="trigger_priv" />
+    <result column="Create_tablespace_priv" jdbcType="CHAR" property="create_tablespace_priv" />
+    <result column="ssl_type" jdbcType="CHAR" property="ssl_type" />
+    <result column="max_questions" jdbcType="INTEGER" property="max_questions" />
+    <result column="max_updates" jdbcType="INTEGER" property="max_updates" />
+    <result column="max_connections" jdbcType="INTEGER" property="max_connections" />
+    <result column="max_user_connections" jdbcType="INTEGER" property="max_user_connections" />
+    <result column="plugin" jdbcType="CHAR" property="plugin" />
+    <result column="password_expired" jdbcType="CHAR" property="password_expired" />
+    <result column="password_last_changed" jdbcType="TIMESTAMP" property="password_last_changed" />
+    <result column="password_lifetime" jdbcType="SMALLINT" property="password_lifetime" />
+    <result column="account_locked" jdbcType="CHAR" property="account_locked" />
+    <result column="Create_role_priv" jdbcType="CHAR" property="create_role_priv" />
+    <result column="Drop_role_priv" jdbcType="CHAR" property="drop_role_priv" />
+    <result column="Password_reuse_history" jdbcType="SMALLINT" property="password_reuse_history" />
+    <result column="Password_reuse_time" jdbcType="SMALLINT" property="password_reuse_time" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ybj.news_website.model.UserWithBLOBs">
+    <result column="ssl_cipher" jdbcType="LONGVARBINARY" property="ssl_cipher" />
+    <result column="x509_issuer" jdbcType="LONGVARBINARY" property="x509_issuer" />
+    <result column="x509_subject" jdbcType="LONGVARBINARY" property="x509_subject" />
+    <result column="authentication_string" jdbcType="LONGVARCHAR" property="authentication_string" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    User, Host, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, 
+    Reload_priv, Shutdown_priv, Process_priv, File_priv, Grant_priv, References_priv, 
+    Index_priv, Alter_priv, Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv, 
+    Execute_priv, Repl_slave_priv, Repl_client_priv, Create_view_priv, Show_view_priv, 
+    Create_routine_priv, Alter_routine_priv, Create_user_priv, Event_priv, Trigger_priv, 
+    Create_tablespace_priv, ssl_type, max_questions, max_updates, max_connections, max_user_connections, 
+    plugin, password_expired, password_last_changed, password_lifetime, account_locked, 
+    Create_role_priv, Drop_role_priv, Password_reuse_history, Password_reuse_time
+  </sql>
+  <sql id="Blob_Column_List">
+    ssl_cipher, x509_issuer, x509_subject, authentication_string
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ybj.news_website.model.UserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where User = #{user,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where User = #{user,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    insert into user (User, Host, Select_priv, 
+      Insert_priv, Update_priv, Delete_priv, 
+      Create_priv, Drop_priv, Reload_priv, 
+      Shutdown_priv, Process_priv, File_priv, 
+      Grant_priv, References_priv, Index_priv, 
+      Alter_priv, Show_db_priv, Super_priv, 
+      Create_tmp_table_priv, Lock_tables_priv, Execute_priv, 
+      Repl_slave_priv, Repl_client_priv, Create_view_priv, 
+      Show_view_priv, Create_routine_priv, Alter_routine_priv, 
+      Create_user_priv, Event_priv, Trigger_priv, 
+      Create_tablespace_priv, ssl_type, max_questions, 
+      max_updates, max_connections, max_user_connections, 
+      plugin, password_expired, password_last_changed, 
+      password_lifetime, account_locked, Create_role_priv, 
+      Drop_role_priv, Password_reuse_history, Password_reuse_time, 
+      ssl_cipher, x509_issuer, x509_subject, 
+      authentication_string)
+    values (#{user,jdbcType=CHAR}, #{host,jdbcType=CHAR}, #{select_priv,jdbcType=CHAR}, 
+      #{insert_priv,jdbcType=CHAR}, #{update_priv,jdbcType=CHAR}, #{delete_priv,jdbcType=CHAR}, 
+      #{create_priv,jdbcType=CHAR}, #{drop_priv,jdbcType=CHAR}, #{reload_priv,jdbcType=CHAR}, 
+      #{shutdown_priv,jdbcType=CHAR}, #{process_priv,jdbcType=CHAR}, #{file_priv,jdbcType=CHAR}, 
+      #{grant_priv,jdbcType=CHAR}, #{references_priv,jdbcType=CHAR}, #{index_priv,jdbcType=CHAR}, 
+      #{alter_priv,jdbcType=CHAR}, #{show_db_priv,jdbcType=CHAR}, #{super_priv,jdbcType=CHAR}, 
+      #{create_tmp_table_priv,jdbcType=CHAR}, #{lock_tables_priv,jdbcType=CHAR}, #{execute_priv,jdbcType=CHAR}, 
+      #{repl_slave_priv,jdbcType=CHAR}, #{repl_client_priv,jdbcType=CHAR}, #{create_view_priv,jdbcType=CHAR}, 
+      #{show_view_priv,jdbcType=CHAR}, #{create_routine_priv,jdbcType=CHAR}, #{alter_routine_priv,jdbcType=CHAR}, 
+      #{create_user_priv,jdbcType=CHAR}, #{event_priv,jdbcType=CHAR}, #{trigger_priv,jdbcType=CHAR}, 
+      #{create_tablespace_priv,jdbcType=CHAR}, #{ssl_type,jdbcType=CHAR}, #{max_questions,jdbcType=INTEGER}, 
+      #{max_updates,jdbcType=INTEGER}, #{max_connections,jdbcType=INTEGER}, #{max_user_connections,jdbcType=INTEGER}, 
+      #{plugin,jdbcType=CHAR}, #{password_expired,jdbcType=CHAR}, #{password_last_changed,jdbcType=TIMESTAMP}, 
+      #{password_lifetime,jdbcType=SMALLINT}, #{account_locked,jdbcType=CHAR}, #{create_role_priv,jdbcType=CHAR}, 
+      #{drop_role_priv,jdbcType=CHAR}, #{password_reuse_history,jdbcType=SMALLINT}, #{password_reuse_time,jdbcType=SMALLINT}, 
+      #{ssl_cipher,jdbcType=LONGVARBINARY}, #{x509_issuer,jdbcType=LONGVARBINARY}, #{x509_subject,jdbcType=LONGVARBINARY}, 
+      #{authentication_string,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user != null">
+        User,
+      </if>
+      <if test="host != null">
+        Host,
+      </if>
+      <if test="select_priv != null">
+        Select_priv,
+      </if>
+      <if test="insert_priv != null">
+        Insert_priv,
+      </if>
+      <if test="update_priv != null">
+        Update_priv,
+      </if>
+      <if test="delete_priv != null">
+        Delete_priv,
+      </if>
+      <if test="create_priv != null">
+        Create_priv,
+      </if>
+      <if test="drop_priv != null">
+        Drop_priv,
+      </if>
+      <if test="reload_priv != null">
+        Reload_priv,
+      </if>
+      <if test="shutdown_priv != null">
+        Shutdown_priv,
+      </if>
+      <if test="process_priv != null">
+        Process_priv,
+      </if>
+      <if test="file_priv != null">
+        File_priv,
+      </if>
+      <if test="grant_priv != null">
+        Grant_priv,
+      </if>
+      <if test="references_priv != null">
+        References_priv,
+      </if>
+      <if test="index_priv != null">
+        Index_priv,
+      </if>
+      <if test="alter_priv != null">
+        Alter_priv,
+      </if>
+      <if test="show_db_priv != null">
+        Show_db_priv,
+      </if>
+      <if test="super_priv != null">
+        Super_priv,
+      </if>
+      <if test="create_tmp_table_priv != null">
+        Create_tmp_table_priv,
+      </if>
+      <if test="lock_tables_priv != null">
+        Lock_tables_priv,
+      </if>
+      <if test="execute_priv != null">
+        Execute_priv,
+      </if>
+      <if test="repl_slave_priv != null">
+        Repl_slave_priv,
+      </if>
+      <if test="repl_client_priv != null">
+        Repl_client_priv,
+      </if>
+      <if test="create_view_priv != null">
+        Create_view_priv,
+      </if>
+      <if test="show_view_priv != null">
+        Show_view_priv,
+      </if>
+      <if test="create_routine_priv != null">
+        Create_routine_priv,
+      </if>
+      <if test="alter_routine_priv != null">
+        Alter_routine_priv,
+      </if>
+      <if test="create_user_priv != null">
+        Create_user_priv,
+      </if>
+      <if test="event_priv != null">
+        Event_priv,
+      </if>
+      <if test="trigger_priv != null">
+        Trigger_priv,
+      </if>
+      <if test="create_tablespace_priv != null">
+        Create_tablespace_priv,
+      </if>
+      <if test="ssl_type != null">
+        ssl_type,
+      </if>
+      <if test="max_questions != null">
+        max_questions,
+      </if>
+      <if test="max_updates != null">
+        max_updates,
+      </if>
+      <if test="max_connections != null">
+        max_connections,
+      </if>
+      <if test="max_user_connections != null">
+        max_user_connections,
+      </if>
+      <if test="plugin != null">
+        plugin,
+      </if>
+      <if test="password_expired != null">
+        password_expired,
+      </if>
+      <if test="password_last_changed != null">
+        password_last_changed,
+      </if>
+      <if test="password_lifetime != null">
+        password_lifetime,
+      </if>
+      <if test="account_locked != null">
+        account_locked,
+      </if>
+      <if test="create_role_priv != null">
+        Create_role_priv,
+      </if>
+      <if test="drop_role_priv != null">
+        Drop_role_priv,
+      </if>
+      <if test="password_reuse_history != null">
+        Password_reuse_history,
+      </if>
+      <if test="password_reuse_time != null">
+        Password_reuse_time,
+      </if>
+      <if test="ssl_cipher != null">
+        ssl_cipher,
+      </if>
+      <if test="x509_issuer != null">
+        x509_issuer,
+      </if>
+      <if test="x509_subject != null">
+        x509_subject,
+      </if>
+      <if test="authentication_string != null">
+        authentication_string,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user != null">
+        #{user,jdbcType=CHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=CHAR},
+      </if>
+      <if test="select_priv != null">
+        #{select_priv,jdbcType=CHAR},
+      </if>
+      <if test="insert_priv != null">
+        #{insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="update_priv != null">
+        #{update_priv,jdbcType=CHAR},
+      </if>
+      <if test="delete_priv != null">
+        #{delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_priv != null">
+        #{create_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_priv != null">
+        #{drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="reload_priv != null">
+        #{reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="shutdown_priv != null">
+        #{shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="process_priv != null">
+        #{process_priv,jdbcType=CHAR},
+      </if>
+      <if test="file_priv != null">
+        #{file_priv,jdbcType=CHAR},
+      </if>
+      <if test="grant_priv != null">
+        #{grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="references_priv != null">
+        #{references_priv,jdbcType=CHAR},
+      </if>
+      <if test="index_priv != null">
+        #{index_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_priv != null">
+        #{alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_db_priv != null">
+        #{show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="super_priv != null">
+        #{super_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tmp_table_priv != null">
+        #{create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="lock_tables_priv != null">
+        #{lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="execute_priv != null">
+        #{execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_slave_priv != null">
+        #{repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_client_priv != null">
+        #{repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_view_priv != null">
+        #{create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_view_priv != null">
+        #{show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_routine_priv != null">
+        #{create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_routine_priv != null">
+        #{alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_user_priv != null">
+        #{create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="event_priv != null">
+        #{event_priv,jdbcType=CHAR},
+      </if>
+      <if test="trigger_priv != null">
+        #{trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tablespace_priv != null">
+        #{create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="ssl_type != null">
+        #{ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="max_questions != null">
+        #{max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="max_updates != null">
+        #{max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="max_connections != null">
+        #{max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="max_user_connections != null">
+        #{max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="plugin != null">
+        #{plugin,jdbcType=CHAR},
+      </if>
+      <if test="password_expired != null">
+        #{password_expired,jdbcType=CHAR},
+      </if>
+      <if test="password_last_changed != null">
+        #{password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password_lifetime != null">
+        #{password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="account_locked != null">
+        #{account_locked,jdbcType=CHAR},
+      </if>
+      <if test="create_role_priv != null">
+        #{create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_role_priv != null">
+        #{drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="password_reuse_history != null">
+        #{password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="password_reuse_time != null">
+        #{password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="ssl_cipher != null">
+        #{ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_issuer != null">
+        #{x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_subject != null">
+        #{x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="authentication_string != null">
+        #{authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.user != null">
+        User = #{record.user,jdbcType=CHAR},
+      </if>
+      <if test="record.host != null">
+        Host = #{record.host,jdbcType=CHAR},
+      </if>
+      <if test="record.select_priv != null">
+        Select_priv = #{record.select_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.insert_priv != null">
+        Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.update_priv != null">
+        Update_priv = #{record.update_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.delete_priv != null">
+        Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_priv != null">
+        Create_priv = #{record.create_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.drop_priv != null">
+        Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.reload_priv != null">
+        Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.shutdown_priv != null">
+        Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.process_priv != null">
+        Process_priv = #{record.process_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.file_priv != null">
+        File_priv = #{record.file_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.grant_priv != null">
+        Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.references_priv != null">
+        References_priv = #{record.references_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.index_priv != null">
+        Index_priv = #{record.index_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.alter_priv != null">
+        Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.show_db_priv != null">
+        Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.super_priv != null">
+        Super_priv = #{record.super_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_tmp_table_priv != null">
+        Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.lock_tables_priv != null">
+        Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.execute_priv != null">
+        Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.repl_slave_priv != null">
+        Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.repl_client_priv != null">
+        Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_view_priv != null">
+        Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.show_view_priv != null">
+        Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_routine_priv != null">
+        Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.alter_routine_priv != null">
+        Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_user_priv != null">
+        Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.event_priv != null">
+        Event_priv = #{record.event_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.trigger_priv != null">
+        Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_tablespace_priv != null">
+        Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.ssl_type != null">
+        ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="record.max_questions != null">
+        max_questions = #{record.max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_updates != null">
+        max_updates = #{record.max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_connections != null">
+        max_connections = #{record.max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_user_connections != null">
+        max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="record.plugin != null">
+        plugin = #{record.plugin,jdbcType=CHAR},
+      </if>
+      <if test="record.password_expired != null">
+        password_expired = #{record.password_expired,jdbcType=CHAR},
+      </if>
+      <if test="record.password_last_changed != null">
+        password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password_lifetime != null">
+        password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="record.account_locked != null">
+        account_locked = #{record.account_locked,jdbcType=CHAR},
+      </if>
+      <if test="record.create_role_priv != null">
+        Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.drop_role_priv != null">
+        Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.password_reuse_history != null">
+        Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="record.password_reuse_time != null">
+        Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="record.ssl_cipher != null">
+        ssl_cipher = #{record.ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.x509_issuer != null">
+        x509_issuer = #{record.x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.x509_subject != null">
+        x509_subject = #{record.x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.authentication_string != null">
+        authentication_string = #{record.authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user
+    set User = #{record.user,jdbcType=CHAR},
+      Host = #{record.host,jdbcType=CHAR},
+      Select_priv = #{record.select_priv,jdbcType=CHAR},
+      Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      Update_priv = #{record.update_priv,jdbcType=CHAR},
+      Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      Create_priv = #{record.create_priv,jdbcType=CHAR},
+      Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{record.process_priv,jdbcType=CHAR},
+      File_priv = #{record.file_priv,jdbcType=CHAR},
+      Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      References_priv = #{record.references_priv,jdbcType=CHAR},
+      Index_priv = #{record.index_priv,jdbcType=CHAR},
+      Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      Super_priv = #{record.super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      Event_priv = #{record.event_priv,jdbcType=CHAR},
+      Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      max_questions = #{record.max_questions,jdbcType=INTEGER},
+      max_updates = #{record.max_updates,jdbcType=INTEGER},
+      max_connections = #{record.max_connections,jdbcType=INTEGER},
+      max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      plugin = #{record.plugin,jdbcType=CHAR},
+      password_expired = #{record.password_expired,jdbcType=CHAR},
+      password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{record.account_locked,jdbcType=CHAR},
+      Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT},
+      ssl_cipher = #{record.ssl_cipher,jdbcType=LONGVARBINARY},
+      x509_issuer = #{record.x509_issuer,jdbcType=LONGVARBINARY},
+      x509_subject = #{record.x509_subject,jdbcType=LONGVARBINARY},
+      authentication_string = #{record.authentication_string,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set User = #{record.user,jdbcType=CHAR},
+      Host = #{record.host,jdbcType=CHAR},
+      Select_priv = #{record.select_priv,jdbcType=CHAR},
+      Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      Update_priv = #{record.update_priv,jdbcType=CHAR},
+      Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      Create_priv = #{record.create_priv,jdbcType=CHAR},
+      Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{record.process_priv,jdbcType=CHAR},
+      File_priv = #{record.file_priv,jdbcType=CHAR},
+      Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      References_priv = #{record.references_priv,jdbcType=CHAR},
+      Index_priv = #{record.index_priv,jdbcType=CHAR},
+      Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      Super_priv = #{record.super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      Event_priv = #{record.event_priv,jdbcType=CHAR},
+      Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      max_questions = #{record.max_questions,jdbcType=INTEGER},
+      max_updates = #{record.max_updates,jdbcType=INTEGER},
+      max_connections = #{record.max_connections,jdbcType=INTEGER},
+      max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      plugin = #{record.plugin,jdbcType=CHAR},
+      password_expired = #{record.password_expired,jdbcType=CHAR},
+      password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{record.account_locked,jdbcType=CHAR},
+      Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    update user
+    <set>
+      <if test="host != null">
+        Host = #{host,jdbcType=CHAR},
+      </if>
+      <if test="select_priv != null">
+        Select_priv = #{select_priv,jdbcType=CHAR},
+      </if>
+      <if test="insert_priv != null">
+        Insert_priv = #{insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="update_priv != null">
+        Update_priv = #{update_priv,jdbcType=CHAR},
+      </if>
+      <if test="delete_priv != null">
+        Delete_priv = #{delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_priv != null">
+        Create_priv = #{create_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_priv != null">
+        Drop_priv = #{drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="reload_priv != null">
+        Reload_priv = #{reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="shutdown_priv != null">
+        Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="process_priv != null">
+        Process_priv = #{process_priv,jdbcType=CHAR},
+      </if>
+      <if test="file_priv != null">
+        File_priv = #{file_priv,jdbcType=CHAR},
+      </if>
+      <if test="grant_priv != null">
+        Grant_priv = #{grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="references_priv != null">
+        References_priv = #{references_priv,jdbcType=CHAR},
+      </if>
+      <if test="index_priv != null">
+        Index_priv = #{index_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_priv != null">
+        Alter_priv = #{alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_db_priv != null">
+        Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="super_priv != null">
+        Super_priv = #{super_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tmp_table_priv != null">
+        Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="lock_tables_priv != null">
+        Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="execute_priv != null">
+        Execute_priv = #{execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_slave_priv != null">
+        Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_client_priv != null">
+        Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_view_priv != null">
+        Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_view_priv != null">
+        Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_routine_priv != null">
+        Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_routine_priv != null">
+        Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_user_priv != null">
+        Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="event_priv != null">
+        Event_priv = #{event_priv,jdbcType=CHAR},
+      </if>
+      <if test="trigger_priv != null">
+        Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tablespace_priv != null">
+        Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="ssl_type != null">
+        ssl_type = #{ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="max_questions != null">
+        max_questions = #{max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="max_updates != null">
+        max_updates = #{max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="max_connections != null">
+        max_connections = #{max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="max_user_connections != null">
+        max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="plugin != null">
+        plugin = #{plugin,jdbcType=CHAR},
+      </if>
+      <if test="password_expired != null">
+        password_expired = #{password_expired,jdbcType=CHAR},
+      </if>
+      <if test="password_last_changed != null">
+        password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password_lifetime != null">
+        password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="account_locked != null">
+        account_locked = #{account_locked,jdbcType=CHAR},
+      </if>
+      <if test="create_role_priv != null">
+        Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_role_priv != null">
+        Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="password_reuse_history != null">
+        Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="password_reuse_time != null">
+        Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="ssl_cipher != null">
+        ssl_cipher = #{ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_issuer != null">
+        x509_issuer = #{x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_subject != null">
+        x509_subject = #{x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="authentication_string != null">
+        authentication_string = #{authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    update user
+    set Host = #{host,jdbcType=CHAR},
+      Select_priv = #{select_priv,jdbcType=CHAR},
+      Insert_priv = #{insert_priv,jdbcType=CHAR},
+      Update_priv = #{update_priv,jdbcType=CHAR},
+      Delete_priv = #{delete_priv,jdbcType=CHAR},
+      Create_priv = #{create_priv,jdbcType=CHAR},
+      Drop_priv = #{drop_priv,jdbcType=CHAR},
+      Reload_priv = #{reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{process_priv,jdbcType=CHAR},
+      File_priv = #{file_priv,jdbcType=CHAR},
+      Grant_priv = #{grant_priv,jdbcType=CHAR},
+      References_priv = #{references_priv,jdbcType=CHAR},
+      Index_priv = #{index_priv,jdbcType=CHAR},
+      Alter_priv = #{alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      Super_priv = #{super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      Event_priv = #{event_priv,jdbcType=CHAR},
+      Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{ssl_type,jdbcType=CHAR},
+      max_questions = #{max_questions,jdbcType=INTEGER},
+      max_updates = #{max_updates,jdbcType=INTEGER},
+      max_connections = #{max_connections,jdbcType=INTEGER},
+      max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      plugin = #{plugin,jdbcType=CHAR},
+      password_expired = #{password_expired,jdbcType=CHAR},
+      password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{account_locked,jdbcType=CHAR},
+      Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT},
+      ssl_cipher = #{ssl_cipher,jdbcType=LONGVARBINARY},
+      x509_issuer = #{x509_issuer,jdbcType=LONGVARBINARY},
+      x509_subject = #{x509_subject,jdbcType=LONGVARBINARY},
+      authentication_string = #{authentication_string,jdbcType=LONGVARCHAR}
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set Host = #{host,jdbcType=CHAR},
+      Select_priv = #{select_priv,jdbcType=CHAR},
+      Insert_priv = #{insert_priv,jdbcType=CHAR},
+      Update_priv = #{update_priv,jdbcType=CHAR},
+      Delete_priv = #{delete_priv,jdbcType=CHAR},
+      Create_priv = #{create_priv,jdbcType=CHAR},
+      Drop_priv = #{drop_priv,jdbcType=CHAR},
+      Reload_priv = #{reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{process_priv,jdbcType=CHAR},
+      File_priv = #{file_priv,jdbcType=CHAR},
+      Grant_priv = #{grant_priv,jdbcType=CHAR},
+      References_priv = #{references_priv,jdbcType=CHAR},
+      Index_priv = #{index_priv,jdbcType=CHAR},
+      Alter_priv = #{alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      Super_priv = #{super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      Event_priv = #{event_priv,jdbcType=CHAR},
+      Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{ssl_type,jdbcType=CHAR},
+      max_questions = #{max_questions,jdbcType=INTEGER},
+      max_updates = #{max_updates,jdbcType=INTEGER},
+      max_connections = #{max_connections,jdbcType=INTEGER},
+      max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      plugin = #{plugin,jdbcType=CHAR},
+      password_expired = #{password_expired,jdbcType=CHAR},
+      password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{account_locked,jdbcType=CHAR},
+      Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT}
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, birthday, sex, address
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, username, birthday, 
+      sex, address)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      sex = #{record.sex,jdbcType=CHAR},
+      address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      sex = #{sex,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    <result column="user_account" jdbcType="VARCHAR" property="user_account" />
+    <result column="user_password" jdbcType="VARCHAR" property="user_password" />
+    <result column="user_icon" jdbcType="VARCHAR" property="user_icon" />
+    <result column="user_email" jdbcType="VARCHAR" property="user_email" />
+    <result column="activate" jdbcType="INTEGER" property="activate" />
+    <result column="role_id" jdbcType="INTEGER" property="role_id" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, user_account, user_password, user_icon, user_email, activate, role_id
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (user_id, user_account, user_password, 
+      user_icon, user_email, activate, 
+      role_id)
+    values (#{user_id,jdbcType=INTEGER}, #{user_account,jdbcType=VARCHAR}, #{user_password,jdbcType=VARCHAR}, 
+      #{user_icon,jdbcType=VARCHAR}, #{user_email,jdbcType=VARCHAR}, #{activate,jdbcType=INTEGER}, 
+      #{role_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="user_account != null">
+        user_account,
+      </if>
+      <if test="user_password != null">
+        user_password,
+      </if>
+      <if test="user_icon != null">
+        user_icon,
+      </if>
+      <if test="user_email != null">
+        user_email,
+      </if>
+      <if test="activate != null">
+        activate,
+      </if>
+      <if test="role_id != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=INTEGER},
+      </if>
+      <if test="user_account != null">
+        #{user_account,jdbcType=VARCHAR},
+      </if>
+      <if test="user_password != null">
+        #{user_password,jdbcType=VARCHAR},
+      </if>
+      <if test="user_icon != null">
+        #{user_icon,jdbcType=VARCHAR},
+      </if>
+      <if test="user_email != null">
+        #{user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="activate != null">
+        #{activate,jdbcType=INTEGER},
+      </if>
+      <if test="role_id != null">
+        #{role_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.user_id != null">
+        user_id = #{record.user_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.user_account != null">
+        user_account = #{record.user_account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_password != null">
+        user_password = #{record.user_password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_icon != null">
+        user_icon = #{record.user_icon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.user_email != null">
+        user_email = #{record.user_email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.activate != null">
+        activate = #{record.activate,jdbcType=INTEGER},
+      </if>
+      <if test="record.role_id != null">
+        role_id = #{record.role_id,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set user_id = #{record.user_id,jdbcType=INTEGER},
+      user_account = #{record.user_account,jdbcType=VARCHAR},
+      user_password = #{record.user_password,jdbcType=VARCHAR},
+      user_icon = #{record.user_icon,jdbcType=VARCHAR},
+      user_email = #{record.user_email,jdbcType=VARCHAR},
+      activate = #{record.activate,jdbcType=INTEGER},
+      role_id = #{record.role_id,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="expireTime" jdbcType="TIMESTAMP" property="expireTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, password, createTime, expireTime
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, username, password, 
+      createTime, expireTime)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{expireTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="expireTime != null">
+        expireTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null">
+        #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null">
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.expireTime != null">
+        expireTime = #{record.expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      expireTime = #{record.expireTime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expireTime != null">
+        expireTime = #{expireTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      expireTime = #{expireTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="pass" jdbcType="VARCHAR" property="pass" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    name, pass
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (name, pass)
+    values (#{name,jdbcType=VARCHAR}, #{pass,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        name,
+      </if>
+      <if test="pass != null">
+        pass,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pass != null">
+        #{pass,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pass != null">
+        pass = #{record.pass,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set name = #{record.name,jdbcType=VARCHAR},
+      pass = #{record.pass,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="age" jdbcType="INTEGER" property="age" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, age
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, name, age
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="age != null">
+        age,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        #{age,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.age != null">
+        age = #{record.age,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      age = #{record.age,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="age != null">
+        age = #{age,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      age = #{age,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, name, email, password
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, name, email, 
+      password)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null">
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null">
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      name = #{record.name,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="User" jdbcType="CHAR" property="user" />
+    <result column="Host" jdbcType="CHAR" property="host" />
+    <result column="Select_priv" jdbcType="CHAR" property="select_priv" />
+    <result column="Insert_priv" jdbcType="CHAR" property="insert_priv" />
+    <result column="Update_priv" jdbcType="CHAR" property="update_priv" />
+    <result column="Delete_priv" jdbcType="CHAR" property="delete_priv" />
+    <result column="Create_priv" jdbcType="CHAR" property="create_priv" />
+    <result column="Drop_priv" jdbcType="CHAR" property="drop_priv" />
+    <result column="Reload_priv" jdbcType="CHAR" property="reload_priv" />
+    <result column="Shutdown_priv" jdbcType="CHAR" property="shutdown_priv" />
+    <result column="Process_priv" jdbcType="CHAR" property="process_priv" />
+    <result column="File_priv" jdbcType="CHAR" property="file_priv" />
+    <result column="Grant_priv" jdbcType="CHAR" property="grant_priv" />
+    <result column="References_priv" jdbcType="CHAR" property="references_priv" />
+    <result column="Index_priv" jdbcType="CHAR" property="index_priv" />
+    <result column="Alter_priv" jdbcType="CHAR" property="alter_priv" />
+    <result column="Show_db_priv" jdbcType="CHAR" property="show_db_priv" />
+    <result column="Super_priv" jdbcType="CHAR" property="super_priv" />
+    <result column="Create_tmp_table_priv" jdbcType="CHAR" property="create_tmp_table_priv" />
+    <result column="Lock_tables_priv" jdbcType="CHAR" property="lock_tables_priv" />
+    <result column="Execute_priv" jdbcType="CHAR" property="execute_priv" />
+    <result column="Repl_slave_priv" jdbcType="CHAR" property="repl_slave_priv" />
+    <result column="Repl_client_priv" jdbcType="CHAR" property="repl_client_priv" />
+    <result column="Create_view_priv" jdbcType="CHAR" property="create_view_priv" />
+    <result column="Show_view_priv" jdbcType="CHAR" property="show_view_priv" />
+    <result column="Create_routine_priv" jdbcType="CHAR" property="create_routine_priv" />
+    <result column="Alter_routine_priv" jdbcType="CHAR" property="alter_routine_priv" />
+    <result column="Create_user_priv" jdbcType="CHAR" property="create_user_priv" />
+    <result column="Event_priv" jdbcType="CHAR" property="event_priv" />
+    <result column="Trigger_priv" jdbcType="CHAR" property="trigger_priv" />
+    <result column="Create_tablespace_priv" jdbcType="CHAR" property="create_tablespace_priv" />
+    <result column="ssl_type" jdbcType="CHAR" property="ssl_type" />
+    <result column="max_questions" jdbcType="INTEGER" property="max_questions" />
+    <result column="max_updates" jdbcType="INTEGER" property="max_updates" />
+    <result column="max_connections" jdbcType="INTEGER" property="max_connections" />
+    <result column="max_user_connections" jdbcType="INTEGER" property="max_user_connections" />
+    <result column="plugin" jdbcType="CHAR" property="plugin" />
+    <result column="password_expired" jdbcType="CHAR" property="password_expired" />
+    <result column="password_last_changed" jdbcType="TIMESTAMP" property="password_last_changed" />
+    <result column="password_lifetime" jdbcType="SMALLINT" property="password_lifetime" />
+    <result column="account_locked" jdbcType="CHAR" property="account_locked" />
+    <result column="Create_role_priv" jdbcType="CHAR" property="create_role_priv" />
+    <result column="Drop_role_priv" jdbcType="CHAR" property="drop_role_priv" />
+    <result column="Password_reuse_history" jdbcType="SMALLINT" property="password_reuse_history" />
+    <result column="Password_reuse_time" jdbcType="SMALLINT" property="password_reuse_time" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.ybj.news_website.model.UserWithBLOBs">
+    <result column="ssl_cipher" jdbcType="LONGVARBINARY" property="ssl_cipher" />
+    <result column="x509_issuer" jdbcType="LONGVARBINARY" property="x509_issuer" />
+    <result column="x509_subject" jdbcType="LONGVARBINARY" property="x509_subject" />
+    <result column="authentication_string" jdbcType="LONGVARCHAR" property="authentication_string" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    User, Host, Select_priv, Insert_priv, Update_priv, Delete_priv, Create_priv, Drop_priv, 
+    Reload_priv, Shutdown_priv, Process_priv, File_priv, Grant_priv, References_priv, 
+    Index_priv, Alter_priv, Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv, 
+    Execute_priv, Repl_slave_priv, Repl_client_priv, Create_view_priv, Show_view_priv, 
+    Create_routine_priv, Alter_routine_priv, Create_user_priv, Event_priv, Trigger_priv, 
+    Create_tablespace_priv, ssl_type, max_questions, max_updates, max_connections, max_user_connections, 
+    plugin, password_expired, password_last_changed, password_lifetime, account_locked, 
+    Create_role_priv, Drop_role_priv, Password_reuse_history, Password_reuse_time
+  </sql>
+  <sql id="Blob_Column_List">
+    ssl_cipher, x509_issuer, x509_subject, authentication_string
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.ybj.news_website.model.UserExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from user
+    where User = #{user,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where User = #{user,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    insert into user (User, Host, Select_priv, 
+      Insert_priv, Update_priv, Delete_priv, 
+      Create_priv, Drop_priv, Reload_priv, 
+      Shutdown_priv, Process_priv, File_priv, 
+      Grant_priv, References_priv, Index_priv, 
+      Alter_priv, Show_db_priv, Super_priv, 
+      Create_tmp_table_priv, Lock_tables_priv, Execute_priv, 
+      Repl_slave_priv, Repl_client_priv, Create_view_priv, 
+      Show_view_priv, Create_routine_priv, Alter_routine_priv, 
+      Create_user_priv, Event_priv, Trigger_priv, 
+      Create_tablespace_priv, ssl_type, max_questions, 
+      max_updates, max_connections, max_user_connections, 
+      plugin, password_expired, password_last_changed, 
+      password_lifetime, account_locked, Create_role_priv, 
+      Drop_role_priv, Password_reuse_history, Password_reuse_time, 
+      ssl_cipher, x509_issuer, x509_subject, 
+      authentication_string)
+    values (#{user,jdbcType=CHAR}, #{host,jdbcType=CHAR}, #{select_priv,jdbcType=CHAR}, 
+      #{insert_priv,jdbcType=CHAR}, #{update_priv,jdbcType=CHAR}, #{delete_priv,jdbcType=CHAR}, 
+      #{create_priv,jdbcType=CHAR}, #{drop_priv,jdbcType=CHAR}, #{reload_priv,jdbcType=CHAR}, 
+      #{shutdown_priv,jdbcType=CHAR}, #{process_priv,jdbcType=CHAR}, #{file_priv,jdbcType=CHAR}, 
+      #{grant_priv,jdbcType=CHAR}, #{references_priv,jdbcType=CHAR}, #{index_priv,jdbcType=CHAR}, 
+      #{alter_priv,jdbcType=CHAR}, #{show_db_priv,jdbcType=CHAR}, #{super_priv,jdbcType=CHAR}, 
+      #{create_tmp_table_priv,jdbcType=CHAR}, #{lock_tables_priv,jdbcType=CHAR}, #{execute_priv,jdbcType=CHAR}, 
+      #{repl_slave_priv,jdbcType=CHAR}, #{repl_client_priv,jdbcType=CHAR}, #{create_view_priv,jdbcType=CHAR}, 
+      #{show_view_priv,jdbcType=CHAR}, #{create_routine_priv,jdbcType=CHAR}, #{alter_routine_priv,jdbcType=CHAR}, 
+      #{create_user_priv,jdbcType=CHAR}, #{event_priv,jdbcType=CHAR}, #{trigger_priv,jdbcType=CHAR}, 
+      #{create_tablespace_priv,jdbcType=CHAR}, #{ssl_type,jdbcType=CHAR}, #{max_questions,jdbcType=INTEGER}, 
+      #{max_updates,jdbcType=INTEGER}, #{max_connections,jdbcType=INTEGER}, #{max_user_connections,jdbcType=INTEGER}, 
+      #{plugin,jdbcType=CHAR}, #{password_expired,jdbcType=CHAR}, #{password_last_changed,jdbcType=TIMESTAMP}, 
+      #{password_lifetime,jdbcType=SMALLINT}, #{account_locked,jdbcType=CHAR}, #{create_role_priv,jdbcType=CHAR}, 
+      #{drop_role_priv,jdbcType=CHAR}, #{password_reuse_history,jdbcType=SMALLINT}, #{password_reuse_time,jdbcType=SMALLINT}, 
+      #{ssl_cipher,jdbcType=LONGVARBINARY}, #{x509_issuer,jdbcType=LONGVARBINARY}, #{x509_subject,jdbcType=LONGVARBINARY}, 
+      #{authentication_string,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user != null">
+        User,
+      </if>
+      <if test="host != null">
+        Host,
+      </if>
+      <if test="select_priv != null">
+        Select_priv,
+      </if>
+      <if test="insert_priv != null">
+        Insert_priv,
+      </if>
+      <if test="update_priv != null">
+        Update_priv,
+      </if>
+      <if test="delete_priv != null">
+        Delete_priv,
+      </if>
+      <if test="create_priv != null">
+        Create_priv,
+      </if>
+      <if test="drop_priv != null">
+        Drop_priv,
+      </if>
+      <if test="reload_priv != null">
+        Reload_priv,
+      </if>
+      <if test="shutdown_priv != null">
+        Shutdown_priv,
+      </if>
+      <if test="process_priv != null">
+        Process_priv,
+      </if>
+      <if test="file_priv != null">
+        File_priv,
+      </if>
+      <if test="grant_priv != null">
+        Grant_priv,
+      </if>
+      <if test="references_priv != null">
+        References_priv,
+      </if>
+      <if test="index_priv != null">
+        Index_priv,
+      </if>
+      <if test="alter_priv != null">
+        Alter_priv,
+      </if>
+      <if test="show_db_priv != null">
+        Show_db_priv,
+      </if>
+      <if test="super_priv != null">
+        Super_priv,
+      </if>
+      <if test="create_tmp_table_priv != null">
+        Create_tmp_table_priv,
+      </if>
+      <if test="lock_tables_priv != null">
+        Lock_tables_priv,
+      </if>
+      <if test="execute_priv != null">
+        Execute_priv,
+      </if>
+      <if test="repl_slave_priv != null">
+        Repl_slave_priv,
+      </if>
+      <if test="repl_client_priv != null">
+        Repl_client_priv,
+      </if>
+      <if test="create_view_priv != null">
+        Create_view_priv,
+      </if>
+      <if test="show_view_priv != null">
+        Show_view_priv,
+      </if>
+      <if test="create_routine_priv != null">
+        Create_routine_priv,
+      </if>
+      <if test="alter_routine_priv != null">
+        Alter_routine_priv,
+      </if>
+      <if test="create_user_priv != null">
+        Create_user_priv,
+      </if>
+      <if test="event_priv != null">
+        Event_priv,
+      </if>
+      <if test="trigger_priv != null">
+        Trigger_priv,
+      </if>
+      <if test="create_tablespace_priv != null">
+        Create_tablespace_priv,
+      </if>
+      <if test="ssl_type != null">
+        ssl_type,
+      </if>
+      <if test="max_questions != null">
+        max_questions,
+      </if>
+      <if test="max_updates != null">
+        max_updates,
+      </if>
+      <if test="max_connections != null">
+        max_connections,
+      </if>
+      <if test="max_user_connections != null">
+        max_user_connections,
+      </if>
+      <if test="plugin != null">
+        plugin,
+      </if>
+      <if test="password_expired != null">
+        password_expired,
+      </if>
+      <if test="password_last_changed != null">
+        password_last_changed,
+      </if>
+      <if test="password_lifetime != null">
+        password_lifetime,
+      </if>
+      <if test="account_locked != null">
+        account_locked,
+      </if>
+      <if test="create_role_priv != null">
+        Create_role_priv,
+      </if>
+      <if test="drop_role_priv != null">
+        Drop_role_priv,
+      </if>
+      <if test="password_reuse_history != null">
+        Password_reuse_history,
+      </if>
+      <if test="password_reuse_time != null">
+        Password_reuse_time,
+      </if>
+      <if test="ssl_cipher != null">
+        ssl_cipher,
+      </if>
+      <if test="x509_issuer != null">
+        x509_issuer,
+      </if>
+      <if test="x509_subject != null">
+        x509_subject,
+      </if>
+      <if test="authentication_string != null">
+        authentication_string,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user != null">
+        #{user,jdbcType=CHAR},
+      </if>
+      <if test="host != null">
+        #{host,jdbcType=CHAR},
+      </if>
+      <if test="select_priv != null">
+        #{select_priv,jdbcType=CHAR},
+      </if>
+      <if test="insert_priv != null">
+        #{insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="update_priv != null">
+        #{update_priv,jdbcType=CHAR},
+      </if>
+      <if test="delete_priv != null">
+        #{delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_priv != null">
+        #{create_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_priv != null">
+        #{drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="reload_priv != null">
+        #{reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="shutdown_priv != null">
+        #{shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="process_priv != null">
+        #{process_priv,jdbcType=CHAR},
+      </if>
+      <if test="file_priv != null">
+        #{file_priv,jdbcType=CHAR},
+      </if>
+      <if test="grant_priv != null">
+        #{grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="references_priv != null">
+        #{references_priv,jdbcType=CHAR},
+      </if>
+      <if test="index_priv != null">
+        #{index_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_priv != null">
+        #{alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_db_priv != null">
+        #{show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="super_priv != null">
+        #{super_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tmp_table_priv != null">
+        #{create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="lock_tables_priv != null">
+        #{lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="execute_priv != null">
+        #{execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_slave_priv != null">
+        #{repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_client_priv != null">
+        #{repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_view_priv != null">
+        #{create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_view_priv != null">
+        #{show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_routine_priv != null">
+        #{create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_routine_priv != null">
+        #{alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_user_priv != null">
+        #{create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="event_priv != null">
+        #{event_priv,jdbcType=CHAR},
+      </if>
+      <if test="trigger_priv != null">
+        #{trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tablespace_priv != null">
+        #{create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="ssl_type != null">
+        #{ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="max_questions != null">
+        #{max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="max_updates != null">
+        #{max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="max_connections != null">
+        #{max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="max_user_connections != null">
+        #{max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="plugin != null">
+        #{plugin,jdbcType=CHAR},
+      </if>
+      <if test="password_expired != null">
+        #{password_expired,jdbcType=CHAR},
+      </if>
+      <if test="password_last_changed != null">
+        #{password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password_lifetime != null">
+        #{password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="account_locked != null">
+        #{account_locked,jdbcType=CHAR},
+      </if>
+      <if test="create_role_priv != null">
+        #{create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_role_priv != null">
+        #{drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="password_reuse_history != null">
+        #{password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="password_reuse_time != null">
+        #{password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="ssl_cipher != null">
+        #{ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_issuer != null">
+        #{x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_subject != null">
+        #{x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="authentication_string != null">
+        #{authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.user != null">
+        User = #{record.user,jdbcType=CHAR},
+      </if>
+      <if test="record.host != null">
+        Host = #{record.host,jdbcType=CHAR},
+      </if>
+      <if test="record.select_priv != null">
+        Select_priv = #{record.select_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.insert_priv != null">
+        Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.update_priv != null">
+        Update_priv = #{record.update_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.delete_priv != null">
+        Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_priv != null">
+        Create_priv = #{record.create_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.drop_priv != null">
+        Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.reload_priv != null">
+        Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.shutdown_priv != null">
+        Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.process_priv != null">
+        Process_priv = #{record.process_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.file_priv != null">
+        File_priv = #{record.file_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.grant_priv != null">
+        Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.references_priv != null">
+        References_priv = #{record.references_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.index_priv != null">
+        Index_priv = #{record.index_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.alter_priv != null">
+        Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.show_db_priv != null">
+        Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.super_priv != null">
+        Super_priv = #{record.super_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_tmp_table_priv != null">
+        Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.lock_tables_priv != null">
+        Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.execute_priv != null">
+        Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.repl_slave_priv != null">
+        Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.repl_client_priv != null">
+        Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_view_priv != null">
+        Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.show_view_priv != null">
+        Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_routine_priv != null">
+        Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.alter_routine_priv != null">
+        Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_user_priv != null">
+        Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.event_priv != null">
+        Event_priv = #{record.event_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.trigger_priv != null">
+        Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.create_tablespace_priv != null">
+        Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.ssl_type != null">
+        ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="record.max_questions != null">
+        max_questions = #{record.max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_updates != null">
+        max_updates = #{record.max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_connections != null">
+        max_connections = #{record.max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="record.max_user_connections != null">
+        max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="record.plugin != null">
+        plugin = #{record.plugin,jdbcType=CHAR},
+      </if>
+      <if test="record.password_expired != null">
+        password_expired = #{record.password_expired,jdbcType=CHAR},
+      </if>
+      <if test="record.password_last_changed != null">
+        password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.password_lifetime != null">
+        password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="record.account_locked != null">
+        account_locked = #{record.account_locked,jdbcType=CHAR},
+      </if>
+      <if test="record.create_role_priv != null">
+        Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.drop_role_priv != null">
+        Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="record.password_reuse_history != null">
+        Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="record.password_reuse_time != null">
+        Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="record.ssl_cipher != null">
+        ssl_cipher = #{record.ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.x509_issuer != null">
+        x509_issuer = #{record.x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.x509_subject != null">
+        x509_subject = #{record.x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="record.authentication_string != null">
+        authentication_string = #{record.authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update user
+    set User = #{record.user,jdbcType=CHAR},
+      Host = #{record.host,jdbcType=CHAR},
+      Select_priv = #{record.select_priv,jdbcType=CHAR},
+      Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      Update_priv = #{record.update_priv,jdbcType=CHAR},
+      Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      Create_priv = #{record.create_priv,jdbcType=CHAR},
+      Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{record.process_priv,jdbcType=CHAR},
+      File_priv = #{record.file_priv,jdbcType=CHAR},
+      Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      References_priv = #{record.references_priv,jdbcType=CHAR},
+      Index_priv = #{record.index_priv,jdbcType=CHAR},
+      Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      Super_priv = #{record.super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      Event_priv = #{record.event_priv,jdbcType=CHAR},
+      Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      max_questions = #{record.max_questions,jdbcType=INTEGER},
+      max_updates = #{record.max_updates,jdbcType=INTEGER},
+      max_connections = #{record.max_connections,jdbcType=INTEGER},
+      max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      plugin = #{record.plugin,jdbcType=CHAR},
+      password_expired = #{record.password_expired,jdbcType=CHAR},
+      password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{record.account_locked,jdbcType=CHAR},
+      Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT},
+      ssl_cipher = #{record.ssl_cipher,jdbcType=LONGVARBINARY},
+      x509_issuer = #{record.x509_issuer,jdbcType=LONGVARBINARY},
+      x509_subject = #{record.x509_subject,jdbcType=LONGVARBINARY},
+      authentication_string = #{record.authentication_string,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set User = #{record.user,jdbcType=CHAR},
+      Host = #{record.host,jdbcType=CHAR},
+      Select_priv = #{record.select_priv,jdbcType=CHAR},
+      Insert_priv = #{record.insert_priv,jdbcType=CHAR},
+      Update_priv = #{record.update_priv,jdbcType=CHAR},
+      Delete_priv = #{record.delete_priv,jdbcType=CHAR},
+      Create_priv = #{record.create_priv,jdbcType=CHAR},
+      Drop_priv = #{record.drop_priv,jdbcType=CHAR},
+      Reload_priv = #{record.reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{record.shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{record.process_priv,jdbcType=CHAR},
+      File_priv = #{record.file_priv,jdbcType=CHAR},
+      Grant_priv = #{record.grant_priv,jdbcType=CHAR},
+      References_priv = #{record.references_priv,jdbcType=CHAR},
+      Index_priv = #{record.index_priv,jdbcType=CHAR},
+      Alter_priv = #{record.alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{record.show_db_priv,jdbcType=CHAR},
+      Super_priv = #{record.super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{record.create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{record.lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{record.execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{record.repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{record.repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{record.create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{record.show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{record.create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{record.alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{record.create_user_priv,jdbcType=CHAR},
+      Event_priv = #{record.event_priv,jdbcType=CHAR},
+      Trigger_priv = #{record.trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{record.create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{record.ssl_type,jdbcType=CHAR},
+      max_questions = #{record.max_questions,jdbcType=INTEGER},
+      max_updates = #{record.max_updates,jdbcType=INTEGER},
+      max_connections = #{record.max_connections,jdbcType=INTEGER},
+      max_user_connections = #{record.max_user_connections,jdbcType=INTEGER},
+      plugin = #{record.plugin,jdbcType=CHAR},
+      password_expired = #{record.password_expired,jdbcType=CHAR},
+      password_last_changed = #{record.password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{record.password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{record.account_locked,jdbcType=CHAR},
+      Create_role_priv = #{record.create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{record.drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{record.password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{record.password_reuse_time,jdbcType=SMALLINT}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    update user
+    <set>
+      <if test="host != null">
+        Host = #{host,jdbcType=CHAR},
+      </if>
+      <if test="select_priv != null">
+        Select_priv = #{select_priv,jdbcType=CHAR},
+      </if>
+      <if test="insert_priv != null">
+        Insert_priv = #{insert_priv,jdbcType=CHAR},
+      </if>
+      <if test="update_priv != null">
+        Update_priv = #{update_priv,jdbcType=CHAR},
+      </if>
+      <if test="delete_priv != null">
+        Delete_priv = #{delete_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_priv != null">
+        Create_priv = #{create_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_priv != null">
+        Drop_priv = #{drop_priv,jdbcType=CHAR},
+      </if>
+      <if test="reload_priv != null">
+        Reload_priv = #{reload_priv,jdbcType=CHAR},
+      </if>
+      <if test="shutdown_priv != null">
+        Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      </if>
+      <if test="process_priv != null">
+        Process_priv = #{process_priv,jdbcType=CHAR},
+      </if>
+      <if test="file_priv != null">
+        File_priv = #{file_priv,jdbcType=CHAR},
+      </if>
+      <if test="grant_priv != null">
+        Grant_priv = #{grant_priv,jdbcType=CHAR},
+      </if>
+      <if test="references_priv != null">
+        References_priv = #{references_priv,jdbcType=CHAR},
+      </if>
+      <if test="index_priv != null">
+        Index_priv = #{index_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_priv != null">
+        Alter_priv = #{alter_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_db_priv != null">
+        Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      </if>
+      <if test="super_priv != null">
+        Super_priv = #{super_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tmp_table_priv != null">
+        Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      </if>
+      <if test="lock_tables_priv != null">
+        Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      </if>
+      <if test="execute_priv != null">
+        Execute_priv = #{execute_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_slave_priv != null">
+        Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      </if>
+      <if test="repl_client_priv != null">
+        Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_view_priv != null">
+        Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="show_view_priv != null">
+        Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_routine_priv != null">
+        Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="alter_routine_priv != null">
+        Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_user_priv != null">
+        Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      </if>
+      <if test="event_priv != null">
+        Event_priv = #{event_priv,jdbcType=CHAR},
+      </if>
+      <if test="trigger_priv != null">
+        Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      </if>
+      <if test="create_tablespace_priv != null">
+        Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      </if>
+      <if test="ssl_type != null">
+        ssl_type = #{ssl_type,jdbcType=CHAR},
+      </if>
+      <if test="max_questions != null">
+        max_questions = #{max_questions,jdbcType=INTEGER},
+      </if>
+      <if test="max_updates != null">
+        max_updates = #{max_updates,jdbcType=INTEGER},
+      </if>
+      <if test="max_connections != null">
+        max_connections = #{max_connections,jdbcType=INTEGER},
+      </if>
+      <if test="max_user_connections != null">
+        max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      </if>
+      <if test="plugin != null">
+        plugin = #{plugin,jdbcType=CHAR},
+      </if>
+      <if test="password_expired != null">
+        password_expired = #{password_expired,jdbcType=CHAR},
+      </if>
+      <if test="password_last_changed != null">
+        password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password_lifetime != null">
+        password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      </if>
+      <if test="account_locked != null">
+        account_locked = #{account_locked,jdbcType=CHAR},
+      </if>
+      <if test="create_role_priv != null">
+        Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="drop_role_priv != null">
+        Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      </if>
+      <if test="password_reuse_history != null">
+        Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      </if>
+      <if test="password_reuse_time != null">
+        Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT},
+      </if>
+      <if test="ssl_cipher != null">
+        ssl_cipher = #{ssl_cipher,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_issuer != null">
+        x509_issuer = #{x509_issuer,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="x509_subject != null">
+        x509_subject = #{x509_subject,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="authentication_string != null">
+        authentication_string = #{authentication_string,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.ybj.news_website.model.UserWithBLOBs">
+    update user
+    set Host = #{host,jdbcType=CHAR},
+      Select_priv = #{select_priv,jdbcType=CHAR},
+      Insert_priv = #{insert_priv,jdbcType=CHAR},
+      Update_priv = #{update_priv,jdbcType=CHAR},
+      Delete_priv = #{delete_priv,jdbcType=CHAR},
+      Create_priv = #{create_priv,jdbcType=CHAR},
+      Drop_priv = #{drop_priv,jdbcType=CHAR},
+      Reload_priv = #{reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{process_priv,jdbcType=CHAR},
+      File_priv = #{file_priv,jdbcType=CHAR},
+      Grant_priv = #{grant_priv,jdbcType=CHAR},
+      References_priv = #{references_priv,jdbcType=CHAR},
+      Index_priv = #{index_priv,jdbcType=CHAR},
+      Alter_priv = #{alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      Super_priv = #{super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      Event_priv = #{event_priv,jdbcType=CHAR},
+      Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{ssl_type,jdbcType=CHAR},
+      max_questions = #{max_questions,jdbcType=INTEGER},
+      max_updates = #{max_updates,jdbcType=INTEGER},
+      max_connections = #{max_connections,jdbcType=INTEGER},
+      max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      plugin = #{plugin,jdbcType=CHAR},
+      password_expired = #{password_expired,jdbcType=CHAR},
+      password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{account_locked,jdbcType=CHAR},
+      Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT},
+      ssl_cipher = #{ssl_cipher,jdbcType=LONGVARBINARY},
+      x509_issuer = #{x509_issuer,jdbcType=LONGVARBINARY},
+      x509_subject = #{x509_subject,jdbcType=LONGVARBINARY},
+      authentication_string = #{authentication_string,jdbcType=LONGVARCHAR}
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set Host = #{host,jdbcType=CHAR},
+      Select_priv = #{select_priv,jdbcType=CHAR},
+      Insert_priv = #{insert_priv,jdbcType=CHAR},
+      Update_priv = #{update_priv,jdbcType=CHAR},
+      Delete_priv = #{delete_priv,jdbcType=CHAR},
+      Create_priv = #{create_priv,jdbcType=CHAR},
+      Drop_priv = #{drop_priv,jdbcType=CHAR},
+      Reload_priv = #{reload_priv,jdbcType=CHAR},
+      Shutdown_priv = #{shutdown_priv,jdbcType=CHAR},
+      Process_priv = #{process_priv,jdbcType=CHAR},
+      File_priv = #{file_priv,jdbcType=CHAR},
+      Grant_priv = #{grant_priv,jdbcType=CHAR},
+      References_priv = #{references_priv,jdbcType=CHAR},
+      Index_priv = #{index_priv,jdbcType=CHAR},
+      Alter_priv = #{alter_priv,jdbcType=CHAR},
+      Show_db_priv = #{show_db_priv,jdbcType=CHAR},
+      Super_priv = #{super_priv,jdbcType=CHAR},
+      Create_tmp_table_priv = #{create_tmp_table_priv,jdbcType=CHAR},
+      Lock_tables_priv = #{lock_tables_priv,jdbcType=CHAR},
+      Execute_priv = #{execute_priv,jdbcType=CHAR},
+      Repl_slave_priv = #{repl_slave_priv,jdbcType=CHAR},
+      Repl_client_priv = #{repl_client_priv,jdbcType=CHAR},
+      Create_view_priv = #{create_view_priv,jdbcType=CHAR},
+      Show_view_priv = #{show_view_priv,jdbcType=CHAR},
+      Create_routine_priv = #{create_routine_priv,jdbcType=CHAR},
+      Alter_routine_priv = #{alter_routine_priv,jdbcType=CHAR},
+      Create_user_priv = #{create_user_priv,jdbcType=CHAR},
+      Event_priv = #{event_priv,jdbcType=CHAR},
+      Trigger_priv = #{trigger_priv,jdbcType=CHAR},
+      Create_tablespace_priv = #{create_tablespace_priv,jdbcType=CHAR},
+      ssl_type = #{ssl_type,jdbcType=CHAR},
+      max_questions = #{max_questions,jdbcType=INTEGER},
+      max_updates = #{max_updates,jdbcType=INTEGER},
+      max_connections = #{max_connections,jdbcType=INTEGER},
+      max_user_connections = #{max_user_connections,jdbcType=INTEGER},
+      plugin = #{plugin,jdbcType=CHAR},
+      password_expired = #{password_expired,jdbcType=CHAR},
+      password_last_changed = #{password_last_changed,jdbcType=TIMESTAMP},
+      password_lifetime = #{password_lifetime,jdbcType=SMALLINT},
+      account_locked = #{account_locked,jdbcType=CHAR},
+      Create_role_priv = #{create_role_priv,jdbcType=CHAR},
+      Drop_role_priv = #{drop_role_priv,jdbcType=CHAR},
+      Password_reuse_history = #{password_reuse_history,jdbcType=SMALLINT},
+      Password_reuse_time = #{password_reuse_time,jdbcType=SMALLINT}
+    where User = #{user,jdbcType=CHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.ybj.news_website.model.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="sex" jdbcType="CHAR" property="sex" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, username, birthday, sex, address
+  </sql>
+  <select id="selectByExample" parameterType="com.ybj.news_website.model.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ybj.news_website.model.UserExample">
+    delete from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ybj.news_website.model.User">
+    insert into user (id, username, birthday, 
+      sex, address)
+    values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, 
+      #{sex,jdbcType=CHAR}, #{address,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ybj.news_website.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ybj.news_website.model.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update user
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null">
+        birthday = #{record.birthday,jdbcType=DATE},
+      </if>
+      <if test="record.sex != null">
+        sex = #{record.sex,jdbcType=CHAR},
+      </if>
+      <if test="record.address != null">
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update user
+    set id = #{record.id,jdbcType=INTEGER},
+      username = #{record.username,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=DATE},
+      sex = #{record.sex,jdbcType=CHAR},
+      address = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ybj.news_website.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=CHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ybj.news_website.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      sex = #{sex,jdbcType=CHAR},
+      address = #{address,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

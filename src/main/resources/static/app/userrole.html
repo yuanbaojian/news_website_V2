@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+            <a class="btn btn-success btn-xs" href="/UserExcelDownloads">导出到excel</a>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>用户ID</th>
+                    <th>用户名</th>
+                    <th>角色ID</th>
+                    <th>角色名</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="userrole:${alluserrole}">
+                   <td th:text="${userrole[t_user_id]}"></td>
+                   <td th:text="${userrole[user_account]}"></td>
+                   <td th:text="${userrole[t_role_id]}"></td>
+                   <td th:text="${userrole[t_role_name]}"></td>
+                    <td><a class="btn btn-info  btn-sm"
+                           th:onclick="'javascript:opendlg('+${userrole.t_user_id}+','+${userrole.t_role_id}+')'">编辑角色</a></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="pagination">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="width: 300px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    请选择角色
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div th:each="role:${allrole}" class="radio">
+                    <label>
+                        <input type="radio" name="rolegroup"
+                               th:value="${role.t_role_id}" checked>
+                        <span th:text="${role.t_role_name}"></span>
+                    </label>
+                </div>
+
+            </div>
+
+            <div class="modal-footer" >
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button id="modal_a_save" type="button" class="btn btn-primary">
+                    提交更改
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<div th:replace="/temp/t_index::tail_index">
+</div>
+<script>
+    function opendlg(user_id,role_id) {
+        //让对话框的选项选中
+        radios=document.getElementsByName("rolegroup");
+        for (i=0;i<radios.length;i++){
+            if (radios[i].value==role_id){
+                radios[i].checked=true;
+            }
+        }
+    //动态给按钮点击方法
+    $('#modal_a_save').click(function () {
+        for (i=0;i<radios.length;i++){
+            if (radios[i].checked==true){
+                var r_id=radios[i].value;
+                //ajax把数据插入数据库
+                $.ajax({
+                    type:'post',
+                    url:'/updateuserrole',
+                    dataType:'json',
+                    data:{t_user_id:user_id,t_role_id:r_id},
+                    success:function (data) {
+                        if (data.flag=='true'){
+                            window.location.href="/userrole";
+                        }
+                    }
+                    });
+                //返回
+            }
+        }
+    });
+        //先打开对话框
+        $('#myModal').modal('show');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#">图文评论</a></li>
+                <li><a href="#">待开发</a></li>
+            </ul>
+             <div class="col-md-3" style="border-right-style:solid;">
+                <!--相关图文-->
+                 <br>
+                <div  th:include="/temp/t_index::comment_index"></div>
+             </div>
+            <div class="col-md-9" th:if="${comment} ne null">
+                <br>
+                <ul th:each="com:${comment}">
+                    <li  th:text="${com.user_account+'在'+com.create_time+'评论: '+com.content+'  '}">
+                        <!--<ul  th:each="com2:${comment}" th:if="${com2.pid==com.id}">-->
+                            <!--<li  th:text="${com2.user_account+'在'+com2.create_time+'评论: '+com2.content+'  '}" ></li>-->
+                        <!--</ul>-->
+                    </li>
+                </ul>
+             </div>
+        </div>
+    </div>
+</div>
+   <div th:replace="/temp/t_index::tail_index">
+   </div>
+</body>
+</html>

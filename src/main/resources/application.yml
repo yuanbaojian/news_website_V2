@@ -1,0 +1,21 @@
+server:
+  port: 8888
+
+spring:
+  thymeleaf:
+          prefix: classpath:/static/
+
+  datasource:
+    name: news_website
+    url: jdbc:mysql://localhost:3306/news_website?useUnicode=true&amp;characterEncoding=utf8
+    username: root
+    password: 312ybj
+
+  mail:
+    host: smtp.qq.com
+    username: 352512524@qq.com
+    password: hxervlfnzxascafd
+
+
+
+

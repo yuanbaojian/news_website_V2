@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style>
+    .article_img{
+        width: 70px;
+        height: 70px;
+    }
+</style>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+            <a class="btn btn-success btn-xs" href="/newxwarticle">添加文章</a>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>一级标题</th>
+                    <th>二级标题</th>
+                    <th>三级标题</th>
+                    <th>新闻来源</th>
+                    <th>作者</th>
+                    <th>发布时间</th>
+                    <th>配图1</th>
+                    <th>配图2</th>
+                    <th>配图3</th>
+                    <th>配图4</th>
+                    <th>配图5</th>
+                    <!--<th>文档</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="articlea:${allarticle}">
+                    <td th:text="${articlea[t_article_id]}"></td>
+                    <td th:text="${articlea[t_article_title_1]}"></td>
+                    <td th:text="${articlea[t_article_title_2]}"></td>
+                    <td th:text="${articlea[t_article_title_3]}"></td>
+                    <td th:text="${articlea[t_article_source]}"></td>
+                    <td th:text="${articlea[t_article_author]}"></td>
+                    <td th:text="${articlea[t_article_create_date]}"></td>
+
+                    <td><img class="article_img" th:src="@{'/image/'+${articlea[t_article_img1]}}"></td>
+                    <td><img class="article_img"  th:src="@{'/image/'+${articlea[t_article_img2]}}"></td>
+                    <td><img class="article_img" th:src="@{'/image/'+${articlea[t_article_img3]}}"></td>
+                    <td><img class="article_img"  th:src="@{'/image/'+${articlea[t_article_img4]}}"></td>
+                    <td><img class="article_img"  th:src="@{'/image/'+${articlea[t_article_img5]}}"></td>
+
+                    <!--<td th:text="${articlea[t_article_document]}"></td>-->
+                    <td><a class="btn btn-danger  btn-xs"
+                           th:href="${'/deletearticle?t_article_id='+articlea.t_article_id}">删除</a></td>
+                    <td><a class="btn btn-info  btn-xs"
+                           th:href="${'/update?t_article_id='+articlea.t_article_id}">编辑</a></td>
+                    <td th:if="${success==success}" th:text="${success}" style="size: 20px;color: #67b168"></td>
+                    <td th:if="${error==error}" th:text="${error}" style="size: 20px; color: red"></td>
+                </tr>
+                </tbody>
+            </table>
+            <ul class="pagination" id="articlepage">
+                <li><a href="#">&laquo;</a></li>
+                <li><a href="#"></a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div th:replace="/temp/t_index::tail_index"></div>
+</body>
+</html>

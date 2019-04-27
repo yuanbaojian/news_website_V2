@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="/temp/t_index::head_index">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="/temp/t_index::top_nav"></div>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-2">
+            <div th:include="/temp/t_index::left_menu"></div>
+        </div>
+        <div class="col-md-10">
+             新建栏目表单
+            <form action="/saveclassification" id="defaultForm" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="t_classification_name" class="col-sm-2 control-label">栏目名称</label>
+                    <div class="col-sm-6">
+                        <input name="t_classification_name" type="text" class="form-control" id="t_classification_name"
+                               placeholder="请输入栏目名称">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="t_classification_code" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-6">
+                        <input name="t_classification_code" type="text" class="form-control" id="t_classification_code"
+                               placeholder="请输入栏目编码">
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button id="btn_submit" type="submit" class="btn btn-default">添加保存</button>
+                        <button id="btn_reset" type="reset" class="btn btn-default">重置</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+   <div th:replace="/temp/t_index::tail_index">
+   </div>
+<script>
+    $(document).ready(function() {
+        // Generate a simple captcha
+        function randomNumber(min, max) {
+            return Math.floor(Math.random() * (max - min + 1) + min);
+        };
+        //$('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+        $('#defaultForm').bootstrapValidator({
+//        live: 'disabled',
+            message: '值不符合规则',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                t_classification_name: {
+
+                    validators: {
+                        notEmpty: {
+                            message: '栏目名称不允许为空'
+                        }
+                    }
+                },
+                t_classification_code: {
+                    validators: {
+                        notEmpty: {
+                            message: '栏目编码不能为空'
+                        },
+
+                    }
+                },
+
+
+            }
+        });
+
+        // Validate the form manually
+        $('#btn_submit').click(function() {
+          var v=  $('#defaultForm').bootstrapValidator('validate');
+          console.log(v);
+            if ($("#defaultForm").data('bootstrapValidator').isValid()) {//获取验证结果，如果成功，执行下面代码
+                console.log('form is valid');
+                //$('#defaultForm').submit();//手工提交。//验证成功后的操作，如ajax
+                 document.getElementById("defaultForm").submit();
+            }
+
+            //触发表单提交
+        });
+
+        $('#resetBtn').click(function() {
+            $('#defaultForm').data('bootstrapValidator').resetForm(true);
+        });
+    });
+</script>
+</body>
+</html>
