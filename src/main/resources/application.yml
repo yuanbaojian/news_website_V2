@@ -3,11 +3,18 @@ server:
 
 spring:
   thymeleaf:
-          prefix: classpath:/static/
+          prefix: classpath:/templates/
+          mode: HTML
+          cache: false
+          encoding: UTF-8
+            #     新版本不支持content-type: text/html，故新写法
+          servlet:
+              content-type: text/html
+          suffix: .html
 
   datasource:
     name: news_website
-    url: jdbc:mysql://localhost:3306/news_website?useUnicode=true&amp;characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/news_website?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone = GMT
     username: root
     password: 312ybj
 
