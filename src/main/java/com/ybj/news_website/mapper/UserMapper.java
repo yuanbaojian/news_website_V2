@@ -3,6 +3,7 @@ package com.ybj.news_website.mapper;
 import com.ybj.news_website.model.User;
 import com.ybj.news_website.model.UserExample;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,12 +21,19 @@ public interface UserMapper {
 
 
 
-    @Insert(" insert into user(user_account,user_password,user_email) values(#{user_account},#{user_password},#{user_email}) ")
+    @Insert(" insert  into user(user_account,user_password,user_icon, user_email,role_id)" +
+            " values(#{user_account},#{user_password},#{user_icon},#{user_email}, #{role_id}) ")
     public void InsertUser(User record);
 
 
     @Select("select * from user")
     public List<User> GetAllUser();
+
+
+    @Select("select * from user where user_account= #{user_account} and " +
+            "user_password= #{user_password}")
+    List<Map<String, Object>> login(@Param("user_account") String user_account,
+                                    @Param("user_password") String user_password);
 
     int insertSelective(User record);
 

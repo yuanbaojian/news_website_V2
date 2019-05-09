@@ -2,10 +2,21 @@ package com.ybj.news_website.Mapper;
 
 import com.ybj.news_website.model.Article;
 import com.ybj.news_website.model.ArticleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+
+@Mapper
 public interface ArticleMapper {
+
+    @Select("select * from article")
+    Collection<Article> GetArticle();
+
+
     long countByExample(ArticleExample example);
 
     int deleteByExample(ArticleExample example);

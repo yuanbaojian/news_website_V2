@@ -1,5 +1,6 @@
 package com.ybj.news_website.controller;
 
+import com.ybj.news_website.model.User;
 import com.ybj.news_website.serviceInterface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.ybj.news_website.util.Response;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 import java.util.Map;
 
 
 @Controller
-
 public class UserController {
 
     @Autowired
@@ -22,7 +24,13 @@ public class UserController {
     //去往登陆页面
     @RequestMapping("/tologin")
     public String toLogin(){
-        return "login";
+        return "user/login";
+    }
+
+    //去往注册页面
+    @RequestMapping("/toRegister")
+    public String toRegister(){
+        return "user/register";
     }
 
 
@@ -32,6 +40,51 @@ public class UserController {
         return "test";
     }
 
+
+    @RequestMapping("/register")
+    public ModelAndView register(String user_account, String  user_password, String user_email)
+    {
+
+        User user=new User();
+        user.setUser_account(user_account);
+        user.setUser_password(user_password);
+        user.setUser_email(user_email);
+        user.setRole_id(1);
+        Map<String,String> map=userService.InsertUser(user);
+
+        userService.InsertUser(user);
+        return new ModelAndView("/dashBoard.html");
+    }
+
+
+    @RequestMapping("/login")
+    public ModelAndView login(String user_account, String user_password){
+
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.addObject("user_account", user_account);
+
+
+        User user=new User();
+        user.setUser_account(user_account);
+        List<Map<String, Object>> list=userService.login(user_account, user_password);
+        int role_id= (int)list.get(0).get("role_id");
+       // System.out.println(" role_id 为 " + list.get(0).get("role_id"));
+        if (list.size()>0)
+        {
+            //跳转到用户管理页面
+            if(role_id==1) {
+                modelAndView.setViewName("user/dashBoard");
+            }
+            //跳转到管理员页面
+            else {
+                modelAndView.setViewName("admin/dashBoard");
+            }
+        }
+        else {
+            modelAndView.setViewName("/login");
+        }
+        return modelAndView;
+    }
 
 /**
     //跳转到注册页面
