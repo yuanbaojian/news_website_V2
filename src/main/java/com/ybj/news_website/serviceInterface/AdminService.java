@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public interface AdminService {
 
@@ -14,8 +15,8 @@ public interface AdminService {
     public Collection<News_classification> GetNewsClassification();
 
 
-    public Collection<Article> GetArticle();
+//    public Collection<Article> GetArticle();
 
 
-    public  Collection<User> GetUser();
+    public  List<Map<String, String>> GetUser();
 }

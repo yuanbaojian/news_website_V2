@@ -506,72 +506,72 @@ public class ArticleExample {
         }
 
         public Criteria andArticle_img5IsNull() {
-            addCriterion("article_img5 is null");
+            addCriterion("article_name is null");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5IsNotNull() {
-            addCriterion("article_img5 is not null");
+            addCriterion("article_name is not null");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5EqualTo(String value) {
-            addCriterion("article_img5 =", value, "article_img5");
+            addCriterion("article_name =", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5NotEqualTo(String value) {
-            addCriterion("article_img5 <>", value, "article_img5");
+            addCriterion("article_name <>", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5GreaterThan(String value) {
-            addCriterion("article_img5 >", value, "article_img5");
+            addCriterion("article_name >", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5GreaterThanOrEqualTo(String value) {
-            addCriterion("article_img5 >=", value, "article_img5");
+            addCriterion("article_name >=", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5LessThan(String value) {
-            addCriterion("article_img5 <", value, "article_img5");
+            addCriterion("article_name <", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5LessThanOrEqualTo(String value) {
-            addCriterion("article_img5 <=", value, "article_img5");
+            addCriterion("article_name <=", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5Like(String value) {
-            addCriterion("article_img5 like", value, "article_img5");
+            addCriterion("article_name like", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5NotLike(String value) {
-            addCriterion("article_img5 not like", value, "article_img5");
+            addCriterion("article_name not like", value, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5In(List<String> values) {
-            addCriterion("article_img5 in", values, "article_img5");
+            addCriterion("article_name in", values, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5NotIn(List<String> values) {
-            addCriterion("article_img5 not in", values, "article_img5");
+            addCriterion("article_name not in", values, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5Between(String value1, String value2) {
-            addCriterion("article_img5 between", value1, value2, "article_img5");
+            addCriterion("article_name between", value1, value2, "article_name");
             return (Criteria) this;
         }
 
         public Criteria andArticle_img5NotBetween(String value1, String value2) {
-            addCriterion("article_img5 not between", value1, value2, "article_img5");
+            addCriterion("article_name not between", value1, value2, "article_name");
             return (Criteria) this;
         }
 

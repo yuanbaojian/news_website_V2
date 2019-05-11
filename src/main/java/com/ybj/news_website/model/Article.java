@@ -5,7 +5,9 @@ import java.util.Date;
 public class Article {
     private Integer article_id;
 
-    private Date article_created_time;
+
+    //
+    private String article_created_time;
 
     private String article_img1;
 
@@ -15,9 +17,17 @@ public class Article {
 
     private String article_img4;
 
-    private String article_img5;
+    private String article_name;
 
     private Integer classification_id;
+
+    public String getArticle_name() {
+        return article_name;
+    }
+
+    public void setArticle_name(String article_name) {
+        this.article_name = article_name;
+    }
 
     private Integer user_id;
 
@@ -33,11 +43,11 @@ public class Article {
         this.article_id = article_id;
     }
 
-    public Date getArticle_created_time() {
+    public String getArticle_created_time() {
         return article_created_time;
     }
 
-    public void setArticle_created_time(Date article_created_time) {
+    public void setArticle_created_time(String article_created_time) {
         this.article_created_time = article_created_time;
     }
 
@@ -73,13 +83,6 @@ public class Article {
         this.article_img4 = article_img4 == null ? null : article_img4.trim();
     }
 
-    public String getArticle_img5() {
-        return article_img5;
-    }
-
-    public void setArticle_img5(String article_img5) {
-        this.article_img5 = article_img5 == null ? null : article_img5.trim();
-    }
 
     public Integer getClassification_id() {
         return classification_id;

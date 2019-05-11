@@ -13,6 +13,14 @@ public class HomeController {
         return "home/index";
     }
 
+    @RequestMapping("/tologin")
+    public String tologin()
+    {
+        return "common/login";
+    }
+
+
+
 
 
 

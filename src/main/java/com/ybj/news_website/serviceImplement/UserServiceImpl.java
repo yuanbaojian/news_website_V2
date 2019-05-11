@@ -1,4 +1,4 @@
-package com.ybj.news_website.implement;
+package com.ybj.news_website.serviceImplement;
 
 import com.ybj.news_website.model.User;
 import com.ybj.news_website.serviceInterface.UserService;
@@ -17,9 +17,16 @@ public class UserServiceImpl implements UserService {
     UserMapper userMapper;
 
     @Override
-    public List<User> GetAlluser() {
-        List<User> users= userMapper.GetAllUser();
+    public List<Map<String, String>> GetAlluser() {
+        List<Map<String, String>> users= userMapper.GetAllUser();
         return users;
+    }
+
+
+    @Override
+    public Map<String, String> GetUserById(Integer  user_id) {
+        Map<String, String> user= userMapper.GetUserById(user_id);
+        return user;
     }
 
 
@@ -33,9 +40,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public  List<Map<String, Object>>  login(String user_account, String user_password) {
-        List<Map<String, Object>> list=userMapper.login(user_account,user_password);
+    public  List<Map<String, Object>>  login(Integer  user_id, String user_password) {
+        List<Map<String, Object>> list=userMapper.login(user_id,user_password);
         return list;
+    }
+
+    @Override
+    public void Update(User user) {
+        userMapper.Update(user);
     }
 
 

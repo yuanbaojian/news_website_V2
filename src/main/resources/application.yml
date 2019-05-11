@@ -23,6 +23,11 @@ spring:
     username: 352512524@qq.com
     password: hxervlfnzxascafd
 
+  logging:
+    level:
+      com:
+        looedu:
+          mapper: debug
 
 
 

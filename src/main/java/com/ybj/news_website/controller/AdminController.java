@@ -46,17 +46,17 @@ public class AdminController {
     }
 
 
-    @GetMapping("/showArticle")
-    @ResponseBody
-    public Object  showArticle()
-    {
-
-        Collection<Article>  articles= adminService.GetArticle();
-        //从数据库查询到的 json 数据
-        ModelAndView modelAndView=  new ModelAndView();
-        //modelAndView.setViewName("admin/news_classification");
-        return  articles;
-    }
+//    @GetMapping("/showArticle")
+//    @ResponseBody
+//    public Object  showArticle()
+//    {
+//
+//        Collection<Article>  articles= adminService.GetArticle();
+//        //从数据库查询到的 json 数据
+//        ModelAndView modelAndView=  new ModelAndView();
+//        //modelAndView.setViewName("admin/news_classification");
+//        return  articles;
+//    }
 
 
     @GetMapping("/showUser")
