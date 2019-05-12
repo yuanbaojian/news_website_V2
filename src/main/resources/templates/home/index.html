@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8">
 <meta name="renderer" content="webkit">
@@ -32,15 +32,8 @@
 <nav class="navbar navbar-default" id="navbar">
 <div class="container">
   <div class="header-topbar hidden-xs link-border">
-	<ul class="site-nav topmenu">
-	  <li><a href="#" >标签云</a></li>
-		<li><a href="#" rel="nofollow" >读者墙</a></li>
-		<li><a href="#" title="RSS订阅" >
-			<i class="fa fa-rss">
-			</i> RSS订阅
-		</a></li>
-	</ul>
-			 勤记录 懂分享</div>
+
+			 阅读让自己更快乐</div>
   <div class="navbar-header">
 	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#header-navbar" aria-expanded="false"> <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
 	<h1 class="logo hvr-bounce-in"><a href="#" title="木庄网络博客"><img src="images/201610171329086541.png" alt="木庄网络博客"></a></h1>
@@ -54,15 +47,25 @@
 		</span> </div>
 	</form>
 	<ul class="nav navbar-nav navbar-right">
-	  <li><a data-cont="木庄网络博客" title="木庄网络博客" href="index.html">首页</a></li>
-	  <li><a data-cont="列表页" title="列表页" href="list.html">列表页</a></li>
-	  <li><a data-cont="详细页" title="详细页" href="show.html">详细页</a></li>
-	  <li><a data-cont="404" title="404" href="404.html">404</a></li>
-	  <li><a data-cont="MZ-NetBolg主题" title="MZ-NetBolg主题" href="#" >MZ-NetBolg主题</a></li>
-	  <li><a data-cont="IT技术笔记" title="IT技术笔记" href="#" >IT技术笔记</a></li>
-	  <li><a data-cont="源码分享" title="源码分享" href="#" >源码分享</a></li>
-	  <li><a data-cont="靠谱网赚" title="靠谱网赚" href="#" >靠谱网赚</a></li>
-	  <li><a data-cont="资讯分享" title="资讯分享" href="#" >资讯分享</a></li>
+		<!--打算将新闻分类放进来，取10个-->
+		<tr th:each="news_classification : ${classification}">
+
+			<li>
+				<a  th:href="@{/index/} + ${news_classification['classification_id']}">
+			<td th:text="${news_classification['classification_name']}"></td>
+				</a>
+			</li>
+
+		</tr>
+	  <!--<li><a data-cont="木庄网络博客" title="木庄网络博客" href="index.html">首页</a></li>-->
+	  <!--<li><a data-cont="列表页" title="列表页" href="list.html">列表页</a></li>-->
+	  <!--<li><a data-cont="详细页" title="详细页" href="show.html">详细页</a></li>-->
+	  <!--<li><a data-cont="404" title="404" href="404.html">404</a></li>-->
+	  <!--<li><a data-cont="MZ-NetBolg主题" title="MZ-NetBolg主题" href="#" >MZ-NetBolg主题</a></li>-->
+	  <!--<li><a data-cont="IT技术笔记" title="IT技术笔记" href="#" >IT技术笔记</a></li>-->
+	  <!--<li><a data-cont="源码分享" title="源码分享" href="#" >源码分享</a></li>-->
+	  <!--<li><a data-cont="靠谱网赚" title="靠谱网赚" href="#" >靠谱网赚</a></li>-->
+	  <!--<li><a data-cont="资讯分享" title="资讯分享" href="#" >资讯分享</a></li>-->
 	</ul>
   </div>
 </div>
@@ -174,20 +177,20 @@
 <div class="fixed">
   <div class="widget widget-tabs">
 	<ul class="nav nav-tabs" role="tablist">
-	  <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" >统计信息</a></li>
+	  <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" >快捷方式</a></li>
 	  <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" >联系站长</a></li>
 	</ul>
 	<div class="tab-content">
 	  <div role="tabpanel" class="tab-pane contact active" id="notice">
 		<a href="/tologin"> 登陆</a>
-		  <h2>网站运行:
-		  <span id="sitetime">88天 </span></h2>
+		  <a href="/tologin">注册</a>
+
 	  </div>
 		<div role="tabpanel" class="tab-pane contact" id="contact">
-		  <h2>QQ:
+		  <h2>QQ: 1793870688
 			  <a href="" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title=""  data-original-title="QQ:"></a>
 		  </h2>
-		  <h2>Email:
+		  <h2>Email:312ybj@Gmail.com
 		  <a href="#" target="_blank" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title=""  data-original-title="#"></a></h2>
 	  </div>
 	</div>

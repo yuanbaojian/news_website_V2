@@ -16,6 +16,10 @@ public interface ArticleMapper {
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
 
 
+    @Select("select * from article where checked=0")
+    List<Map<String, String>> GetUnchecked();
+
+
     @Select("select * from article where article_id=#{article_id}")
     Map<String, String> GetArticleByArticleId(Integer article_id);
 
@@ -38,6 +42,11 @@ public interface ArticleMapper {
             "classification_id=#{classification_id} " +
             "  where article_id=#{article_id}")
     void update(Article article);
+
+    @Update(" update article set checked=#{checked}," +
+
+            "  where article_id=#{article_id}")
+    void check(Integer article_id);
 
 
     @Delete("delete from article where article_id=#{article_id}")

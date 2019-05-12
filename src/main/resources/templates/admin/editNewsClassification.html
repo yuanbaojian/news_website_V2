@@ -10,71 +10,37 @@
 
 
 
-    <title> 添加 或 修改文章信息 </title>
+    <title>  修改文章信息 </title>
     <!-- Bootstrap core CSS -->
-    <link href="../../static/asserts/css/bootstrap.min.css"  rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="../../static/asserts/css/dashboard.css"  rel="stylesheet">
-    <style type="text/css">
-        /* Chart.js */
-
-        @-webkit-keyframes chartjs-render-animation {
-            from {
-                opacity: 0.99
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        @keyframes chartjs-render-animation {
-            from {
-                opacity: 0.99
-            }
-            to {
-                opacity: 1
-            }
-        }
-
-        .chartjs-render-monitor {
-            -webkit-animation: chartjs-render-animation 0.001s;
-            animation: chartjs-render-animation 0.001s;
-        }
-    </style>
 </head>
 
 <body>
 <!--引入抽取的topbar-->
 <!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
-<div th:replace="user_component/topBar :: topBar"></div>
+<div th:replace="admin_component/topBar :: topBar"></div>
 
 <div class="container-fluid">
     <div class="row">
         <!--引入侧边栏-->
-        <div th:replace="user_component/leftBar :: leftBar"></div>
+        <div th:replace="admin_component/leftBar :: leftBar"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <!--需要区分是员工修改还是添加；-->
 
-            <form th:action="@{/article}" method="post">
+            <form th:action="@{/news_classification}" method="post">
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="classification_id"  th:value="${classification['classification_id']}"/>
                 <div class="form‐group">
-                    <label>文章标题</label>
-                    <input type="text" name="article_name" class="form‐control" placeholder="zhangsan">
+                    <label>分类标题</label>
+                    <input type="text" name="classification_id" class="form‐control" th:value="${classification['classification_id']}">
                 </div>
                 <div class="form‐group">
-                    <label>文章内容</label>
-                    <input type="textarea" name="article_context" class="form‐control" placeholder="文章内容">
-                </div>
-                <div class="form‐group">
-                    <label>文章分类</label><br/>
-                    <select  name="classification_id" class="form‐control">
-                        <option th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
-
-                    </select>
+                    <label>分类名称</label>
+                    <input type="textarea" name="classification_name" class="form‐control" th:value="${classification['classification_name']}">
                 </div>
 
-                <button type="submit" class="btn btn‐primary">添加</button>
+                <button type="submit" class="btn btn‐primary">修改 </button>
             </form>
 
         </main>
@@ -125,6 +91,37 @@
         }
     });
 </script>
+
+<link href="../../static/asserts/css/bootstrap.min.css"  rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="../../static/asserts/css/dashboard.css"  rel="stylesheet">
+<style type="text/css">
+    /* Chart.js */
+
+    @-webkit-keyframes chartjs-render-animation {
+        from {
+            opacity: 0.99
+        }
+        to {
+            opacity: 1
+        }
+    }
+
+    @keyframes chartjs-render-animation {
+        from {
+            opacity: 0.99
+        }
+        to {
+            opacity: 1
+        }
+    }
+
+    .chartjs-render-monitor {
+        -webkit-animation: chartjs-render-animation 0.001s;
+        animation: chartjs-render-animation 0.001s;
+    }
+</style>
 
 
 </body>

@@ -16,4 +16,6 @@ public interface ArticleService {
     public void Update(Article article);
 
     public void Delete(Integer article_id);
+
+    public List<Map<String, String>> GetUnChecked();
 }

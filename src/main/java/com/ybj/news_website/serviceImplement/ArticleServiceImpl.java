@@ -42,4 +42,9 @@ public class ArticleServiceImpl implements ArticleService {
     public void Delete(Integer article_id) {
         articleMapper.delete(article_id);
     }
+
+    @Override
+    public List<Map<String, String>> GetUnChecked() {
+        return articleMapper.GetUnchecked();
+    }
 }

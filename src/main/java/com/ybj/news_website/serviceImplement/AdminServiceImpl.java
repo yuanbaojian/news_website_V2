@@ -40,4 +40,14 @@ public class AdminServiceImpl implements AdminService {
     public  List<Map<String, String>> GetUser() {
         return userMapper.GetAllUser();
     }
+
+    @Override
+    public Map<String, String> GetAdmin(Integer user_id) {
+         return userMapper.GetUserById(user_id);
+    }
+
+    @Override
+    public void check(Integer article_id) {
+        articleMapper.check(article_id);
+    }
 }

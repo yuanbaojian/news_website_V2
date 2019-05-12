@@ -16,4 +16,6 @@ public interface AdminMapper {
     public Collection<News_classification> GetNewsClassification();
 
 
+
+
 }

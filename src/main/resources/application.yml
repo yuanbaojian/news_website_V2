@@ -2,6 +2,11 @@ server:
   port: 8888
 
 spring:
+  # 默认值为 classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+  resources:
+    static-locations: classpath:/static/ #这里设置要指向的路径，多个使用英文逗号隔开，在前面的优先级高
+
+
   thymeleaf:
           prefix: classpath:/templates/
           mode: HTML

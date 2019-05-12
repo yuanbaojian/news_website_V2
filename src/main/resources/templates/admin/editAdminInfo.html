@@ -10,10 +10,10 @@
 
     <title>Dashboard Template for Bootstrap</title>
     <!-- Bootstrap core CSS -->
-    <link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+    <link src="asserts/css/bootstrap.min.css"  rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="asserts/css/dashboard.css"  rel="stylesheet">
+    <link src="asserts/css/dashboard.css"  rel="stylesheet">
     <style type="text/css">
         /* Chart.js */
 
@@ -45,16 +45,16 @@
 <body>
 <!--引入抽取的topbar-->
 <!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
-<div th:replace="user_component/topBar :: topBar"></div>
+<div th:replace="admin_component/topBar :: topBar"></div>
 
 <div class="container-fluid">
     <div class="row">
         <!--引入侧边栏-->
-        <div th:replace="user_component/leftBar :: leftBar"></div>
+        <div th:replace="admin_component/leftBar :: leftBar"></div>
 
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
             <!--需要区分是员工修改还是添加；-->
-            <form th:action="@{/user}" method="post">
+            <form th:action="@{/admin}" method="post">
                 <!--发送put请求修改员工数据-->
                 <!--
                 1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
@@ -62,14 +62,14 @@
                 3、创建一个input项，name="_method";值就是我们指定的请求方式
                 -->
                 <input type="hidden" name="_method" value="put"/>
-                <input type="hidden" name="user_id"  th:value="${user["user_id"]}">
+                <input type="hidden" name="user_id"  th:value="${admin["user_id"]}">
                 <div class="form-group">
                     <label>用户头像</label>
-                    <input name="user_icon" type="text" class="form-control"  th:value="${user['user_icon']}">
+                    <input name="user_icon" type="text" class="form-control"  th:value="${admin['user_icon']}">
                 </div>
                 <div class="form-group">
                     <label>用户Email</label>
-                    <input name="user_email" type="email" class="form-control" th:value="${user['user_email']}">
+                    <input name="user_email" type="email" class="form-control" th:value="${admin['user_email']}">
                 </div>
 
                 <button type="submit" class="btn btn-primary" >修改</button>

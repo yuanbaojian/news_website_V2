@@ -14,7 +14,7 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserMapper userMapper;
+    UserMapper  userMapper;
 
     @Override
     public List<Map<String, String>> GetAlluser() {

@@ -19,4 +19,9 @@ public interface AdminService {
 
 
     public  List<Map<String, String>> GetUser();
+
+    public Map<String,String > GetAdmin(Integer user_id);
+
+
+    public  void check(Integer article_id);
 }
