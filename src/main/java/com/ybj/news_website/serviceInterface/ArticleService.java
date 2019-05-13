@@ -9,7 +9,7 @@ public interface ArticleService {
 
     public List<Map<String, String>> GetArticleByUserId(Integer  user_id);
 
-    public Map<String, String> GetArticleByArticleId(Integer  article_id);
+    public Article GetArticleByArticleId(Integer  article_id);
 
     public void Insert(Article article, Integer user_id);
 
@@ -18,4 +18,6 @@ public interface ArticleService {
     public void Delete(Integer article_id);
 
     public List<Map<String, String>> GetUnChecked();
+
+    public List<Map<String, String>> GetAllByTime();
 }

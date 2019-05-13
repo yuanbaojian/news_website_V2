@@ -76,7 +76,7 @@ public class ArticleController {
     @GetMapping("/article/{article_id}")
     public String toEdit(@PathVariable("article_id") Integer article_id, Model model)
     {
-        Map<String,String> article=articleService.GetArticleByArticleId(article_id);
+        Article article=articleService.GetArticleByArticleId(article_id);
         List<Map<String,String>> classification=newsClassificationService.GetAll();
         model.addAttribute("article", article);
         model.addAttribute("classification", classification);

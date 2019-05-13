@@ -22,8 +22,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Map<String, String> GetArticleByArticleId(Integer article_id) {
-        Map<String, String> article= articleMapper.GetArticleByArticleId(article_id);
+    public Article GetArticleByArticleId(Integer article_id) {
+        Article article= articleMapper.GetArticleByArticleId(article_id);
         return article;
     }
 
@@ -46,5 +46,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Map<String, String>> GetUnChecked() {
         return articleMapper.GetUnchecked();
+    }
+
+    @Override
+    public List<Map<String, String>> GetAllByTime() {
+        return articleMapper.GetAllByTime();
     }
 }

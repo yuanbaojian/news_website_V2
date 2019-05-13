@@ -14,6 +14,9 @@ public interface News_classificationMapper {
     List<Map<String, String>>  getAll();
 
 
+
+
+
     @Select("select * from news_classification limit 5")
     List<Map<String, String>>  getFive();
 

@@ -104,7 +104,7 @@ public class AdminController {
     @GetMapping("/unCheckedArticle/{article_id}")
     public String toEdit(@PathVariable("article_id") Integer article_id, Model model)
     {
-        Map<String,String> article=articleService.GetArticleByArticleId(article_id);
+        Article article=articleService.GetArticleByArticleId(article_id);
         model.addAttribute("article", article);
         return "admin/editUncheckedArticle";
     }

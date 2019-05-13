@@ -15,13 +15,17 @@ public interface ArticleMapper {
     @Select("select * from article where user_id=#{user_id}")
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
 
+    //放到前台， 按时间排序
+    @Select("select * from article order by article_created_time desc")
+    List<Map<String, String>>  GetAllByTime();
+
 
     @Select("select * from article where checked=0")
     List<Map<String, String>> GetUnchecked();
 
 
     @Select("select * from article where article_id=#{article_id}")
-    Map<String, String> GetArticleByArticleId(Integer article_id);
+    Article GetArticleByArticleId(Integer article_id);
 
 
     @Insert("insert into article(article_name,article_context,user_id," +
