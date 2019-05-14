@@ -72,7 +72,8 @@
                         <td th:text="${article['classification_id']}"></td>
                         <td th:text="${article['article_created_time']}"></td>
                         <td>
-                            <a class="btn btn-sm btn-primary" th:href="@{/article/} + ${article['article_id']}">编辑</a>
+
+                            <a class="btn btn-sm btn-primary" th:href="@{'/Aarticle?article_id=' + ${article['article_id']}}">编辑</a>
                             <form th:action="@{/article/} + ${article['article_id']}" method="post">
                                 <input type="hidden" name="_method" value="delete" />
                                 <button type="submit" class="btn btn-sm btn-danger">

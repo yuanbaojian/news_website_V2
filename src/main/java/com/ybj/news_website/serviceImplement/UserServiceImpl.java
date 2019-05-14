@@ -24,8 +24,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public Map<String, String> GetUserById(Integer  user_id) {
-        Map<String, String> user= userMapper.GetUserById(user_id);
+    public User GetUserById(Integer  user_id) {
+        User user= userMapper.GetUserById(user_id);
         return user;
     }
 

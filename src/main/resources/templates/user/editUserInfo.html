@@ -62,7 +62,7 @@
                 3、创建一个input项，name="_method";值就是我们指定的请求方式
                 -->
                 <input type="hidden" name="_method" value="put"/>
-                <input type="hidden" name="user_id"  th:value="${user["user_id"]}">
+                <input type="hidden" name="user_id"   th:value="${user['user_id']}">
                 <div class="form-group">
                     <label>用户头像</label>
                     <input name="user_icon" type="text" class="form-control"  th:value="${user['user_icon']}">

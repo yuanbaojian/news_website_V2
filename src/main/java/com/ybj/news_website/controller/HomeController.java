@@ -1,6 +1,7 @@
 package com.ybj.news_website.controller;
 
 import com.ybj.news_website.model.Article;
+import com.ybj.news_website.model.User;
 import com.ybj.news_website.serviceInterface.ArticleService;
 import com.ybj.news_website.serviceInterface.NewsClassificationService;
 import com.ybj.news_website.serviceInterface.UserService;
@@ -50,8 +51,8 @@ public class HomeController {
     }
 
 //跳转到详情页， 显示具体的新闻内容
-    @RequestMapping("/showArticle/{article_id}")
-    public String  Show(Model model, @PathVariable("article_id")int article_id)
+    @RequestMapping("/showArticle")
+    public String  Show(Model model, int article_id)
     {
         Article article=articleService.GetArticleByArticleId(article_id);
 
@@ -59,12 +60,12 @@ public class HomeController {
 
         //因为是map<String, String>导致 不能取到int类型
         //String user_id=(String) article.get("user_id");
-         Map<String,String> user=userService.GetUserById(user_id);
+         User user=userService.GetUserById(user_id);
 
         model.addAttribute("article", article);
         model.addAttribute("user", user);
 
-        return "article/detail";
+        return "home/article";
     }
 
 

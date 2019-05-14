@@ -72,7 +72,7 @@
                                 <td th:text="${user['user_email']}"></td>
                                 <td th:text="${user['role_id']}"></td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary" th:href="@{/userInfo/} + ${user['user_id']}">编辑</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{'/toEditUserInfo?user_id=' + ${user['user_id']}}">编辑</a>
                                 </td>
 
                         </tbody>

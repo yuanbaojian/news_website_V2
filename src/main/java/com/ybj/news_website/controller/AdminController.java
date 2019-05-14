@@ -75,19 +75,12 @@ public class AdminController {
     public String  adminInfo(HttpSession session, Model model)
     {
         Integer  user_id= (Integer ) session.getAttribute("user_id");
-        Map<String,String> admin=userService.GetUserById(user_id);
+        User admin=userService.GetUserById(user_id);
         model.addAttribute("admin", admin);
         return "admin/adminInfo";
     }
 
-    //跳转到修改页面
-    @GetMapping("/adminInfo/{user_id}")
-    public String toEditUserInfo(@PathVariable("user_id") Integer  user_id, Model model)
-    {
-        //我就使用userService,  更改信息没必要重写
-        Map<String, String> user=userService.GetUserById(user_id);
-        return "admin/editAdminInfo";
-    }
+
 
     //获取全部未过审核文章
     @RequestMapping("/unCheckedArticles")
@@ -116,6 +109,26 @@ public class AdminController {
     {
         articleService.Update(article);
         return "redirect:/articles";
+    }
+
+
+    //    跳转到修改个人信息页面
+    @RequestMapping("/toEditAdminInfo")
+    public String toEditUserInfo( Integer  user_id, Model model)
+    {
+        //应该用单个获取， list<map>不适合了， 取名也不对
+        User user=userService.GetUserById(user_id);
+        model.addAttribute("admin",user);
+        return "admin/editAdminInfo";
+    }
+
+
+    //修改个人信息
+    @PutMapping("/editAdminInfo")
+    public String Edit(User user)
+    {
+        userService.Update(user);
+        return "redirect:/adminInfo";
     }
 
 

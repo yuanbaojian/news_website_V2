@@ -32,12 +32,13 @@ public interface UserMapper {
 
 //    查询自己信息
     @Select("select user_id, user_account, user_icon,user_email, role_id from user  where user_id=#{user_id} " )
-    public Map<String, String> GetUserById(Integer   user_id);
+    public User GetUserById(Integer   user_id);
 
+    //更新自己个人信息
     @Update(" update user set user_icon=#{user_icon}," +
-            "user_email=#{user_email}," +
+            "user_email=#{user_email}" +
             "  where user_id=#{user_id}")
-    void Update(@Param("user") User user);
+    void Update(User user);
 
 
 //登陆使用

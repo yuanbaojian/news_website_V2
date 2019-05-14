@@ -44,7 +44,7 @@
                         <td th:text="${admin['user_email']}"></td>
                         <td th:text="${admin['role_id']}"></td>
                         <td>
-                            <a class="btn btn-sm btn-primary" th:href="@{/adminInfo/} + ${admin['user_id']}">编辑</a>
+                            <a class="btn btn-sm btn-primary" th:href="@{'/toEditAdminInfo?user_id=' + ${admin['user_id']}}">编辑</a>
                         </td>
 
                         </tbody>

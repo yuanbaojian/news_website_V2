@@ -14,7 +14,7 @@ public interface UserService {
 
     public List<Map<String, String>> GetAlluser();
 
-    public Map<String, String> GetUserById(Integer  user_id);
+    public User GetUserById(Integer  user_id);
 
     public Map<String,String> InsertUser(User user);
 

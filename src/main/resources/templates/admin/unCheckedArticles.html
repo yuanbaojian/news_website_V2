@@ -44,13 +44,7 @@
                             <td th:text="${article['classification_id']}"></td>
                             <td th:text="${article['article_created_time']}"></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" th:href="@{/unCheckedArticle/} + ${article['article_id']}">编辑</a>
-                                <form th:action="@{/unCheckedArticle/} + ${article['article_id']}" method="post">
-                                    <input type="hidden" name="_method" value="delete" />
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        删除
-                                    </button>
-                                </form>
+                                <a class="btn btn-sm btn-primary" th:href="@{'/unCheckedArticle?article_id'= + ${article['article_id']}}">查看详情</a>
                             </td>
                         </tr>
                         </tbody>

@@ -47,7 +47,7 @@
 		</span> </div>
 	</form>
 	<ul class="nav navbar-nav navbar-right">
-		<!--打算将新闻分类放进来，取10个-->
+		<!--打算将新闻分类放进来，取5个-->
 		<tr th:each="news_classification : ${classification}">
 
 			<li>
@@ -111,7 +111,7 @@
 
 		<article class="excerpt excerpt-1" style="">
 			<!--图片-->
-			<a class="focus" th:href="@{'/showArticle/'+${article[article_id]}}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
+			<a class="focus" th:href="@{'/showArticle?article_id='+${article[article_id]}}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
 			<!--主题-->
 			<header><a class="cat" href="#" title="MZ-NetBlog主题" >
 				<td th:text="${article['classification_name']}"></td>

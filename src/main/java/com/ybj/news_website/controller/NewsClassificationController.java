@@ -31,41 +31,40 @@ public class NewsClassificationController {
     }
 
     //去添加分类页面
-    @GetMapping("/news_classification")
+    @GetMapping("/toAddNews_classification")
     public String ToAdd(Model model)
     {
         //这个就不需要 回显数据了吧
-        List<Map<String,String>> classification =newsClassificationService.GetAll();
-        model.addAttribute("classification", classification);
         return  "admin/addNewsClassification";
     }
 
     //    添加分类
-    @PostMapping("/news_classification")
+    @PostMapping("/addNewsClassification")
     public String add(News_classification news_classification, HttpSession session)
     {
-
         newsClassificationService.Insert(news_classification);
         return "redirect:/news_classifications";
     }
 
+
+
     //跳转到分类修改页面
-    @GetMapping("/news_classification/{classification_id}")
-    public String toEdit(@PathVariable("classification_id") Integer classification_id, Model model)
+    @GetMapping("/toEditNews_classification")
+    public String toEdit( Integer classification_id, Model model)
     {
         Map<String,String> article=newsClassificationService.GetById(classification_id);
-        List<Map<String,String>> classification=newsClassificationService.GetAll();
+        Map<String,String> classification=newsClassificationService.GetById(classification_id);
         model.addAttribute("classification", classification);
         return "admin/editNewsClassification";
     }
 
 
     //修改分类
-    @PutMapping("/news_classification")
+    @PutMapping("/editNews_classification")
     public String  Edit(News_classification news_classification)
     {
         newsClassificationService.Update(news_classification);
-        return "redirect:/articles";
+        return "redirect:/news_classifications";
     }
 
 

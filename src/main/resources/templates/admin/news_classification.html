@@ -24,6 +24,7 @@
         <div class="content">
             <div class="container-fluid">
                 <h2>分类信息</h2>
+                <a class="sm btn btn-success"   th:href="@{/toAddNews_classification}">添加分类</a>
                 <div class="table-responsive">
                         <table class="table table-striped table-sm">
                             <thead>
@@ -38,7 +39,7 @@
                                 <td th:text="${news_classification['classification_id']}"></td>
                                 <td th:text="${news_classification['classification_name']}"></td>
                                 <td>
-                                    <a class="btn btn-sm btn-primary" th:href="@{/news_classification/} + ${news_classification['classification_id']}">编辑</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{'/toEditNews_classification?classification_id=' + ${news_classification['classification_id']}}">编辑</a>
                                     <form th:action="@{/news_classification/} + ${news_classification['classification_id']}" method="post">
                                         <input type="hidden" name="_method" value="delete" />
                                         <button type="submit" class="btn btn-sm btn-danger">

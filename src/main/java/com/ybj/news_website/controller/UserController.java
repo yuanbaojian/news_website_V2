@@ -94,7 +94,7 @@ public class UserController {
     public String getUserInfo(Model model,HttpSession session)
     {
         Integer  user_id= (Integer ) session.getAttribute("user_id");
-        Map<String, String> user=userService.GetUserById(user_id);
+        User user=userService.GetUserById(user_id);
         model.addAttribute("user", user);
 
         return "user/userInfo";
@@ -102,14 +102,17 @@ public class UserController {
 
 
 //    跳转到修改页面
-    @GetMapping("/userInfo/{user_id}")
-    public String toEditUserInfo(@PathVariable("user_id") Integer  user_id, Model model)
+    @RequestMapping("/toEditUserInfo")
+    public String toEditUserInfo( Integer  user_id, Model model)
     {
     //应该用单个获取， list<map>不适合了， 取名也不对
-        Map<String, String> user=userService.GetUserById(user_id);
+        User user=userService.GetUserById(user_id);
+        model.addAttribute("user",user);
         return "user/editUserInfo";
     }
 
+
+    //修改个人信息
     @PutMapping("/user")
     public String Edit(User user)
     {

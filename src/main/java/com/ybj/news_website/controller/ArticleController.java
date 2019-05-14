@@ -73,8 +73,8 @@ public class ArticleController {
     }
 
     //跳转到修改页面
-    @GetMapping("/article/{article_id}")
-    public String toEdit(@PathVariable("article_id") Integer article_id, Model model)
+    @GetMapping("/Aarticle")
+    public String toEdit( Integer article_id, Model model)
     {
         Article article=articleService.GetArticleByArticleId(article_id);
         List<Map<String,String>> classification=newsClassificationService.GetAll();
@@ -82,6 +82,7 @@ public class ArticleController {
         model.addAttribute("classification", classification);
         return "article/edit";
     }
+
 
 
     //修改文章
