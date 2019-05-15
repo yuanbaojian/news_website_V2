@@ -6,11 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import com.ybj.news_website.util.Response;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +25,7 @@ public class UserController {
     @RequestMapping("/test")
     public  String test()
     {
-        return "test";
+        return "edit";
     }
 
 

@@ -52,7 +52,7 @@ public class ArticleController {
     {
         List<Map<String,String>> classification =newsClassificationService.GetAll();
         model.addAttribute("classification", classification);
-        return  "article/add";
+        return  "article/addByUeditor";
     }
 
 //    添加文章

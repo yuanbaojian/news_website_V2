@@ -44,6 +44,13 @@ public class HomeController {
         return "common/login";
     }
 
+
+    @RequestMapping("/toEdit")
+    public String toEdit()
+    {
+        return "edit";
+    }
+
     @RequestMapping("/toRegister")
     public String toRegister()
     {
