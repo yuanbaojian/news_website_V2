@@ -52,4 +52,14 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Map<String, String>> GetAllByTime() {
         return articleMapper.GetAllByTime();
     }
+
+    @Override
+    public List<Map<String ,String>> search(String keyword) {
+        return articleMapper.fuzzySearch(keyword);
+    }
+
+    @Override
+    public List<Map<String, String>> GetAllByClass(Integer classification_id) {
+        return articleMapper.GetAllByClass(classification_id);
+    }
 }

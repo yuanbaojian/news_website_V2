@@ -9,6 +9,11 @@
     <meta name="author" content="">
 
 
+    <link rel="stylesheet" href="ueditor/css/style.css" />
+    <link rel="stylesheet" href="ueditor/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+
+
 
     <title> 添加 文章信息 </title>
     <!-- Bootstrap core CSS -->
@@ -54,41 +59,40 @@
         <!--引入侧边栏-->
         <div th:replace="user_component/leftBar :: leftBar"></div>
 
-        <div class="col-md-10">
-            <div class="col-sm-10">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
 
+
+            <div id="layout" th:fragment="markdown">
+                <header>
+
+                </header>
+
+
+                <form th:action="@{/addArticle}" method="post">
+
+                    <div class="form‐group">
+                        <label>文章标题</label>
+                        <input type="text" name="article_name" class="form‐control" placeholder="zhangsan">
+                    </div>
+                    <label>文章分类</label><br/>
+
+                    <select  name="classification_id" class="form‐control">
+                        <option th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
+
+                    </select>
+                    <div id="test-editormd">
+                        <textarea name="article_context" id="article_context" style="display:none;"> </textarea>
+                    </div>
+                    <button class="btn btn-success btn-lg" type="submit">提交</button>
+                </form>
 
             </div>
-        </div>
-
-
-        <!---->
-        <!--<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">-->
-            <!--<form th:action="@{/article}" method="post">-->
-                <!--<div class="form‐group">-->
-                    <!--<label>文章标题</label>-->
-                    <!--<input type="text" name="article_name" class="form‐control" placeholder="zhangsan">-->
-                <!--</div>-->
-                <!--<div class="form‐group">-->
-                    <!--<label>文章内容</label>-->
-                    <!--<input type="textarea" name="article_context" class="form‐control" placeholder="文章内容">-->
-                <!--</div>-->
-                <!--<div class="form‐group">-->
-                    <!--<label>文章分类</label><br/>-->
-                    <!--<select  name="classification_id" class="form‐control">-->
-                        <!--<option th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>-->
-
-                    <!--</select>-->
-                <!--</div>-->
-                <!--<button type="submit" class="btn btn‐primary">添加</button>-->
-            <!--</form>-->
-        <!--</main>-->
-
 
 
 
     </div>
 </div>
+
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -100,6 +104,31 @@
 
 
 </body>
+<script src="ueditor/js/jquery.min.js"></script>
+<script src="ueditor/js/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function() {
+        testEditor = editormd("test-editormd", {
+            width   : "90%",
+            height  : 640,
+            syncScrolling : "single",
+            path    : "lib/",
+            saveHTMLToTextarea : true, // 保存HTML到Textarea
+        });
+
+        /*
+        // or
+        testEditor = editormd({
+            id      : "test-editormd",
+            width   : "90%",
+            height  : 640,
+            path    : "../lib/"
+        });
+        */
+    });
+</script>
 
 
 

@@ -7,6 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="stylesheet" href="ueditor/css/style.css" />
+    <link rel="stylesheet" href="ueditor/css/editormd.css" />
+    <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
+
 
 
 
@@ -35,10 +39,7 @@
                     <label>文章标题</label>
                     <input type="text" name="article_name" class="form‐control" th:value="${article['article_name']}">
                 </div>
-                <div class="form‐group">
-                    <label>文章内容</label>
-                    <input type="textarea" name="article_context" class="form‐control" th:value="${article['article_context']}">
-                </div>
+
                 <div class="form‐group">
                     <label>文章分类</label><br/>
                     <select  name="classification_id" class="form‐control">
@@ -46,7 +47,20 @@
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn‐primary">修改 </button>
+                <!--<div id="test-editormd">-->
+                    <!--<textarea name="article_context" id="article_context" style="display:none;"> </textarea>-->
+                <!--</div>-->
+
+
+                <article class="article-content">
+                    <div id="doc-content">
+                <textarea  name="article_context" style="display:none;" th:utext="${article['article_context']}">
+                </textarea>
+                    </div>
+                </article>
+
+
+                <button type="submit" class="btn btn-success btn-lg">修改 </button>
             </form>
 
         </main>
@@ -128,6 +142,39 @@
         animation: chartjs-render-animation 0.001s;
     }
 </style>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.ias.js"></script>
+<script src="js/scripts.js"></script>
+<script src="ueditor/js/jquery.min.js"></script>
+<script src="ueditor/js/editormd.min.js"></script>
+<script type="text/javascript">
+    var testEditor;
+
+    $(function() {
+        testEditor = editormd("doc-content", {
+            width   : "90%",
+            height  : 400,
+            syncScrolling : "single",
+            path    : "lib/",
+            codeFold : false,
+            watch : true,
+            markdownSourceCode : false
+
+        });
+
+        /*
+        // or
+        testEditor = editormd({
+            id      : "test-editormd",
+            width   : "90%",
+            height  : 640,
+            path    : "../lib/"
+        });
+        */
+    });
+</script>
+
 
 
 </body>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8"/>
+    <title>Editor.md examples</title>
+    <link rel="stylesheet" href="ueditor/css/editormd.preview.min.css" />
+    <link rel="stylesheet" href="ueditor/css/editormd.css"/>
+</head>
+<body>
+<!-- 因为我们使用了dark主题，所以在容器div上加上dark的主题类，实现我们自定义的代码样式 -->
+<div class="content editormd-preview-theme" id="content">${article.article_context!''}</div>
+<script src="ueditor/js/jquery.min.js"></script>
+<script src="ueditor/js/marked.min.js"></script>
+<script src="ueditor/js/prettify.min.js"></script>
+<script src="ueditor/js/editormd.min.js"></script>
+<script type="text/javascript">
+    editormd.markdownToHTML("content");
+</script>
+</body>
+</html>

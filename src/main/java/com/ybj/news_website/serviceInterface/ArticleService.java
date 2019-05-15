@@ -20,4 +20,9 @@ public interface ArticleService {
     public List<Map<String, String>> GetUnChecked();
 
     public List<Map<String, String>> GetAllByTime();
+
+
+    public List<Map<String ,String>> search(String keyword);
+
+    public List<Map<String ,String>> GetAllByClass(Integer classification_id);
 }

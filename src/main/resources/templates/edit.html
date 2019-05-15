@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8" />
     <title>Simple example - Editor.md examples</title>
@@ -8,45 +8,19 @@
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
 </head>
 <body>
-<div id="layout">
+<div id="layout" th:fragment="markdown">
     <header>
-        <h1>Simple example</h1>
+
     </header>
-    <div id="test-editormd">
-                <textarea style="display:none;">[TOC]
 
-#### Disabled options
 
-- TeX (Based on KaTeX);
-- Emoji;
-- Task lists;
-- HTML tags decode;
-- Flowchart and Sequence Diagram;
+    <form name="mdEditorForm">
+        <div id="test-editormd">
+            <textarea name="article_context" id="article_context" style="display:none;"> </textarea>
+        </div>
+        <button class="btn btn-success btn-lg" type="submit">提交</button>
+    </form>
 
-#### Editor.md directory
-
-    editor.md/
-            lib/
-            css/
-            scss/
-            tests/
-            fonts/
-            images/
-            plugins/
-            examples/
-            languages/
-            editormd.js
-            ...
-
-```html
-&lt;!-- English --&gt;
-&lt;script src="../dist/js/languages/en.js"&gt;&lt;/script&gt;
-
-&lt;!-- 繁體中文 --&gt;
-&lt;script src="../dist/js/languages/zh-tw.js"&gt;&lt;/script&gt;
-```
-</textarea>
-    </div>
 </div>
 <script src="ueditor/js/jquery.min.js"></script>
 <script src="ueditor/js/editormd.min.js"></script>

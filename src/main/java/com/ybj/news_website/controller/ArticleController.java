@@ -52,11 +52,11 @@ public class ArticleController {
     {
         List<Map<String,String>> classification =newsClassificationService.GetAll();
         model.addAttribute("classification", classification);
-        return  "article/addByUeditor";
+        return  "article/add";
     }
 
 //    添加文章
-    @PostMapping("/article")
+    @PostMapping("/addArticle")
     public String add(Article article, HttpSession session)
     {
         Integer  user_id= (Integer ) session.getAttribute("user_id");

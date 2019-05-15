@@ -38,6 +38,20 @@ public class HomeController {
         return "home/index";
     }
 
+
+
+    @RequestMapping("/indexByClass")
+    public String indexByClass(Model model, Integer classification_id)
+    {
+        List<Map<String,String>> classification= newsClassificationService.GetFive();
+        model.addAttribute("classification", classification);
+
+        List<Map<String,String>> articles= articleService.GetAllByClass(classification_id);
+        model.addAttribute("articles", articles);
+
+        return "home/index";
+    }
+
     @RequestMapping("/tologin")
     public String tologin()
     {
@@ -73,6 +87,16 @@ public class HomeController {
         model.addAttribute("user", user);
 
         return "home/article";
+    }
+
+
+    @RequestMapping("/search")
+    public String  showSearch(Model model, String keyword)
+    {
+        List<Map<String ,String>> articles=articleService.search(keyword);
+        model.addAttribute("articles", articles);
+
+        return "home/index";
     }
 
 

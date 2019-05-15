@@ -16,12 +16,23 @@ public interface ArticleMapper {
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
 
     //放到前台， 按时间排序
-    @Select("select * from article order by article_created_time desc")
+    @Select("select * from article a ,news_classification b " +
+            " where  a.classification_id=b.classification_id order by a.article_created_time desc")
     List<Map<String, String>>  GetAllByTime();
+
+    //模糊搜索
+    @Select("select * from article a ,news_classification b " +
+            " where article_name like CONCAT('%',#{keyword},'%') and  a.classification_id=b.classification_id ")
+    List<Map<String ,String>>  fuzzySearch(String keyword);
 
 
     @Select("select * from article where checked=0")
     List<Map<String, String>> GetUnchecked();
+
+
+    @Select("select * from article a ,news_classification b" +
+            " where a.classification_id=#{classification_id} and a.classification_id=b.classification_id")
+    List<Map<String, String>> GetAllByClass(Integer classification_id);
 
 
     @Select("select * from article where article_id=#{article_id}")
