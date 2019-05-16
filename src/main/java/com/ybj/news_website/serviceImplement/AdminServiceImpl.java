@@ -47,8 +47,6 @@ public class AdminServiceImpl implements AdminService {
          return userMapper.GetUserById(user_id);
     }
 
-    @Override
-    public void check(Integer article_id) {
-        articleMapper.check(article_id);
-    }
+
+
 }

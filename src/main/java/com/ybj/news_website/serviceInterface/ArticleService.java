@@ -21,8 +21,12 @@ public interface ArticleService {
 
     public List<Map<String, String>> GetAllByTime();
 
+    public List<Map<String, String>> GetAllByComment();
+
 
     public List<Map<String ,String>> search(String keyword);
 
     public List<Map<String ,String>> GetAllByClass(Integer classification_id);
+
+    public void checkArticle(Integer article_id);
 }

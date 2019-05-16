@@ -23,7 +23,7 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h2>个人信息</h2>
+                <h2>未审核文章信息</h2>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead>
@@ -44,7 +44,7 @@
                             <td th:text="${article['classification_id']}"></td>
                             <td th:text="${article['article_created_time']}"></td>
                             <td>
-                                <a class="btn btn-sm btn-primary" th:href="@{'/unCheckedArticle?article_id'= + ${article['article_id']}}">查看详情</a>
+                                <a class="btn btn-sm btn-primary" th:href="@{'/toUncheckedArticle?article_id=' + ${article['article_id']}}">查看详情</a>
                             </td>
                         </tr>
                         </tbody>

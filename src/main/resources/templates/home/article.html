@@ -79,6 +79,7 @@
             <h1 class="article-title"><span  th:text="${article['article_name']}"></span></h1>
             <h4><span th:text="${'作者：'+user['user_account']}"></span></h4>
             <h4><span th:text="${'创建时间：'+article['article_created_time']}"></span></h4>
+
             <div class="article-meta">
 
             </div>
@@ -106,19 +107,13 @@
             <div id="respond">
 
                 <div class="comment">
-                    <form method="post">
+                    <form th:action="@{/addComment}" method="post">
                         <!--<input type="hidden" id="role" value="游客">-->
                         <div class="comment-box">
-                            <textarea placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
-                                      cols="100%" rows="3" tabindex="3"></textarea>
+                            <input type="textarea" placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
+                                      cols="100%" rows="3" tabindex="3"></input>
                             <div class="comment-ctrl">
-                                <div class="comment-prompt" style="display: none;"><i
-                                        class="fa fa-spin fa-circle-o-notch"></i> <span class="comment-prompt-text">评论正在提交中...请稍后</span>
-                                </div>
-                                <div class="comment-success" style="display: none;"><i class="fa fa-check"></i> <span
-                                        class="comment-prompt-text">评论提交成功...</span></div>
-
-                                <button th:if="${session.t_user} ne null" name="comment-submit" id="comment-submit" onclick="addcomment()"  tabindex="4" >评论</button>
+                                <button th:if="${session.user_id} ne null" name="comment-submit" id="comment-submit"   tabindex="4" >评论</button>
                             </div>
                         </div>
                     </form> </div>
@@ -126,6 +121,26 @@
 
 
             </div>
+
+            <!--显示评论-->
+            <div id="postcomments">
+                <!--用户id-->
+                <!--<input th:if="${session.user_id} ne null" hidden  id="uid" th:value="${session.user[t_user_id]}">-->
+                <ol id="comment_list" class="commentlist" th:each="comment:${comments}">
+                    <li    class="comment-content">
+                        <div class="comment-main">
+                            <p>
+                                <span   style="float: left;" class="text  address" th:text="${user['user_account']}"></span>
+                                <span style="float: left;" class="time" th:text="${comment['created_time']}"></span>:
+                                <span  style="float: left;" th:text="${comment['content']}"></span>
+                            </p>
+                        </div>
+
+                    </li>
+                </ol>
+            </div>
+
+
 
 
         </div>
@@ -143,8 +158,7 @@
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane contact active" id="notice">
-                        <a th:href="@{/tologin}"> 登陆</a>
-                        <a th:href="@{/toRegister}">注册</a>
+                        用户名： <div th:text="${session.user_id}"></div>
 
                     </div>
                     <div role="tabpanel" class="tab-pane contact" id="contact">

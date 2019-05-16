@@ -105,10 +105,10 @@
 			<!--图片-->
 			<a class="focus" th:href="@{'/showArticle?article_id='+${article[article_id]}}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
 			<!--主题-->
-			<header><a class="cat" href="#" title="MZ-NetBlog主题" >
+			<header><a class="cat" href="#" >
 				<i></i></a>
 				<!--名称-->
-				<h2><a href="#" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" >
+				<h2><a href="#"  target="_blank" >
 					<td th:text="${article['article_name']}"></td>
 				</a>
 				</h2>
@@ -119,6 +119,8 @@
 					<td th:text="${article['article_created_time']}"></td>
 				</time>
 			<td th:text="${article['classification_name']}"></td>
+
+
 			</p>
 			<!--具体内容-->
 			<p class="note">
@@ -157,11 +159,40 @@
 	  <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" >联系站长</a></li>
 	</ul>
 	<div class="tab-content">
-	  <div role="tabpanel" class="tab-pane contact active" id="notice">
-		  <a th:href="@{/tologin}"> 登陆</a>
-		  <a th:href="@{/toRegister}">注册</a>
+	  <!--<div role="tabpanel" class="tab-pane contact active" id="notice">-->
+		  <!--<a th:href="@{/tologin}"> 登陆</a>-->
+		  <!--<a th:href="@{/toRegister}">注册</a>-->
 
-	  </div>
+	  <!--</div>-->
+
+
+
+
+		<div role="tabpanel" class="tab-pane contact active" id="notice">
+
+		<div th:if="${session.user_id} ne null">
+			<p style="text-align:right">
+
+				<a th:href="@{/userhome}">用户后台</a>
+				<a th:href="@{/logout}">退出</a>
+			</p>
+			<p align="center">
+
+			<p style="text-align:center" th:text=${session.user_account}> </p>
+			</p>
+		</div>
+			<div th:if="${session.user_id} eq null">
+				<br>
+				<p align="center" th:href="@{/tologin}" style="font-family: 楷体"><b>登录后可保存您的浏览喜好、评论、以及发布新闻</b></p>
+				<a  th:href="@{/tologin}"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-primary ">登录</button></p></a>
+				<p align="center">
+					<a href="#" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-qq fa-2x" aria-hidden="true"></i></a>
+					<a href="#" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-weixin fa-2x" aria-hidden="true"></i></a>
+				</p>
+			</div>
+		</div>
+
+
 		<div role="tabpanel" class="tab-pane contact" id="contact">
 		  <h2>QQ: 1793870688
 			  <a href="" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="bottom" title=""  data-original-title="QQ:"></a>
@@ -187,70 +218,29 @@
 
 </div>
 <div class="widget widget_hot">
-	  <h3>最新评论文章</h3>
-	  <ul>            
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
+	  <h3>最热评论文章</h3>
+	  <ul >
+		  <tr th:each="article : ${articlesCommented}">
+			<li><a  href="#" ><span class="thumbnail">
 				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-			<li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-
+			</span><span class="text" >
+				<td th:text="${article['article_name']}"></td>
+			</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+				<td th:text="${article['article_created_time']}"></td>
+			</span><span class="muted"><i class="glyphicon glyphicon-comment"></i>
+				<td th:text="${article['count']}"></td>
+			</span></a></li>
+		  </tr>
 	  </ul>
  </div>
- <div class="widget widget_sentence">    
-	<a href="#" target="_blank" rel="nofollow" title="专业网站建设" >
-	<img style="width: 100%" src="images//201610241224221511.jpg" alt="专业网站建设" ></a>    
- </div>
- <div class="widget widget_sentence">    
-	<a href="#" target="_blank" rel="nofollow" title="MZ-NetBlog主题" >
-	<img style="width: 100%" src="images/ad.jpg" alt="MZ-NetBlog主题" ></a>    
- </div>
-<div class="widget widget_sentence">
-  <h3>友情链接</h3>
-  <div class="widget-sentence-link">
-	<a href="#" title="网站建设" target="_blank" >网站建设</a>&nbsp;&nbsp;&nbsp;
-  </div>
-</div>
+
+
+
 </aside>
 </section>
 <footer class="footer">
 <div class="container">
-<p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+<p>Copyright &copy; 2019.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" >搞个大新闻</a> </p>
 </div>
 <div id="gotop"><a class="gotop"></a></div>
 </footer>

@@ -33,9 +33,15 @@
             <article class="article-content">
                 <div th:utext="${article['article_context']}"></div>
             </article>
+            <form th:href="/addComment" method="post">
             <div class="title" id="comment">
                 <h3>评论(ps:登陆后才可以哦！)</h3>
+
+                    <input type="textarea" placeholder="您的评论或留言（必填）" name="content" id="comment-textarea2" cols="100%" rows="3" tabindex="3"></input>
+                    <button type="submit" name="comment-submit" id="comment-submit"  tabindex="4" >评论</button>
+
             </div>
+            </form>
             <!--<div id="respond">-->
 
                     <!--<div class="comment">-->

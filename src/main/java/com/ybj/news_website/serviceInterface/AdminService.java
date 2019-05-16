@@ -23,5 +23,5 @@ public interface AdminService {
     public User GetAdmin(Integer user_id);
 
 
-    public  void check(Integer article_id);
+
 }

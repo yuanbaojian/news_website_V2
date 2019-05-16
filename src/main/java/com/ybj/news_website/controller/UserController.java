@@ -1,6 +1,8 @@
 package com.ybj.news_website.controller;
 
 import com.ybj.news_website.model.User;
+import com.ybj.news_website.serviceInterface.ArticleService;
+import com.ybj.news_website.serviceInterface.NewsClassificationService;
 import com.ybj.news_website.serviceInterface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +22,27 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    NewsClassificationService newsClassificationService;
+
+    @Autowired
+    ArticleService articleService;
 
 
 
-    @RequestMapping("/test")
-    public  String test()
+
+
+    @RequestMapping("/indexLoged")
+    public  String indexLoged(Model model)
     {
-        return "edit";
+        List<Map<String,String>> classification= newsClassificationService.GetFive();
+        model.addAttribute("classification", classification);
+
+        List<Map<String,String>> articles= articleService.GetAllByTime();
+        model.addAttribute("articles", articles);
+        return "home/index_loged";
     }
+
 
 
     @RequestMapping("/register")
@@ -85,6 +101,21 @@ public class UserController {
             modelAndView.setViewName("/login");
         }
         return modelAndView;
+    }
+
+    //退出系统
+    @RequestMapping("/logout")
+    public String logout(HttpSession session)
+    {
+        session.removeAttribute("user_id");
+        return "redirect:/";
+    }
+
+
+    @RequestMapping("/userHome")
+    public String userHome()
+    {
+        return "user/home";
     }
 
     //获取自己用户信息

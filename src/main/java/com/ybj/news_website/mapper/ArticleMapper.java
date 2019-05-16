@@ -17,21 +17,34 @@ public interface ArticleMapper {
 
     //放到前台， 按时间排序
     @Select("select * from article a ,news_classification b " +
-            " where  a.classification_id=b.classification_id order by a.article_created_time desc")
+            " where  a.classification_id=b.classification_id and a.checked=1 order by a.article_created_time desc")
     List<Map<String, String>>  GetAllByTime();
+
+    //放到前台， 按评论数排序
+    @Select("select a.*, b.user_account from (SELECT *, count(*) AS count " +
+            "FROM  (select a.* from article a RIGHT JOIN comment b on a.article_id= b.article_id and a.checked=1 ) c " +
+            "GROUP BY c.article_id " +
+            "ORDER BY count DESC " +
+            "LIMIT 20) a, user b where  a.user_id=b.user_id")
+    List<Map<String, String>>  GetAllByComment();
+
+
 
     //模糊搜索
     @Select("select * from article a ,news_classification b " +
-            " where article_name like CONCAT('%',#{keyword},'%') and  a.classification_id=b.classification_id ")
+            " where article_name like CONCAT('%',#{keyword},'%') and " +
+            " a.classification_id=b.classification_id  and a.checked=1")
     List<Map<String ,String>>  fuzzySearch(String keyword);
 
-
+    //查询未审核的文章
     @Select("select * from article where checked=0")
     List<Map<String, String>> GetUnchecked();
 
 
+    //按分类搜索新闻
     @Select("select * from article a ,news_classification b" +
-            " where a.classification_id=#{classification_id} and a.classification_id=b.classification_id")
+            " where a.classification_id=#{classification_id} and " +
+            "a.classification_id=b.classification_id and a.checked=1")
     List<Map<String, String>> GetAllByClass(Integer classification_id);
 
 
@@ -51,17 +64,15 @@ public interface ArticleMapper {
 //    //还未成功， 假装成功， 看下一步骤
 //    @Insert("insert into article(user_id) values( #{user_id})" )
 //    void insert(@Param("article") Article article, @Param("user_id") Integer user_id);
-
     @Update(" update article set article_name=#{article_name}," +
             "article_context=#{article_context}," +
             "classification_id=#{classification_id} " +
             "  where article_id=#{article_id}")
     void update(Article article);
 
-    @Update(" update article set checked=#{checked}," +
-
+    @Update(" update article set checked=1 " +
             "  where article_id=#{article_id}")
-    void check(Integer article_id);
+    void checkArticle(Integer article_id);
 
 
     @Delete("delete from article where article_id=#{article_id}")

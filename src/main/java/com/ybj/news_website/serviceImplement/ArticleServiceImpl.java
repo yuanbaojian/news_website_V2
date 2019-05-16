@@ -54,6 +54,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public List<Map<String, String>> GetAllByComment() {
+        return articleMapper.GetAllByComment();
+    }
+
+    @Override
     public List<Map<String ,String>> search(String keyword) {
         return articleMapper.fuzzySearch(keyword);
     }
@@ -61,5 +66,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Map<String, String>> GetAllByClass(Integer classification_id) {
         return articleMapper.GetAllByClass(classification_id);
+    }
+
+    @Override
+    public void checkArticle(Integer article_id) {
+        articleMapper.checkArticle(article_id);
     }
 }

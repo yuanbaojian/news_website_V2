@@ -7,10 +7,13 @@
 <!--头部导航栏-->
 <div th:fragment="topBar">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0" >
+        欢迎您
+        <p style="text-align:center" th:text=${session.user_account}> </p>
         <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#dashBoard.html">欢迎您</a>
         <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
         <ul class="navbar-nav px-3">
             <li class="nav-item text-nowrap">
+                <a th:href="@{/}">首页</a>
                 <a class="nav-link" href="http://getbootstrap.com/docs/4.0/examples/dashboard/#dashBoard.html">Sign out</a>
             </li>
         </ul>

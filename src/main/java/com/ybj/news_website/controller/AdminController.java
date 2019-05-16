@@ -93,9 +93,9 @@ public class AdminController {
     }
 
 
-    //跳转到修改页面
-    @GetMapping("/unCheckedArticle/{article_id}")
-    public String toEdit(@PathVariable("article_id") Integer article_id, Model model)
+    //查看未通过审核文章
+    @RequestMapping("/toUncheckedArticle")
+    public String toEdit( Integer article_id, Model model)
     {
         Article article=articleService.GetArticleByArticleId(article_id);
         model.addAttribute("article", article);
@@ -103,12 +103,12 @@ public class AdminController {
     }
 
 
-    //修改文章
-    @PutMapping("/unCheckedArticle")
-    public String  Edit(Article article)
+    //审核文章
+    @RequestMapping("/CheckunCheckedArticle")
+    public String  CheckArticle(Integer article_id)
     {
-        articleService.Update(article);
-        return "redirect:/articles";
+        articleService.checkArticle(article_id);
+        return "redirect:/unCheckedArticles";
     }
 
 
