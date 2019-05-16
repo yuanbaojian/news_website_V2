@@ -29,10 +29,10 @@
                         <thead>
                         <tr>
                             <th>article_id</th>
-                            <th>article_name</th>
-                            <th>article_context</th>
-                            <th>classification_id</th>
-                            <th>article_created_time</th>
+                            <th>文章名称</th>
+                            <th>文章内容</th>
+                            <th>分类</th>
+                            <th>创建时间</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -41,7 +41,7 @@
                             <td th:text="${article['article_id']}"></td>
                             <td th:text="${article['article_name']}"></td>
                             <td th:text="${article['article_context']}"></td>
-                            <td th:text="${article['classification_id']}"></td>
+                            <td th:text="${article['classification_name']}"></td>
                             <td th:text="${article['article_created_time']}"></td>
                             <td>
                                 <a class="btn btn-sm btn-primary" th:href="@{'/toUncheckedArticle?article_id=' + ${article['article_id']}}">查看详情</a>

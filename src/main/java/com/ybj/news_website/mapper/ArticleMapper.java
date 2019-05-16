@@ -37,7 +37,8 @@ public interface ArticleMapper {
     List<Map<String ,String>>  fuzzySearch(String keyword);
 
     //查询未审核的文章
-    @Select("select * from article where checked=0")
+    @Select("select a.* , b.classification_name from article a, news_classification b " +
+            " where checked=0 and a.classification_id=b.classification_id")
     List<Map<String, String>> GetUnchecked();
 
 
