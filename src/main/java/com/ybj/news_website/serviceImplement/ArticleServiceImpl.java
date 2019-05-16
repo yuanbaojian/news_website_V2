@@ -16,6 +16,11 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleMapper articleMapper;
 
     @Override
+    public int getArticleNum() {
+        return articleMapper.getArticleNum();
+    }
+
+    @Override
     public List<Map<String, String>> GetArticleByUserId(Integer user_id) {
         List<Map<String, String>> articles= articleMapper.GetArticleByUserId(user_id);
         return articles;

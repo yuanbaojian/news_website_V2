@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
 
+    public int getUserNum();
+
     public List<Map<String, String>> GetAlluser();
 
     public User GetUserById(Integer  user_id);

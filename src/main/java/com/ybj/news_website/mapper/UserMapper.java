@@ -18,6 +18,9 @@ public interface UserMapper {
 
     int deleteByExample(UserExample example);
 
+    @Select("select  count(*) from user")
+    int getUserNum();
+
 
 
     @Insert(" insert  into user(user_account,user_password,user_icon, user_email,role_id)" +

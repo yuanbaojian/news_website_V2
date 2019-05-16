@@ -94,6 +94,12 @@ public class UserController {
             }
             //跳转到管理员页面
             else {
+                int userNum=userService.getUserNum();
+                modelAndView.addObject("userNum", userNum);
+
+                int articleNum=articleService.getArticleNum();
+                modelAndView.addObject("articleNum", articleNum);
+
                 modelAndView.setViewName("admin/dashBoard");
             }
         }

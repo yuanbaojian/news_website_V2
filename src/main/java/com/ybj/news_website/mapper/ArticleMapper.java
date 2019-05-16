@@ -12,6 +12,9 @@ import org.apache.ibatis.annotations.*;
 @Mapper
 public interface ArticleMapper {
 
+    @Select("select  count(*) from article")
+    int getArticleNum();
+
     @Select("select * from article where user_id=#{user_id}")
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
 

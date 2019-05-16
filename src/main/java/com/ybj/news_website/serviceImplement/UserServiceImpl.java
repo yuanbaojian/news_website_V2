@@ -17,6 +17,11 @@ public class UserServiceImpl implements UserService {
     UserMapper  userMapper;
 
     @Override
+    public int getUserNum() {
+        return userMapper.getUserNum();
+    }
+
+    @Override
     public List<Map<String, String>> GetAlluser() {
         List<Map<String, String>> users= userMapper.GetAllUser();
         return users;
