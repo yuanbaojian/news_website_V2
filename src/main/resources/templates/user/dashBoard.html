@@ -1,130 +1,481 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
-<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" >
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<meta name="description" content="">
-		<meta name="author" content="">
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Ready Bootstrap Dashboard</title>
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+	<link rel="stylesheet" href="assets/css/ready.css">
+	<link rel="stylesheet" href="assets/css/demo.css">
+</head>
+<body>
+<div class="wrapper">
+	<!--头部菜单-->
+	<div th:replace="user_component/topBar :: topBar"></div>
 
-		<title>Dashboard Template for Bootstrap</title>
-		<!-- Bootstrap core CSS -->
-		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
 
-		<!-- Custom styles for this template -->
-		<link href="asserts/css/dashboard.css" rel="stylesheet">
-		<style type="text/css">
-			/* Chart.js */
-			
-			@-webkit-keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			@keyframes chartjs-render-animation {
-				from {
-					opacity: 0.99
-				}
-				to {
-					opacity: 1
-				}
-			}
-			
-			.chartjs-render-monitor {
-				-webkit-animation: chartjs-render-animation 0.001s;
-				animation: chartjs-render-animation 0.001s;
-			}
-		</style>
-	</head>
+	<div th:replace="user_component/leftBar :: leftBar"></div>
 
-	<body>
 
-	<!--引入头部-->
-<div th:replace="user_component/topBar :: topBar"></div>
-
-		<div class="container-fluid">
-			<div class="row" >
-				<div th:replace="user_component/leftBar :: leftBar"></div>
-
-				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-					<div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
-						<div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-							<div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
-						</div>
-						<div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
-							<div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
-						</div>
-					</div>
-					<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-						<h1 class="h2">Dashboard</h1>
-						<div class="btn-toolbar mb-2 mb-md-0">
-							<div class="btn-group mr-2">
-								<button class="btn btn-sm btn-outline-secondary">Share</button>
-								<button class="btn btn-sm btn-outline-secondary">Export</button>
+	<div class="main-panel">
+		<div class="content">
+			<div class="container-fluid">
+				<h4 class="page-title">Dashboard</h4>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="card card-stats card-warning">
+							<div class="card-body ">
+								<div class="row">
+									<div class="col-5">
+										<div class="icon-big text-center">
+											<i class="la la-users"></i>
+										</div>
+									</div>
+									<div class="col-7 d-flex align-items-center">
+										<div class="numbers">
+											<p class="card-category">用户数量</p>
+											<h4 class="card-title" th:text="${userNum}"></h4>
+										</div>
+									</div>
+								</div>
 							</div>
-							<button class="btn btn-sm btn-outline-secondary dropdown-toggle">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-                This week
-              </button>
 						</div>
 					</div>
-
-					<canvas class="my-4 chartjs-render-monitor" id="myChart" width="1076" height="454" style="display: block; width: 1076px; height: 454px;"></canvas>
-
-					
-				</main>
+					<!--<div class="col-md-3">-->
+					<!--<div class="card card-stats card-success">-->
+					<!--<div class="card-body ">-->
+					<!--<div class="row">-->
+					<!--<div class="col-5">-->
+					<!--<div class="icon-big text-center">-->
+					<!--<i class="la la-bar-chart"></i>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-7 d-flex align-items-center">-->
+					<!--<div class="numbers">-->
+					<!--<p class="card-category">Sales</p>-->
+					<!--<h4 class="card-title">$ 1,345</h4>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="col-md-6">
+						<div class="card card-stats card-danger">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-5">
+										<div class="icon-big text-center">
+											<i class="la la-newspaper-o"></i>
+										</div>
+									</div>
+									<div class="col-7 d-flex align-items-center">
+										<div class="numbers">
+											<p class="card-category">文章数量</p>
+											<h4 class="card-title" th:text="${articleNum}"  ></h4>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--<div class="col-md-3">-->
+					<!--<div class="card card-stats card-primary">-->
+					<!--<div class="card-body ">-->
+					<!--<div class="row">-->
+					<!--<div class="col-5">-->
+					<!--<div class="icon-big text-center">-->
+					<!--<i class="la la-check-circle"></i>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--<div class="col-7 d-flex align-items-center">-->
+					<!--<div class="numbers">-->
+					<!--<p class="card-category">Order</p>-->
+					<!--<h4 class="card-title">576</h4>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+				</div>
+				<div class="row">
+					<!--<div class="col-md-3">-->
+					<!--<div class="card">-->
+					<!--<div class="card-header">-->
+					<!--<h4 class="card-title">Task</h4>-->
+					<!--<p class="card-category">Complete</p>-->
+					<!--</div>-->
+					<!--<div class="card-body">-->
+					<!--<div id="task-complete" class="chart-circle mt-4 mb-3"></div>-->
+					<!--</div>-->
+					<!--<div class="card-footer">-->
+					<!--<div class="legend"><i class="la la-circle text-primary"></i> Completed</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<!--</div>-->
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h4 class="card-title">World Map</h4>
+								<p class="card-category">
+									Map of the distribution of users around the world</p>
+							</div>
+							<div class="card-body">
+								<div class="mapcontainer">
+									<div class="map">
+										<span>Alternative content for the map</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+				<!--<div class="row row-card-no-pd">-->
+				<!--<div class="col-md-4">-->
+				<!--<div class="card">-->
+				<!--<div class="card-body">-->
+				<!--<p class="fw-bold mt-1">My Balance</p>-->
+				<!--<h4><b>$ 3,018</b></h4>-->
+				<!--<a href="#" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="la la-plus"></i> Add Balance</a>-->
+				<!--</div>-->
+				<!--<div class="card-footer">-->
+				<!--<ul class="nav">-->
+				<!--<li class="nav-item"><a class="btn btn-default btn-link" href="#"><i class="la la-history"></i> History</a></li>-->
+				<!--<li class="nav-item ml-auto"><a class="btn btn-default btn-link" href="#"><i class="la la-refresh"></i> Refresh</a></li>-->
+				<!--</ul>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-5">-->
+				<!--<div class="card">-->
+				<!--<div class="card-body">-->
+				<!--<div class="progress-card">-->
+				<!--<div class="d-flex justify-content-between mb-1">-->
+				<!--<span class="text-muted">Profit</span>-->
+				<!--<span class="text-muted fw-bold"> $3K</span>-->
+				<!--</div>-->
+				<!--<div class="progress mb-2" style="height: 7px;">-->
+				<!--<div class="progress-bar bg-success" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="78%"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="progress-card">-->
+				<!--<div class="d-flex justify-content-between mb-1">-->
+				<!--<span class="text-muted">Orders</span>-->
+				<!--<span class="text-muted fw-bold"> 576</span>-->
+				<!--</div>-->
+				<!--<div class="progress mb-2" style="height: 7px;">-->
+				<!--<div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="65%"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="progress-card">-->
+				<!--<div class="d-flex justify-content-between mb-1">-->
+				<!--<span class="text-muted">Tasks Complete</span>-->
+				<!--<span class="text-muted fw-bold"> 70%</span>-->
+				<!--</div>-->
+				<!--<div class="progress mb-2" style="height: 7px;">-->
+				<!--<div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="70%"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="progress-card">-->
+				<!--<div class="d-flex justify-content-between mb-1">-->
+				<!--<span class="text-muted">Open Rate</span>-->
+				<!--<span class="text-muted fw-bold"> 60%</span>-->
+				<!--</div>-->
+				<!--<div class="progress mb-2" style="height: 7px;">-->
+				<!--<div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-placement="top" title="60%"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-3">-->
+				<!--<div class="card card-stats">-->
+				<!--<div class="card-body">-->
+				<!--<p class="fw-bold mt-1">Statistic</p>-->
+				<!--<div class="row">-->
+				<!--<div class="col-5">-->
+				<!--<div class="icon-big text-center icon-warning">-->
+				<!--<i class="la la-pie-chart text-warning"></i>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-7 d-flex align-items-center">-->
+				<!--<div class="numbers">-->
+				<!--<p class="card-category">Number</p>-->
+				<!--<h4 class="card-title">150GB</h4>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<hr/>-->
+				<!--<div class="row">-->
+				<!--<div class="col-5">-->
+				<!--<div class="icon-big text-center">-->
+				<!--<i class="la la-heart-o text-primary"></i>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-7 d-flex align-items-center">-->
+				<!--<div class="numbers">-->
+				<!--<p class="card-category">Followers</p>-->
+				<!--<h4 class="card-title">+45K</h4>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="row">-->
+				<!--<div class="col-md-4">-->
+				<!--<div class="card">-->
+				<!--<div class="card-header">-->
+				<!--<h4 class="card-title">Users Statistics</h4>-->
+				<!--<p class="card-category">-->
+				<!--Users statistics this month</p>-->
+				<!--</div>-->
+				<!--<div class="card-body">-->
+				<!--<div id="monthlyChart" class="chart chart-pie"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-8">-->
+				<!--<div class="card">-->
+				<!--<div class="card-header">-->
+				<!--<h4 class="card-title">2018 Sales</h4>-->
+				<!--<p class="card-category">-->
+				<!--Number of products sold</p>-->
+				<!--</div>-->
+				<!--<div class="card-body">-->
+				<!--<div id="salesChart" class="chart"></div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-6">-->
+				<!--<div class="card">-->
+				<!--<div class="card-header ">-->
+				<!--<h4 class="card-title">Table</h4>-->
+				<!--<p class="card-category">Users Table</p>-->
+				<!--</div>-->
+				<!--<div class="card-body">-->
+				<!--<table class="table table-head-bg-success table-striped table-hover">-->
+				<!--<thead>-->
+				<!--<tr>-->
+				<!--<th scope="col">#</th>-->
+				<!--<th scope="col">First</th>-->
+				<!--<th scope="col">Last</th>-->
+				<!--<th scope="col">Handle</th>-->
+				<!--</tr>-->
+				<!--</thead>-->
+				<!--<tbody>-->
+				<!--<tr>-->
+				<!--<td>1</td>-->
+				<!--<td>Mark</td>-->
+				<!--<td>Otto</td>-->
+				<!--<td>@mdo</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+				<!--<td>2</td>-->
+				<!--<td>Jacob</td>-->
+				<!--<td>Thornton</td>-->
+				<!--<td>@fat</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+				<!--<td>3</td>-->
+				<!--<td colspan="2">Larry the Bird</td>-->
+				<!--<td>@twitter</td>-->
+				<!--</tr>-->
+				<!--</tbody>-->
+				<!--</table>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="col-md-6">-->
+				<!--<div class="card card-tasks">-->
+				<!--<div class="card-header ">-->
+				<!--<h4 class="card-title">Tasks</h4>-->
+				<!--<p class="card-category">To Do List</p>-->
+				<!--</div>-->
+				<!--<div class="card-body ">-->
+				<!--<div class="table-full-width">-->
+				<!--<table class="table">-->
+				<!--<thead>-->
+				<!--<tr>-->
+				<!--<th>-->
+				<!--<div class="form-check">-->
+				<!--<label class="form-check-label">-->
+				<!--<input class="form-check-input  select-all-checkbox" type="checkbox" data-select="checkbox" data-target=".task-select">-->
+				<!--<span class="form-check-sign"></span>-->
+				<!--</label>-->
+				<!--</div>-->
+				<!--</th>-->
+				<!--<th>Task</th>-->
+				<!--<th>Action</th>-->
+				<!--</tr>-->
+				<!--</thead>-->
+				<!--<tbody>-->
+				<!--<tr>-->
+				<!--<td>-->
+				<!--<div class="form-check">-->
+				<!--<label class="form-check-label">-->
+				<!--<input class="form-check-input task-select" type="checkbox">-->
+				<!--<span class="form-check-sign"></span>-->
+				<!--</label>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--<td>Planning new project structure</td>-->
+				<!--<td class="td-actions text-right">-->
+				<!--<div class="form-button-action">-->
+				<!--<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">-->
+				<!--<i class="la la-edit"></i>-->
+				<!--</button>-->
+				<!--<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">-->
+				<!--<i class="la la-times"></i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+				<!--<td>-->
+				<!--<div class="form-check">-->
+				<!--<label class="form-check-label">-->
+				<!--<input class="form-check-input task-select" type="checkbox">-->
+				<!--<span class="form-check-sign"></span>-->
+				<!--</label>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--<td>Update Fonts</td>-->
+				<!--<td class="td-actions text-right">-->
+				<!--<div class="form-button-action">-->
+				<!--<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">-->
+				<!--<i class="la la-edit"></i>-->
+				<!--</button>-->
+				<!--<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">-->
+				<!--<i class="la la-times"></i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+				<!--<td>-->
+				<!--<div class="form-check">-->
+				<!--<label class="form-check-label">-->
+				<!--<input class="form-check-input task-select" type="checkbox">-->
+				<!--<span class="form-check-sign"></span>-->
+				<!--</label>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--<td>Add new Post-->
+				<!--</td>-->
+				<!--<td class="td-actions text-right">-->
+				<!--<div class="form-button-action">-->
+				<!--<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">-->
+				<!--<i class="la la-edit"></i>-->
+				<!--</button>-->
+				<!--<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">-->
+				<!--<i class="la la-times"></i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--</tr>-->
+				<!--<tr>-->
+				<!--<td>-->
+				<!--<div class="form-check">-->
+				<!--<label class="form-check-label">-->
+				<!--<input class="form-check-input task-select" type="checkbox">-->
+				<!--<span class="form-check-sign"></span>-->
+				<!--</label>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--<td>Finalise the design proposal</td>-->
+				<!--<td class="td-actions text-right">-->
+				<!--<div class="form-button-action">-->
+				<!--<button type="button" data-toggle="tooltip" title="Edit Task" class="btn btn-link <btn-simple-primary">-->
+				<!--<i class="la la-edit"></i>-->
+				<!--</button>-->
+				<!--<button type="button" data-toggle="tooltip" title="Remove" class="btn btn-link btn-simple-danger">-->
+				<!--<i class="la la-times"></i>-->
+				<!--</button>-->
+				<!--</div>-->
+				<!--</td>-->
+				<!--</tr>-->
+				<!--</tbody>-->
+				<!--</table>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--<div class="card-footer ">-->
+				<!--<div class="stats">-->
+				<!--<i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes ago-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
+				<!--</div>-->
 			</div>
 		</div>
 
-		<!-- Bootstrap core JavaScript
-    ================================================== -->
-		<!-- Placed at the end of the document so the pages load faster -->
-		<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
-		<script type="text/javascript" src="asserts/js/popper.min.js" ></script>
-		<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>
-
-		<!-- Icons -->
-		<script type="text/javascript" src="asserts/js/feather.min.js" ></script>
-		<script>
-			feather.replace()
-		</script>
-
-		<!-- Graphs -->
-		<script type="text/javascript" src="asserts/js/Chart.min.js" ></script>
-		<script>
-			var ctx = document.getElementById("myChart");
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-					datasets: [{
-						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-						lineTension: 0,
-						backgroundColor: 'transparent',
-						borderColor: '#007bff',
-						borderWidth: 4,
-						pointBackgroundColor: '#007bff'
-					}]
-				},
-				options: {
-					scales: {
-						yAxes: [{
-							ticks: {
-								beginAtZero: false
-							}
-						}]
-					},
-					legend: {
-						display: false,
-					}
-				}
-			});
-		</script>
-
-	</body>
-
+		<footer class="footer">
+			<div class="container-fluid">
+				<nav class="pull-left">
+					<ul class="nav">
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								ThemeKita
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#">
+								Help
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="#license/#free-item">
+								Licenses
+							</a>
+						</li>
+					</ul>
+				</nav>
+				<div class="copyright ml-auto">
+					2018, made with <i class="la la-heart heart text-danger"></i> by <a href="#">ThemeKita</a> - More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>
+			</div>
+		</footer>
+	</div>
+</div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePro" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header bg-primary">
+				<h6 class="modal-title"><i class="la la-frown-o"></i> Under Development</h6>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body text-center">
+				<p>Currently the pro version of the <b>Ready Dashboard</b> Bootstrap is in progress development</p>
+				<p>
+					<b>We'll let you know when it's done</b></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/plugin/chartist/chartist.min.js"></script>
+<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
+<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
+<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<script src="assets/js/ready.min.js"></script>
+<script src="assets/js/demo.js"></script>
 </html>

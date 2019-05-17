@@ -12,7 +12,10 @@
     <link rel="shortcut icon" href="https://pandao.github.io/editor.md/favicon.ico" type="image/x-icon" />
 
 
-
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
+    <link rel="stylesheet" href="assets/css/ready.css">
+    <link rel="stylesheet" href="assets/css/demo.css">
 
     <title>  修改文章信息 </title>
     <!-- Bootstrap core CSS -->
@@ -20,17 +23,19 @@
 </head>
 
 <body>
+<div class="wrapper">
 <!--引入抽取的topbar-->
 <!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
 <div th:replace="user_component/topBar :: topBar"></div>
 
-<div class="container-fluid">
-    <div class="row">
         <!--引入侧边栏-->
         <div th:replace="user_component/leftBar :: leftBar"></div>
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
             <!--需要区分是员工修改还是添加；-->
+            <div class="main-panel">
+                <div class="content">
+                    <div class="container-fluid">
 
             <form th:action="@{/article}" method="post">
                 <input type="hidden" name="_method" value="put"/>
@@ -62,26 +67,26 @@
 
                 <button type="submit" class="btn btn-success btn-lg">修改 </button>
             </form>
-
-        </main>
+                    </div>
+                    </div>
     </div>
 </div>
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
-<script type="text/javascript" src="asserts/js/popper.min.js" ></script>
-<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>
+<!--<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>-->
+<!--<script type="text/javascript" src="asserts/js/popper.min.js" ></script>-->
+<!--<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>-->
 
-<!-- Icons -->
-<script type="text/javascript" src="asserts/js/feather.min.js" ></script>
-<script>
-    feather.replace()
-</script>
+<!--&lt;!&ndash; Icons &ndash;&gt;-->
+<!--<script type="text/javascript" src="asserts/js/feather.min.js" ></script>-->
+<!--<script>-->
+    <!--feather.replace()-->
+<!--</script>-->
 
 <!-- Graphs -->
-<script type="text/javascript" src="asserts/js/Chart.min.js" ></script>
+<!--<script type="text/javascript" src="asserts/js/Chart.min.js" ></script>-->
 <script>
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
@@ -112,10 +117,10 @@
     });
 </script>
 
-<link href="asserts/css/bootstrap.min.css"  rel="stylesheet">
+<!--<link href="asserts/css/bootstrap.min.css"  rel="stylesheet">-->
 
-<!-- Custom styles for this template -->
-<link href="asserts/css/dashboard.css"  rel="stylesheet">
+<!--&lt;!&ndash; Custom styles for this template &ndash;&gt;-->
+<!--<link href="asserts/css/dashboard.css"  rel="stylesheet">-->
 <style type="text/css">
     /* Chart.js */
 
@@ -178,5 +183,20 @@
 
 
 </body>
+
+<script src="assets/js/core/jquery.3.2.1.min.js"></script>
+<script src="assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+<script src="assets/js/core/popper.min.js"></script>
+<script src="assets/js/core/bootstrap.min.js"></script>
+<script src="assets/js/plugin/chartist/chartist.min.js"></script>
+<script src="assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js"></script>
+<script src="assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+<script src="assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/jquery.mapael.min.js"></script>
+<script src="assets/js/plugin/jquery-mapael/maps/world_countries.min.js"></script>
+<script src="assets/js/plugin/chart-circle/circles.min.js"></script>
+<script src="assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+<script src="assets/js/ready.min.js"></script>
+<script src="assets/js/demo.js"></script>
 
 </html>

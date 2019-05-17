@@ -88,13 +88,18 @@
             <!--显示文章具体详情-->
 
 
-            <article class="article-content">
+            <article class="article-content ">
                 <div id="doc-content">
-                <textarea style="display:none;" th:utext="${article['article_context']}">
+                <textarea style="display:none;" th:text="${article['article_context']}">
                 </textarea>
                 </div>
 
             </article>
+
+            <script type="text/javascript">
+                editormd.markdownToHTML("md_content");
+            </script>
+
 
 
 
@@ -183,46 +188,6 @@
         <div class="widget widget_hot">
             <h3>最新评论文章</h3>
             <ul>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
-                <li><a title="用DTcms做一个独立博客网站（响应式模板）" href="#" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text">用DTcms做一个独立博客网站（响应式模板）</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
-				2016-11-01
-			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>88</span></a></li>
 
             </ul>
         </div>
@@ -265,7 +230,7 @@
             path    : "lib/",
             codeFold : false,
             watch : true,
-            toolbar  : false,
+            toolbar  : true,
             editord: false,
             markdownSourceCode : false,
             tex: true, // 默认不解析

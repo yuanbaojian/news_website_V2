@@ -31,8 +31,13 @@
                             <!--data-original-title="评论量"><i class="glyphicon glyphicon-comment"></i>[[${commentsize}]]</span></div>-->
             </header>
             <article class="article-content">
-                <div th:utext="${article['article_context']}"></div>
+                <div th:text="${article['article_context']}"></div>
             </article>
+
+
+
+
+
             <form th:href="/addComment" method="post">
             <div class="title" id="comment">
                 <h3>评论(ps:登陆后才可以哦！)</h3>
