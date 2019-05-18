@@ -11,12 +11,16 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface ArticleMapper {
+
+
     @Select("select  count(*) from article where user_id=#{user_id}")
     int getUserArticleNum(Integer user_id);
 
     @Select("select  count(*) from article")
     int getArticleNum();
 
+
+    //查询用户自己的文章
     @Select("select a.*, b.classification_name from article a, news_classification b where " +
             "user_id=#{user_id} and a.classification_id=b.classification_id")
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
@@ -56,7 +60,7 @@ public interface ArticleMapper {
     List<Map<String, String>> GetAllByClass(Integer classification_id);
 
 
-    @Select("select * from article where article_id=#{article_id}")
+    @Select("select * from article a where article_id=#{article_id}")
     Article GetArticleByArticleId(Integer article_id);
 
 

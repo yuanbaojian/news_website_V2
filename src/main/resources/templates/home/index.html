@@ -113,9 +113,9 @@
 
 			</p>
 			<!--具体内容-->
-			<p class="note">
-				<td th:text="${article['article_context']}"></td>
-			</p>
+			<!--<p class="note">-->
+				<!--<td   th:text="${article['article_context']}"></td>-->
+			<!--</p>-->
 		</article>
 
 
@@ -149,15 +149,6 @@
 	  <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" >联系站长</a></li>
 	</ul>
 	<div class="tab-content">
-	  <!--<div role="tabpanel" class="tab-pane contact active" id="notice">-->
-		  <!--<a th:href="@{/tologin}"> 登陆</a>-->
-		  <!--<a th:href="@{/toRegister}">注册</a>-->
-
-	  <!--</div>-->
-
-
-
-
 		<div role="tabpanel" class="tab-pane contact active" id="notice">
 
 		<div th:if="${session.user_id} ne null">

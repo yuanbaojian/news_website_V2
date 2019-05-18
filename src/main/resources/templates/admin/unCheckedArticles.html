@@ -30,7 +30,7 @@
                         <tr>
                             <th>文章id</th>
                             <th>文章名称</th>
-                            <th>文章内容</th>
+                            <!--<th>文章内容</th>-->
                             <th>分类</th>
                             <th>创建时间</th>
                             <th>操作</th>
@@ -40,7 +40,7 @@
                         <tr th:each="article : ${unCheckedArticles}">
                             <td th:text="${article['article_id']}"></td>
                             <td th:text="${article['article_name']}"></td>
-                            <td th:text="${article['article_context']}"></td>
+                            <!--<td th:text="${article['article_context']}"></td>-->
                             <td th:text="${article['classification_name']}"></td>
                             <td th:text="${article['article_created_time']}"></td>
                             <td>

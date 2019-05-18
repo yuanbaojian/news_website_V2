@@ -44,7 +44,7 @@ public class ArticleController {
     {
         List<Map<String,String>> classification =newsClassificationService.GetAll();
         model.addAttribute("classification", classification);
-        return  "article/add";
+        return  "article/addByUeditor";
     }
 
 //    添加文章
@@ -57,7 +57,7 @@ public class ArticleController {
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = sdf.format(d);
-
+        article.setUser_id(user_id);
         article.setArticle_created_time(date);
         article.setChecked(0);
         articleService.Insert(article, user_id);

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head_index">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!--<link rel="icon" href="../../favicon.ico">-->
+    <link rel="shortcut icon" href="old_editor/component/images/favicon.ico">
+
+
+
+    <link rel="stylesheet" type="text/css" href="old_editor/component/webuploader.dist/image-upload/style.css">
+    <link rel="stylesheet" type="text/css" href="old_editor/component/webuploader.dist/webuploader.css">
+    <!-- Bootstrap core CSS -->
+    <link href="old_editor/component/css/nav2.css" rel="stylesheet">
+    <link href="old_editor/component/css/bootstrap.css" rel="stylesheet">
+    <link href="old_editor/component/css/navbar-fixed-top.css" rel="stylesheet">
+    <link href="old_editor/component/css/bootstrapValidator.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="old_editor/component/css/font-awesome.min.css">
+
+
+</head>
+<body>
+    <div th:fragment="top_nav">
+
+                <div class="nav2 navbar-fixed-top">
+                        <ul class="nav2-top">
+                            <a class="logo"><img style="width: 180px" src="/images/201610171329086541.png"></a>
+                            <li><a href="/">首页</a></li>
+                            <li><a href="#">热点</a></li>
+                            <li><a href="#">定制专区</a></li>
+                        </ul>
+                        <div class="search-area">
+                            <form>
+                                <input type="text" id="seek" name="keyword" placeholder="搜索你感兴趣的内容..." onkeydown="onKeyDown(event)">
+                                <button id="buttonds" type="submit" class="ask" formaction="/clickseek" >提问</button>
+                            </form>
+                        </div>
+                        <div class="nav2-right">
+                            <a href="/userhome" class="profile"></a>
+                            <a href="/userhome"><span th:text="${session.user_id}"></span></a>
+                            <a href="/loginout" >注销</a>
+                        </div>
+                </div>
+
+            </div>
+
+    </div>
+    <div th:fragment="left_menu">
+        <ul id="main-nav" class="nav nav-tabs nav-stacked" style="">
+            <li class="active">
+                <a href="/userhome">
+                    <i class="glyphicon glyphicon-th-large"></i>
+                    首页
+                </a>
+            </li>
+            <!--<li th:each="node:${session.nodes}" th:if="${node.t_node_level=='1'}">-->
+                <!--<a th:href="${'#systemSetting'+node.t_node_id}" class="nav-header collapsed" data-toggle="collapse">-->
+                    <!--<i class="glyphicon glyphicon-cog"></i>-->
+                    <!--<script>-->
+                        <!--console.log(this.systemSetting)</script>-->
+                    <!--<span th:text="${node.t_node_name}"></span>-->
+                    <!--<span class="pull-right glyphicon glyphicon-chevron-down"></span>-->
+                <!--</a>-->
+                <!--<ul th:id="${'systemSetting'+node.t_node_id}" class="nav nav-list collapse secondmenu" style="height: 0px;">-->
+                    <!--<li th:each="node2:${session.nodes}" th:if="${node.t_node_id+''==node2.t_node_parent_id+''}">-->
+                        <!--<a th:href="${node2.t_node_url}">-->
+                            <!--<i class="glyphicon glyphicon-user">-->
+                                <!--<span th:text="${node2.t_node_name}"></span>-->
+                            <!--</i>-->
+
+                        <!--</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
+        </ul>
+    </div>
+    <div th:fragment="comment_index">
+    <nav class="nav nav-tabs nav-stacked" role="navigation">
+            <div class="navbar-header">
+                <a class="navbar-brand">相关图文</a>
+            </div>
+            <!--<ul class="nav navbar-nav" th:each="comart:${article}">-->
+                <!--<li class="item"><a th:href="@{'/comment/'+${comart.t_article_id}}"-->
+                       <!--th:text="${comart.t_article_title_1}"></a>-->
+                <!--</li>-->
+            <!--</ul>-->
+    </nav>
+    </div>
+    <div th:fragment="tail_index">
+        <script src="old_editor/component/js/jquery-3.3.1.js"></script>
+        <script src="old_editor/component/js/bootstrap.js"></script>
+        <script src="old_editor/component/js/bootstrapValidator.js"></script>
+        <script src="old_editor/component/js/sousuo.js"></script>
+    </div>
+
+
+</body>
+</html>
