@@ -79,6 +79,8 @@
             <h1 class="article-title"><span  th:text="${article['article_name']}"></span></h1>
             <h4><span th:text="${'作者：'+user['user_account']}"></span></h4>
             <h4><span th:text="${'创建时间：'+article['article_created_time']}"></span></h4>
+            <textarea  th:text="${article['article_context']}">
+                </textarea>
 
             <div class="article-meta">
 
@@ -90,7 +92,7 @@
 
             <article class="article-content ">
                 <div id="doc-content">
-                <textarea style="display:none;" th:text="${article['article_context']}">
+                <textarea style="display:none;" th:utext="${article['article_context']}">
                 </textarea>
                 </div>
 

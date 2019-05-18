@@ -21,10 +21,19 @@ public interface UserMapper {
     @Select("select  count(*) from user")
     int getUserNum();
 
+    @Select("select  user_password from user where user_id=#{user_id}")
+    String checkPwd(Integer user_id);
+
+    //更改密码
+    @Select("update user set user_password=#{user_password} where user_id=#{user_id}")
+    String changePwd(@Param("user_password") String user_password, @Param("user_id") Integer user_id);
+
+
 
 
     @Insert(" insert  into user(user_account,user_password,user_icon, user_email,role_id)" +
             " values(#{user_account},#{user_password},#{user_icon},#{user_email}, #{role_id}) ")
+    @Options(useGeneratedKeys = true, keyProperty = "user_id", keyColumn = "user_id")
     public void InsertUser(User record);
 
 
@@ -38,7 +47,7 @@ public interface UserMapper {
     public User GetUserById(Integer   user_id);
 
     //更新自己个人信息
-    @Update(" update user set user_icon=#{user_icon}," +
+    @Update(" update user set user_account=#{user_account}," +
             "user_email=#{user_email}" +
             "  where user_id=#{user_id}")
     void Update(User user);
@@ -47,7 +56,7 @@ public interface UserMapper {
 //登陆使用
     @Select("select * from user where user_id= #{user_id} and " +
             "user_password= #{user_password}")
-    List<Map<String, Object>> login(@Param("user_id") int user_id,
+    User login(@Param("user_id") int user_id,
                                     @Param("user_password") String user_password);
 
 

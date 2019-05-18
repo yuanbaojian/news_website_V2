@@ -11,11 +11,14 @@ import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface ArticleMapper {
+    @Select("select  count(*) from article where user_id=#{user_id}")
+    int getUserArticleNum(Integer user_id);
 
     @Select("select  count(*) from article")
     int getArticleNum();
 
-    @Select("select * from article where user_id=#{user_id}")
+    @Select("select a.*, b.classification_name from article a, news_classification b where " +
+            "user_id=#{user_id} and a.classification_id=b.classification_id")
     List<Map<String, String>> GetArticleByUserId(Integer user_id);
 
     //放到前台， 按时间排序
@@ -41,7 +44,8 @@ public interface ArticleMapper {
 
     //查询未审核的文章
     @Select("select a.* , b.classification_name from article a, news_classification b " +
-            " where checked=0 and a.classification_id=b.classification_id")
+            " where checked=0 " +
+            " and a.classification_id=b.classification_id  order by a.article_created_time desc")
     List<Map<String, String>> GetUnchecked();
 
 

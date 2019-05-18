@@ -23,7 +23,7 @@ public class ArticleController {
     @Autowired
     NewsClassificationService newsClassificationService;
 
-    //获取全部文章
+    //获取个人全部文章
     @RequestMapping("/articles")
     public String articles(Model model, HttpSession session)
     {
@@ -36,14 +36,6 @@ public class ArticleController {
 
 
 
-//    //    修改文章信息
-//    @GetMapping("/article/{article_id}")
-//    public String EditUserInfo(@PathVariable("article_id") Integer  article_id, Model model)
-//    {
-//        //应该用单个获取， list<map>不适合了， 取名也不对
-//        List<Map<String, String>> user=articleService.GetArticleByArticleId(article_id);
-//        return "article/add";
-//    }
 
 
     //去添加文章页面

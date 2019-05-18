@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta name="description" content="">
 		<meta name="author" content="">
-		<title>Signin Template for Bootstrap</title>
+		<title>注册页面</title>
 		<!-- Bootstrap core CSS -->
 		<link href="asserts/css/bootstrap.min.css" rel="stylesheet">
 		<!-- Custom styles for this template -->
@@ -15,20 +15,21 @@
 	<body class="text-center">
 		<form class="form-signin" action="dashboard.html" th:action="login">
 			<img class="mb-4" src="asserts/img/bootstrap-solid.svg" alt="" width="72" height="72">
-			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+			<h1 class="h3 mb-3 font-weight-normal">登陆</h1>
 			<label class="sr-only">Username</label>
-			<input type="text" name="user_id" class="form-control" placeholder="user_id" required="" autofocus="">
+			<input type="text" name="user_id" class="form-control" placeholder="账号" required="" autofocus="">
+			<div class="checkbox mb-3"></div>
+
 			<label class="sr-only">Password</label>
-			<input type="password" name="user_password" class="form-control" placeholder="user_password" required="">
-			<div class="checkbox mb-3">
-				<label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
-			</div>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-			<p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-			<a class="btn btn-sm">中文</a>
-			<a class="btn btn-sm">English</a>
+			<input type="password" name="user_password" class="form-control" placeholder="密码" required="">
+
+
+			<p style="color: red" th:text="${session.msg}"  th:if="${session.msg} ne null"></p>
+
+			<div class="checkbox mb-3"></div>
+
+			<button class="btn btn-lg btn-primary btn-block" type="submit">登陆啦</button>
+			<p class="mt-5 mb-3 text-muted">© 保健新闻</p>
 		</form>
 
 	</body>

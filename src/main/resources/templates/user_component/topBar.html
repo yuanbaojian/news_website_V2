@@ -8,9 +8,10 @@
 
 <div class="main-header" th:fragment="topBar">
     <div class="logo-header">
-        <a href="dashBoard.html" class="logo">
+        <a href="#" class="logo">
             普通用户控制台
         </a>
+
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -18,7 +19,7 @@
     </div>
     <nav class="navbar navbar-header navbar-expand-lg">
         <div class="container-fluid">
-
+            <a th:href="@{/}">首页</a>
             <!--<form class="navbar-left navbar-form nav-search mr-md-3" action="">-->
             <!--<div class="input-group">-->
             <!--<input type="text" placeholder="Search ..." class="form-control">-->

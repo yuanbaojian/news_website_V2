@@ -70,11 +70,6 @@ public class HomeController {
         return "home/index";
     }
 
-    @RequestMapping("/tologin")
-    public String tologin()
-    {
-        return "common/login";
-    }
 
 
     @RequestMapping("/toEdit")
@@ -83,11 +78,7 @@ public class HomeController {
         return "edit";
     }
 
-    @RequestMapping("/toRegister")
-    public String toRegister()
-    {
-        return "common/register";
-    }
+
 
 //跳转到详情页， 显示具体的新闻内容
     @RequestMapping("/showArticle")

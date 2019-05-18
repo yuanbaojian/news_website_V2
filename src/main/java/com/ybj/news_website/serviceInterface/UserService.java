@@ -18,11 +18,15 @@ public interface UserService {
 
     public User GetUserById(Integer  user_id);
 
-    public Map<String,String> InsertUser(User user);
+    public void InsertUser(User user);
 
-    public List<Map<String, Object>> login(Integer  user_id, String user_password);
+    public User login(Integer  user_id, String user_password);
 
     public  void Update(User user);
+
+    public  boolean checkPwd(String  pwd,Integer user_id);
+
+    void changePwd(String pwd, Integer user_id);
 
 
 }

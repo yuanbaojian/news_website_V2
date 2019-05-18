@@ -16,6 +16,11 @@ public class ArticleServiceImpl implements ArticleService {
     ArticleMapper articleMapper;
 
     @Override
+    public int getUserArticleNum(Integer user_id){
+        return articleMapper.getUserArticleNum(user_id);
+    }
+
+    @Override
     public int getArticleNum() {
         return articleMapper.getArticleNum();
     }

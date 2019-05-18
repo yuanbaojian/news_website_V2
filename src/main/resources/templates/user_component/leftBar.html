@@ -15,7 +15,7 @@
             <div class="info">
                 <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 								<span>
-									大保健
+									<span th:text=${session.user_account}></span>
 									<span class="user-level">Administrator</span>
 									<span class="caret"></span>
 								</span>
@@ -59,7 +59,14 @@
             <li class="nav-item">
                 <a  th:href="@{/articles}">
                     <i class="la la-table"></i>
-                    <p>查看文章</p>
+                    <p>查看个人文章</p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a  th:href="@{/toChangePwd}">
+                    <i class="la la-table"></i>
+                    <p>修改密码</p>
                 </a>
             </li>
             <!--<li class="nav-item">-->

@@ -5,8 +5,11 @@ import com.ybj.news_website.serviceInterface.ArticleService;
 import com.ybj.news_website.serviceInterface.NewsClassificationService;
 import com.ybj.news_website.serviceInterface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,8 +31,22 @@ public class UserController {
     @Autowired
     ArticleService articleService;
 
+    @Autowired
+    private JavaMailSender mailSender;
+
+    @RequestMapping("/tologin")
+    public String tologin()
+    {
+        return "common/login";
+    }
 
 
+    @RequestMapping("/toRegister")
+    public String toRegister(HttpSession session)
+    {
+        session.removeAttribute("msg");
+        return "common/register";
+    }
 
 
     @RequestMapping("/indexLoged")
@@ -44,9 +61,9 @@ public class UserController {
     }
 
 
-
+    //登陆
     @RequestMapping("/register")
-    public ModelAndView register(String user_account, String  user_password, String user_email, HttpSession session)
+    public String register(String user_account, String  user_password, String user_email, HttpSession session)
     {
 
         User user=new User();
@@ -54,12 +71,23 @@ public class UserController {
         user.setUser_password(user_password);
         user.setUser_email(user_email);
         user.setRole_id(1);
-        Map<String,String> map=userService.InsertUser(user);
-
-
-
         userService.InsertUser(user);
-        return new ModelAndView("/dashBoard.html");
+
+        Integer user_id=user.getUser_id();
+
+        session.setAttribute("user_id", user_id);
+        session.setAttribute("user_account", user_account);
+
+        //发送邮件， 给用户账号
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("1793870688@qq.com");
+        message.setTo(user_email);
+        message.setSubject("《保健新闻》注册提醒");
+        message.setText("欢迎注册保健新闻， 注册的用户id为 : " + user_id);
+
+        mailSender.send(message);
+
+        return "redirect:/";
     }
 
 
@@ -78,18 +106,21 @@ public class UserController {
 
 
 
-        User user=new User();
-      //  user.setUser_account(user_account);
-        List<Map<String, Object>> list=userService.login(user_id, user_password);
-        Integer  role_id= (Integer )list.get(0).get("role_id");
-        String user_account= (String) list.get(0).get("user_account");
-        session.setAttribute("user_account", user_account);
-        session.setAttribute("user_id", user_id);
+
+        User user=userService.login(user_id, user_password);
+
        // System.out.println(" role_id 为 " + list.get(0).get("role_id"));
-        if (list.size()>0)
+        if (!StringUtils.isEmpty(user))
         {
+            session.setAttribute("user_account", user.getUser_account());
+            session.setAttribute("user_id", user.getUser_id());
+            Integer  role_id= user.getRole_id();
+
             //跳转到用户管理页面
             if(role_id==1) {
+
+                int userArticleNum=articleService.getUserArticleNum(user.getUser_id());
+                modelAndView.addObject("articleNum", userArticleNum);
                 modelAndView.setViewName("user/dashBoard");
             }
             //跳转到管理员页面
@@ -103,8 +134,10 @@ public class UserController {
                 modelAndView.setViewName("admin/dashBoard");
             }
         }
+        //账号或密码错误
         else {
-            modelAndView.setViewName("/login");
+            session.setAttribute("msg", "账号或密码错误");
+            modelAndView.setViewName("common/login");
         }
         return modelAndView;
     }
@@ -117,11 +150,11 @@ public class UserController {
         return "redirect:/";
     }
 
-
+    //返回普通用户后台
     @RequestMapping("/userHome")
     public String userHome()
     {
-        return "user/home";
+        return "user/dashBoard";
     }
 
     //获取自己用户信息
@@ -136,7 +169,7 @@ public class UserController {
     }
 
 
-//    跳转到修改页面
+//    跳转到修改个人信息页面
     @RequestMapping("/toEditUserInfo")
     public String toEditUserInfo( Integer  user_id, Model model)
     {
@@ -155,20 +188,52 @@ public class UserController {
         return "redirect:/userInfo";
     }
 
-/**
-    //跳转到注册页面
-    @RequestMapping("/register")
-    @ResponseBody
-    public Response register(String user_account, String user_password, String user_email) {
-        //service内容;
-        Map<String,String> map=userService.registerUser(user_account,user_password,user_email);
-        if (map.get("ok") != null) {
-            return new Response(0, "系统已经向你的邮箱发送了一封邮件哦，验证后就可以登录啦~");
-        } else {
-            return new Response(1, "error", map);
-        }
+    //去修改密码
+    @RequestMapping("/toChangePwd")
+    public String toChangePwd(Model model, HttpSession session)
+    {
+        return "user/editPwd";
     }
-**/
+
+    //去修改密码
+    @RequestMapping("/changePwd")
+    public String ChangePwd(String oldPwd, String newPwd, String reNewPwd, HttpSession session)
+    {
+        //判断oldPwd是否正确
+        String returnPath;
+        String pwd_msg="";
+        Integer user_id= (Integer) session.getAttribute("user_id");
+        boolean f=userService.checkPwd(oldPwd,user_id);
+        //old正确
+        if(f)
+        {
+            //判断两次密码是否一致
+            if(newPwd.equals(reNewPwd))
+            {
+                //更改密码
+                userService.changePwd(newPwd,user_id);
+                returnPath="redirect:/userInfo";
+            }
+            //两次密码不一致
+            else
+            {
+                pwd_msg="两次密码不一致";
+                returnPath="redirect:/toChangePwd";
+            }
+
+        }
+        //旧密码错误
+        else {
+            pwd_msg="旧密码错误";
+            returnPath="redirect:/toChangePwd";
+        }
+
+        session.setAttribute("pwd_msg", pwd_msg);
+
+        return returnPath;
+    }
+
+
 
     /**
      * 这个东西，  得使用@restController， 但是上面的跳转，需要Controller

@@ -7,6 +7,8 @@ import java.util.Map;
 
 public interface ArticleService {
 
+    int getUserArticleNum(Integer user_id);
+
     int getArticleNum();
 
     public List<Map<String, String>> GetArticleByUserId(Integer  user_id);
