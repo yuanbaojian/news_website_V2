@@ -2102,8 +2102,8 @@ body {
   border-radius: 50%;
 }
 .sidebar .user .photo img {
-  width: 100%;
-  height: 100%;
+  width: 100px;
+  height: auto;
 }
 .sidebar .user .info a {
   white-space: nowrap;
@@ -5920,7 +5920,7 @@ body {
 .user-box .u-img {
   width: 80px;
 }
-.user-box .u-img img {
+.u-img img {
   width: 100%;
   border-radius: 5px;
 }

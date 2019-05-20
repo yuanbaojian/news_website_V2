@@ -22,31 +22,25 @@
 
     <div class="main-panel">
         <div class="content">
-            <div class="container-fluid">
-                <h2>未审核文章信息</h2>
 
-                <header class="article-header">
-                    <h1 class="article-title"><span  th:text="${article['article_name']}"></span></h1>
+                        <!--这是应该是左侧的浏览框，  可以看到文章详情-->
+                        <!--头部信息-->
+                        <header class="article-header">
+                            <h6 class="article-title"><span  th:text="${'文章名称：'+article['article_name']}"></span></h6>
+                            <!--<h4><span th:text="${'作者：'+article['user_account']}"></span></h4>-->
+                            <h6><span th:text="${'创建时间：'+article['article_created_time']}"></span></h6>
+                            <div class="article-meta">
+                            </div>
+                        </header>
 
-                    <h4><span th:text="${'创建时间：'+article['article_created_time']}"></span></h4>
-                    <span th:utext="${article['article_context']}" ></span>
-                    <div class="article-meta">
+                        <div style="height: 50px"></div>
 
-                    </div>
-                </header>
 
-                <!--显示文章具体详情-->
-
-                <article class="article-content">
-                    <div id="doc-content">
-                <textarea style="display:none;" th:utext="${article['article_context']}">
-                </textarea>
-                    </div>
-
-                </article>
-
+                        <!--显示文章具体详情-->
+                        <article class="article-content"  style="width: 1000px;" >
+                            <div  th:utext="${article['article_context']}"></div>
+                        </article>
                 <a class="btn btn-sm btn-success" th:href="@{'/CheckunCheckedArticle?article_id=' + ${article['article_id']}}">审核通过</a>
-            </div>
         </div>
     </div>
 </div>

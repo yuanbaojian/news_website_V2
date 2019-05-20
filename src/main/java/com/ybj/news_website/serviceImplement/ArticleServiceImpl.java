@@ -3,6 +3,7 @@ package com.ybj.news_website.serviceImplement;
 import com.ybj.news_website.model.Article;
 import com.ybj.news_website.serviceInterface.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     ArticleMapper articleMapper;
 
+
+    //开启缓存，直接用注解
+    //@Cacheable("getUserArticleNum")
     @Override
     public int getUserArticleNum(Integer user_id){
         return articleMapper.getUserArticleNum(user_id);

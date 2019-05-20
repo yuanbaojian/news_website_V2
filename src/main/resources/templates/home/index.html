@@ -93,16 +93,19 @@
 
 		<article class="excerpt excerpt-1" style="">
 			<!--图片-->
-			<a class="focus" th:href="@{'/showArticle?article_id='+${article[article_id]}}" title="用DTcms做一个独立博客网站（响应式模板）" target="_blank" ><img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: inline;"></a>
+			<!--<a class="focus" th:href="@{'/showArticle?article_id='+${article[article_id]}}" target="_blank" >-->
+				<!--<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg"  style="display: inline;">-->
+			<!--</a>-->
 			<!--主题-->
 			<header><a class="cat" href="#" >
 				<i></i></a>
 				<!--名称-->
-				<h2><a href="#"  target="_blank" >
+				<h2><a th:href="@{'/showArticle?article_id='+${article[article_id]}}"   target="_blank" class="focus"  >
 					<td th:text="${article['article_name']}"></td>
 				</a>
 				</h2>
 			</header>
+
 			<p class="meta">
 				<!--时间-->
 				<time class="time"><i class="glyphicon glyphicon-time"></i>
@@ -140,7 +143,8 @@
 
 </div>
 </div>
-<div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
+
+
 <aside class="sidebar">
 <div class="fixed">
   <div class="widget widget-tabs">
@@ -165,7 +169,7 @@
 			<div th:if="${session.user_id} eq null">
 				<br>
 				<p align="center" th:href="@{/tologin}" style="font-family: 楷体"><b>登录后可保存您的浏览喜好、评论、以及发布新闻</b></p>
-				<a  th:href="@{/tologin}"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-primary ">登录</button></p></a>
+				<a  th:href="@{/tologin}" method="post"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-primary ">登录</button></p></a>
 
 				<a  th:href="@{/toRegister}"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-success ">注册</button></p></a>
 
@@ -201,9 +205,10 @@
 	  <h3>最热评论文章</h3>
 	  <ul >
 		  <tr th:each="article : ${articlesCommented}">
-			<li><a  th:href="@{'/showArticle?article_id='+${article[article_id]}}" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text" >
+			<li><a  th:href="@{'/showArticle?article_id='+${article[article_id]}}" >
+
+				<!--<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">-->
+			<span class=" thumbnail" >
 				<td th:text="${article['article_name']}"></td>
 			</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
 				<td th:text="${article['article_created_time']}"></td>
@@ -218,12 +223,6 @@
 
 </aside>
 </section>
-<footer class="footer">
-<div class="container">
-<p>Copyright &copy; 2019.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" >搞个大新闻</a> </p>
-</div>
-<div id="gotop"><a class="gotop"></a></div>
-</footer>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>

@@ -82,6 +82,7 @@ public interface ArticleMapper {
             "  where article_id=#{article_id}")
     void update(Article article);
 
+
     @Update(" update article set checked=1 " +
             "  where article_id=#{article_id}")
     void checkArticle(Integer article_id);

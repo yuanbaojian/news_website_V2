@@ -61,7 +61,7 @@ public class UserController {
     }
 
 
-    //登陆
+    //注册
     @RequestMapping("/register")
     public String register(String user_account, String  user_password, String user_email, HttpSession session)
     {

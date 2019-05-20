@@ -72,13 +72,13 @@ public class ArticleController {
         List<Map<String,String>> classification=newsClassificationService.GetAll();
         model.addAttribute("article", article);
         model.addAttribute("classification", classification);
-        return "article/edit";
+        return "article/editByEditor";
     }
 
 
 
     //修改文章
-    @PutMapping("/article")
+    @RequestMapping("/editArticle")
     public String  Edit(Article article)
     {
         articleService.Update(article);

@@ -75,7 +75,7 @@
         <!--这是应该是左侧的浏览框，  可以看到文章详情-->
 
         <!--头部信息-->
-        <header class="article-header">
+        <header class="article-header ">
             <h4 class="article-title"><span  th:text="${article['article_name']}"></span></h4>
             <h4><span th:text="${'作者：'+user['user_account']}"></span></h4>
             <h4><span th:text="${'创建时间：'+article['article_created_time']}"></span></h4>
@@ -87,33 +87,33 @@
             <!--显示文章具体详情-->
 
 
-            <article class="wangArticle-content" style="float: left;">
-                <div th:utext="${article['article_context']}"></div>
+            <article class="article-content" >
+                <div style="float: left;" th:utext="${article['article_context']}"></div>
             </article>
 
 
-            <div style="height: 400px"></div>
+
+
+
+            <div style="height: 800px"></div>
 
             <div class="title" id="comment">
                 <h3>评论(ps:登陆后才可以哦！)</h3>
             </div>
 
             <div id="respond">
-
                 <div class="comment">
                     <form th:action="@{/addComment}" method="post">
                         <!--<input type="hidden" id="role" value="游客">-->
-                        <div class="comment-box">
-                            <input type="textarea" placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
-                                   cols="100%" rows="3" tabindex="3"></input>
+                        <div class="old_comment-box">
+                            <textarea  type="textarea" placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
+                                       cols="100%" rows="3" tabindex="3"></textarea>
                             <div class="comment-ctrl">
                                 <button th:if="${session.user_id} ne null" name="comment-submit" id="comment-submit"   tabindex="4" >评论</button>
                             </div>
                         </div>
-                    </form> </div>
-
-
-
+                    </form>
+                </div>
             </div>
 
             <!--显示评论-->
@@ -121,7 +121,7 @@
                 <!--用户id-->
                 <!--<input th:if="${session.user_id} ne null" hidden  id="uid" th:value="${session.user[t_user_id]}">-->
                 <ol id="comment_list" class="commentlist" th:each="comment:${comments}">
-                    <li    class="comment-content">
+                    <li  class="comment-content">
                         <div class="comment-main">
                             <p>
                                 <span   style="float: left;" class="text  address" th:text="${user['user_account']}"></span>
@@ -136,16 +136,10 @@
 
 
         </div>
-
-
-
-
-
-
-
-
     </div>
-    <aside class="sidebar">
+
+
+    <aside class="sidebar col-md-3">
         <div class="fixed">
             <div class="widget widget-tabs">
                 <ul class="nav nav-tabs" role="tablist">
@@ -168,10 +162,10 @@
                         </div>
                         <div th:if="${session.user_id} eq null">
                             <br>
-                            <p align="center" th:href="@{/tologin}" style="font-family: 楷体"><b>登录后可保存您的浏览喜好、评论、以及发布新闻</b></p>
-                            <a  th:href="@{/tologin}"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-primary ">登录</button></p></a>
+                            <p align="center" style="font-family: 楷体"><b>登录后可保存您的浏览喜好、评论、以及发布新闻</b></p>
+                            <a  th:href="@{/tologin}"><p align="center"><button type="button"  style="width: 200px;" class="btn ">登录</button></p></a>
 
-                            <a  th:href="@{/toRegister}"><p align="center"><button type="button"  style="width: 200px;" class="btn btn-success ">注册</button></p></a>
+                            <a  th:href="@{/toRegister}"><p align="center"><button type="button"  style="width: 200px;" class="btn  ">注册</button></p></a>
 
                         </div>
                     </div>
@@ -200,9 +194,11 @@
             <h3>最新评论文章</h3>
             <ul>
                 <tr th:each="article : ${articlesCommented}">
-                    <li><a  th:href="@{'/showArticle?article_id='+${article[article_id]}}" ><span class="thumbnail">
-				<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">
-			</span><span class="text" >
+                    <li><a  th:href="@{'/showArticle?article_id='+${article[article_id]}}" >
+                        <!--<span class="thumbnail">-->
+				<!--<img class="thumb" data-original="images/201610181739277776.jpg" src="images/201610181739277776.jpg" alt="用DTcms做一个独立博客网站（响应式模板）"  style="display: block;">-->
+			<!--</span>-->
+                        <span class="thumbnail" >
 				<td th:text="${article['article_name']}"></td>
 			</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
 				<td th:text="${article['article_created_time']}"></td>
@@ -216,12 +212,7 @@
     </aside>
 
 </section>
-<footer class="footer">
-    <div class="container">
-        <p>Copyright &copy; 2016.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-    </div>
-    <div id="gotop"><a class="gotop"></a></div>
-</footer>
+
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.ias.js"></script>
 <script src="js/scripts.js"></script>
