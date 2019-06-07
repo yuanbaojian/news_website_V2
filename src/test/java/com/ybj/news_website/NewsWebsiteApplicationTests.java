@@ -21,16 +21,16 @@ public class NewsWebsiteApplicationTests {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Test
-    public void sendSimpleMail() throws Exception {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("1793870688@qq.com");
-        message.setTo("312ybj@gmail.com");
-        message.setSubject("主题：简单邮件");
-        message.setText("测试邮件内容");
-
-        mailSender.send(message);
-    }
+//    @Test
+//    public void sendSimpleMail() throws Exception {
+//        SimpleMailMessage message = new SimpleMailMessage();
+//        message.setFrom("1793870688@qq.com");
+//        message.setTo("312ybj@gmail.com");
+//        message.setSubject("主题：简单邮件");
+//        message.setText("测试邮件内容");
+//
+//        mailSender.send(message);
+//    }
 
 
 }

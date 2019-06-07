@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>更改新闻分类</title>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>Ready Bootstrap Dashboard</title>
@@ -23,17 +23,17 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h2>修改吧</h2>
+                <h2>修改</h2>
                 <div class="table-responsive">
 
 
                     <form th:action="@{/editNews_classification}" method="post">
                         <input type="hidden" name="_method" value="put"/>
                         <input type="hidden" name="classification_id"  th:value="${classification['classification_id']}"/>
-                        <div class="form‐group">
-                            <label>分类标题</label>
-                            <input type="text" name="classification_id" class="form‐control" th:value="${classification['classification_id']}">
-                        </div>
+                        <!--<div class="form‐group">-->
+                            <!--<label>分类标题</label>-->
+                            <!--<input type="text" name="classification_id" class="form‐control" th:value="${classification['classification_id']}">-->
+                        <!--</div>-->
                         <div class="form‐group">
                             <label>分类名称</label>
                             <input type="textarea" name="classification_name" class="form‐control" th:value="${classification['classification_name']}">

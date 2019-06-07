@@ -8,6 +8,7 @@ import com.ybj.news_website.mapper.CommentMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -21,7 +22,12 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> SelectAll(Integer article_id) {
+    public List<Map<String,String>> SelectAll(Integer article_id) {
         return commentMapper.SelectAll(article_id);
+    }
+
+    @Override
+    public void deleteByArticle(Integer article_id) {
+        commentMapper.deleteByArticle(article_id);
     }
 }

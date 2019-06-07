@@ -83,7 +83,8 @@ public class UserController {
         message.setFrom("1793870688@qq.com");
         message.setTo(user_email);
         message.setSubject("《保健新闻》注册提醒");
-        message.setText("欢迎注册保健新闻， 注册的用户id为 : " + user_id);
+        message.setText("欢迎注册保健新闻， 注册的用户id为 : " + user_id
+        +"请使用此id进行登陆");
 
         mailSender.send(message);
 
@@ -182,9 +183,10 @@ public class UserController {
 
     //修改个人信息
     @PutMapping("/user")
-    public String Edit(User user)
+    public String Edit(User user, HttpSession session)
     {
         userService.Update(user);
+        session.setAttribute("user_account", user.getUser_account());
         return "redirect:/userInfo";
     }
 

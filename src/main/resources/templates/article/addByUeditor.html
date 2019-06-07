@@ -2,10 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>编辑新闻</title>
     <style type="text/css">
         /* Chart.js */
-
         @-webkit-keyframes chartjs-render-animation {
             from {
                 opacity: 0.99
@@ -14,7 +13,6 @@
                 opacity: 1
             }
         }
-
         @keyframes chartjs-render-animation {
             from {
                 opacity: 0.99
@@ -23,7 +21,6 @@
                 opacity: 1
             }
         }
-
         .chartjs-render-monitor {
             -webkit-animation: chartjs-render-animation 0.001s;
             animation: chartjs-render-animation 0.001s;
@@ -51,33 +48,45 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <form class="form-horizontal"  method="post" role="form" th:action="@{/addArticle}" >
+                <form th:action="@{/addArticle}" method="post">
                     <ol id="textdate" class="breadcrumb" style="width: 820px"></ol>
+                    <input type="hidden" name="article_id"  />
                     <div class="input-group" style="width: 820px">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">文章标题</button>
                     </span>
                         <input type="text" name="article_name" class="form-control" id="t_article_title_1"
-                               placeholder="请输入文章标题">
+                        >
                     </div>
                     <div class="input-group" style="width: 820px">
                         <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">栏&nbsp;&nbsp;目</button>
+                        <button class="btn btn-default" type="button">分类</button>
                         </span>
-                        <select class="form-control" name="classification_id" id="t_article_classification">
-                            <option th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
+                        <select  name="classification_id" class="form‐control" >
+                            <option  th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
                         </select>
                     </div>
-                    <div id="editor" style="width: 820px"></div>
 
-                    <textarea hidden id="text1" name="article_context"></textarea>
+                    <div name="article_context" id="editor" style="width: 100%;height: 100%">
+
+                        <!--<textarea   name="article_context" th:text="${article['article_context']}"></textarea>-->
+
+                        <!--<article class="wangArticle-content" style="float: left;">-->
+                        <!--<div  name="article_context" th:utext="${article['article_context']}"></div>-->
+                        <!--</article>-->
+
+                        <textarea hidden id="text1" name="article_context" ></textarea>
+
+                    </div>
+
+
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button id="btn_submit" type="submit" class="btn btn-default">保存</button>
-                            <button id="btn_reset" type="reset" class="btn btn-danger">重置</button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -117,7 +126,7 @@
     }
     editor.customConfig.uploadImgShowBase64 = true
     editor.create()
-    editor.txt.html('<p>请编辑您想发表的新闻</p>')
+    // editor.txt.html('<p>请编辑您想发表的新闻</p>')
     $text1.val(editor.txt.html())
     // document.getElementById('btn1').addEventListener('click', function () {
     //     // 读取 html
@@ -128,7 +137,6 @@
     //     // 读取 text
     //     alert(editor.txt.text())
     // }, false)
-
 </script>
 
 

@@ -5,7 +5,7 @@
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home</title>
+<title>新闻首页</title>
 <meta name="keywords" content="">
 <meta name="description" content="">
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -13,7 +13,6 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 <link rel="apple-touch-icon-precomposed" href="images/icon.png">
-<link rel="shortcut icon" href="images/favicon.ico">
 <script src="js/jquery-2.1.4.min.js"></script>
 <script src="js/nprogress.js"></script>
 <script src="js/jquery.lazyload.min.js"></script>
@@ -111,14 +110,12 @@
 				<time class="time"><i class="glyphicon glyphicon-time"></i>
 					<td th:text="${article['article_created_time']}"></td>
 				</time>
+
 			<td th:text="${article['classification_name']}"></td>
 
-
+			  阅读量: <td th:text="${article['clicked']}"></td>
 			</p>
-			<!--具体内容-->
-			<!--<p class="note">-->
-				<!--<td   th:text="${article['article_context']}"></td>-->
-			<!--</p>-->
+
 		</article>
 
 

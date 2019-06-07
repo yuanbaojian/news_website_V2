@@ -15,7 +15,15 @@ public class Article {
 
     private String article_img3;
 
-    private String article_img4;
+    public Integer getClicked() {
+        return clicked;
+    }
+
+    public void setClicked(Integer clicked) {
+        this.clicked = clicked;
+    }
+
+    private Integer clicked;
 
     private String article_name;
 
@@ -73,14 +81,6 @@ public class Article {
 
     public void setArticle_img3(String article_img3) {
         this.article_img3 = article_img3 == null ? null : article_img3.trim();
-    }
-
-    public String getArticle_img4() {
-        return article_img4;
-    }
-
-    public void setArticle_img4(String article_img4) {
-        this.article_img4 = article_img4 == null ? null : article_img4.trim();
     }
 
 

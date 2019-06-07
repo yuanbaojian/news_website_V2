@@ -9,11 +9,16 @@ public interface ArticleService {
 
     int getUserArticleNum(Integer user_id);
 
+    //浏览量自增
+    void addClicked(Integer article_id);
+
     int getArticleNum();
 
     public List<Map<String, String>> GetArticleByUserId(Integer  user_id);
 
     public Article GetArticleByArticleId(Integer  article_id);
+
+    public Map<String, String> GetArticleByArticleId2(Integer  article_id);
 
     public void Insert(Article article, Integer user_id);
 

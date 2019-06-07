@@ -88,10 +88,13 @@ public class HomeController {
         session.setAttribute("article_id", article.getArticle_id());
         int user_id=article.getUser_id();
 
-        //因为是map<String, String>导致 不能取到int类型
+        //阅读量clicked自增一次
+        articleService.addClicked(article_id);
+
+      //因为是map<String, String>导致 不能取到int类型
         //String user_id=(String) article.get("user_id");
         User user=userService.GetUserById(user_id);
-        List<Comment> comments=commentService.SelectAll(article_id);
+        List<Map<String,String>> comments=commentService.SelectAll(article_id);
 
         List<Map<String,String>> articlesCommented= articleService.GetAllByComment();
         model.addAttribute("articlesCommented", articlesCommented);

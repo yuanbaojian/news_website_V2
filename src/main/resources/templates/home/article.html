@@ -77,11 +77,11 @@
         <!--头部信息-->
         <header class="article-header ">
             <h4 class="article-title"><span  th:text="${article['article_name']}"></span></h4>
-            <h4><span th:text="${'作者：'+user['user_account']}"></span></h4>
-            <h4><span th:text="${'创建时间：'+article['article_created_time']}"></span></h4>
-            <div class="article-meta">
 
-            </div>
+            <h5 ><span th:text="${'作者：'+user['user_account']}"></span></h5>
+
+            <h5 style="float: left"><span th:text="${'创建时间：'+article['article_created_time']}"></span></h5>
+
         </header>
 
             <!--显示文章具体详情-->
@@ -95,17 +95,19 @@
 
 
 
-            <div style="height: 800px"></div>
+            <div style="height: 1000px"></div>
 
             <div class="title" id="comment">
                 <h3>评论(ps:登陆后才可以哦！)</h3>
             </div>
 
             <div id="respond">
+
                 <div class="comment">
+
                     <form th:action="@{/addComment}" method="post">
                         <!--<input type="hidden" id="role" value="游客">-->
-                        <div class="old_comment-box">
+                        <div class="old_comment-box" >
                             <textarea  type="textarea" placeholder="您的评论或留言（必填）" name="content" id="comment-textarea"
                                        cols="100%" rows="3" tabindex="3"></textarea>
                             <div class="comment-ctrl">
@@ -124,7 +126,7 @@
                     <li  class="comment-content">
                         <div class="comment-main">
                             <p>
-                                <span   style="float: left;" class="text  address" th:text="${user['user_account']}"></span>
+                                <span   style="float: left;" class="text  address" th:text="${comment['user_account']}"></span>
                                 <span style="float: left;" class="time" th:text="${comment['created_time']}"></span>:
                                 <span  style="float: left;" th:text="${comment['content']}"></span>
                             </p>

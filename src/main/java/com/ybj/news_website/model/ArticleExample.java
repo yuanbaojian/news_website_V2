@@ -436,7 +436,7 @@ public class ArticleExample {
         }
 
         public Criteria andArticle_img4IsNull() {
-            addCriterion("article_img4 is null");
+            addCriterion("GetArticleByUserId is null");
             return (Criteria) this;
         }
 

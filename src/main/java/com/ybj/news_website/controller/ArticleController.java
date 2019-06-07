@@ -2,6 +2,7 @@ package com.ybj.news_website.controller;
 
 import com.ybj.news_website.model.Article;
 import com.ybj.news_website.serviceInterface.ArticleService;
+import com.ybj.news_website.serviceInterface.CommentService;
 import com.ybj.news_website.serviceInterface.NewsClassificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class ArticleController {
 
     @Autowired
     NewsClassificationService newsClassificationService;
+
+    @Autowired
+    CommentService commentService;
 
     //获取个人全部文章
     @RequestMapping("/articles")
@@ -60,6 +64,7 @@ public class ArticleController {
         article.setUser_id(user_id);
         article.setArticle_created_time(date);
         article.setChecked(0);
+        article.setClicked(0);
         articleService.Insert(article, user_id);
         return "redirect:/articles";
     }
@@ -68,7 +73,7 @@ public class ArticleController {
     @GetMapping("/Aarticle")
     public String toEdit( Integer article_id, Model model)
     {
-        Article article=articleService.GetArticleByArticleId(article_id);
+        Map<String ,String> article=articleService.GetArticleByArticleId2(article_id);
         List<Map<String,String>> classification=newsClassificationService.GetAll();
         model.addAttribute("article", article);
         model.addAttribute("classification", classification);
@@ -85,9 +90,13 @@ public class ArticleController {
         return "redirect:/articles";
     }
 
+    //删除文章
     @DeleteMapping("/article/{article_id}")
     public String Delete(@PathVariable("article_id") Integer article_id)
     {
+        //先删除评论
+
+            commentService.deleteByArticle(article_id);
             articleService.Delete(article_id);
             return "redirect:/articles";
     }

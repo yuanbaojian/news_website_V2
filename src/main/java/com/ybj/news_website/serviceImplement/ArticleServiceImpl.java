@@ -25,6 +25,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public void addClicked(Integer article_id) {
+        articleMapper.addClicked(article_id);
+    }
+
+    @Override
     public int getArticleNum() {
         return articleMapper.getArticleNum();
     }
@@ -39,6 +44,11 @@ public class ArticleServiceImpl implements ArticleService {
     public Article GetArticleByArticleId(Integer article_id) {
         Article article= articleMapper.GetArticleByArticleId(article_id);
         return article;
+    }
+
+    @Override
+    public Map<String, String> GetArticleByArticleId2(Integer article_id) {
+        return articleMapper.GetArticleByArticleId2(article_id);
     }
 
     @Override

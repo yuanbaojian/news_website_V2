@@ -28,6 +28,10 @@ spring:
     username: 1793870688@qq.com
     password: auuderulnsaqdcia
 
+  cache:
+    jcache:
+     config: classpath:/static/ehcache.xml
+
 
   logging:
     level:

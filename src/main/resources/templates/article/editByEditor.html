@@ -2,10 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>编辑新闻</title>
     <style type="text/css">
         /* Chart.js */
-
         @-webkit-keyframes chartjs-render-animation {
             from {
                 opacity: 0.99
@@ -14,7 +13,6 @@
                 opacity: 1
             }
         }
-
         @keyframes chartjs-render-animation {
             from {
                 opacity: 0.99
@@ -23,7 +21,6 @@
                 opacity: 1
             }
         }
-
         .chartjs-render-monitor {
             -webkit-animation: chartjs-render-animation 0.001s;
             animation: chartjs-render-animation 0.001s;
@@ -65,29 +62,31 @@
                         <span class="input-group-btn">
                         <button class="btn btn-default" type="button">分类</button>
                         </span>
-                        <select  name="classification_id" class="form‐control">
-                            <option th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
+                        <select  name="classification_id" class="form‐control" >
+                            <option th:selected="${classification['classification_id']== article['classification_id']}" th:value="${classification['classification_id']}" th:each="classification:${classification}" th:text="${classification['classification_name']}"></option>
                         </select>
                     </div>
-                    <div name="article_context" id="editor" style="width: 820px">
+
+                    <div name="article_context" id="editor" style="width: 100%;height: 100%">
 
                         <!--<textarea   name="article_context" th:text="${article['article_context']}"></textarea>-->
 
-                        <article class="wangArticle-content" style="float: left;">
-                            <div  name="article_context" th:utext="${article['article_context']}"></div>
-                        </article>
+                        <!--<article class="wangArticle-content" style="float: left;">-->
+                            <!--<div  name="article_context" th:utext="${article['article_context']}"></div>-->
+                        <!--</article>-->
 
                         <textarea hidden id="text1" name="article_context" th:utext="${article['article_context']}"></textarea>
 
                     </div>
 
 
+
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button id="btn_submit" type="submit" class="btn btn-default">保存</button>
-                            <button id="btn_reset" type="reset" class="btn btn-danger">重置</button>
                         </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -138,7 +137,6 @@
     //     // 读取 text
     //     alert(editor.txt.text())
     // }, false)
-
 </script>
 
 
