@@ -2,12 +2,12 @@ package com.ybj.news_website.mapper;
 
 import com.ybj.news_website.model.User;
 import com.ybj.news_website.model.UserExample;
-import java.util.List;
 
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.*;
 
 
 @Mapper
@@ -20,12 +20,33 @@ public interface UserMapper {
 
 
 
-    @Insert(" insert into user(user_account,user_password,user_email) values(#{user_account},#{user_password},#{user_email}) ")
+    @Insert(" insert  into user(user_account,user_password,user_icon, user_email,role_id)" +
+            " values(#{user_account},#{user_password},#{user_icon},#{user_email}, #{role_id}) ")
     public void InsertUser(User record);
 
 
-    @Select("select * from user")
-    public List<User> GetAllUser();
+
+    @Select("select user_id, user_account, user_icon,user_email, role_id from user  " )
+    public List<Map<String, String>> GetAllUser();
+
+
+//    查询自己信息
+    @Select("select user_id, user_account, user_icon,user_email, role_id from user  where user_id=#{user_id} " )
+    public Map<String, String> GetUserById(Integer   user_id);
+
+    @Update(" update user set user_icon=#{user_icon}," +
+            "user_email=#{user_email}," +
+            "  where user_id=#{user_id}")
+    void Update(@Param("user") User user);
+
+
+//登陆使用
+    @Select("select * from user where user_id= #{user_id} and " +
+            "user_password= #{user_password}")
+    List<Map<String, Object>> login(@Param("user_id") int user_id,
+                                    @Param("user_password") String user_password);
+
+
 
     int insertSelective(User record);
 

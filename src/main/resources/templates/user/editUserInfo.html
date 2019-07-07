@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Dashboard Template for Bootstrap</title>
+    <!-- Bootstrap core CSS -->
+    <link href="asserts/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="asserts/css/dashboard.css"  rel="stylesheet">
+    <style type="text/css">
+        /* Chart.js */
+
+        @-webkit-keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes chartjs-render-animation {
+            from {
+                opacity: 0.99
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        .chartjs-render-monitor {
+            -webkit-animation: chartjs-render-animation 0.001s;
+            animation: chartjs-render-animation 0.001s;
+        }
+    </style>
+</head>
+
+<body>
+<!--引入抽取的topbar-->
+<!--模板名：会使用thymeleaf的前后缀配置规则进行解析-->
+<div th:replace="user_component/topBar :: topBar"></div>
+
+<div class="container-fluid">
+    <div class="row">
+        <!--引入侧边栏-->
+        <div th:replace="user_component/leftBar :: leftBar"></div>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <!--需要区分是员工修改还是添加；-->
+            <form th:action="@{/user}" method="post">
+                <!--发送put请求修改员工数据-->
+                <!--
+                1、SpringMVC中配置HiddenHttpMethodFilter;（SpringBoot自动配置好的）
+                2、页面创建一个post表单
+                3、创建一个input项，name="_method";值就是我们指定的请求方式
+                -->
+                <input type="hidden" name="_method" value="put"/>
+                <input type="hidden" name="user_id"  th:value="${user["user_id"]}">
+                <div class="form-group">
+                    <label>用户头像</label>
+                    <input name="user_icon" type="text" class="form-control"  th:value="${user['user_icon']}">
+                </div>
+                <div class="form-group">
+                    <label>用户Email</label>
+                    <input name="user_email" type="email" class="form-control" th:value="${user['user_email']}">
+                </div>
+
+                <button type="submit" class="btn btn-primary" >修改</button>
+            </form>
+        </main>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script type="text/javascript" src="asserts/js/jquery-3.2.1.slim.min.js" ></script>
+<script type="text/javascript" src="asserts/js/popper.min.js" ></script>
+<script type="text/javascript" src="asserts/js/bootstrap.min.js" ></script>
+
+<!-- Icons -->
+<script type="text/javascript" src="asserts/js/feather.min.js" ></script>
+<script>
+    feather.replace()
+</script>
+
+</body>
+
+</html>

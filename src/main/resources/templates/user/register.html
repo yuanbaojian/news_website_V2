@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <form id="register" th:action="@{/register}" method="post">
+        <div class="inputs">
+            <input type="text" name="user_account" id="registerInputUsername" placeholder="账号(支持中文)">
+
+            <input type="text" name="user_email" id="registerInputEmail" placeholder="邮箱">
+
+            <input type="password" name="user_password" id="registerInputPassword" placeholder="密码（不少于6位）">
+            <span id="regi-username-error"></span>
+            <span id="regi-email-error"></span>
+            <span id="regi-password-error"></span>
+        </div>
+        <button id="registerButton" type="submit">注册</button>
+    </form>
+
+</div>
+
+</body>
+</html>

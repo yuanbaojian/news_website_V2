@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--左侧的菜单-->
+<div class="sidebar" th:fragment="leftBar">
+    <div class="scrollbar-inner sidebar-wrapper">
+        <div class="user">
+            <div class="photo">
+                <img src="assets/img/profile.jpg">
+            </div>
+            <div class="info">
+                <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+								<span>
+									大保健
+									<span class="user-level">Administrator</span>
+									<span class="caret"></span>
+								</span>
+                </a>
+                <div class="clearfix"></div>
+
+                <div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+                    <ul class="nav">
+                        <li>
+                            <a  th:href="@{/adminInfo}">
+                                <span class="link-collapse">我的信息</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#edit">
+                                <span class="link-collapse">编辑我的信息</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#settings">
+                                <span class="link-collapse">Settings</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <ul class="nav">
+            <li class="nav-item">
+                <a  th:href="@{/news_classifications}">
+                    <i class="la la-table"></i>
+                    <p>管理新闻分类</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="forms.html">
+                    <i class="la la-keyboard-o"></i>
+                    <p>管理已注册用户</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/unCheckedArticles}">
+                    <i class="la la-bell"></i>
+                    <p>审核文章</p>
+                    <span class="badge badge-success">3</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
